@@ -1,8 +1,8 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Select from 'react-select';
-import { imageValidation, fileSizeValidtion } from '@/utils/Utils'
+import { imageValidation, fileSizeValidtion, newImagePreview } from '@/utils/Utils'
 import { EntityName, ApiUrl, ReactRouterPath } from './enums'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,6 @@ const AddBlog = () => {
     const fetchOptions = async () => {
       try {
         const response = await axios.get(ApiUrl + 'related/');
-        console.log(response)
         setSelectOptions(response.data);
       } catch (error) {
         console.error('Error fetching options:', error);
@@ -27,17 +26,12 @@ const AddBlog = () => {
     fetchOptions();
   }, []);
 
-  const categoryOptions = [
-    { id: 1, name: 'Category 1' },
-    { id: 2, name: 'Category 2' },
-    { id: 3, name: 'Category 3' }
-  ];
+  const handleFileChange = (event, name) => {
+    const file = event.target.files[0];
+    formik.setFieldValue(name, file);
+    newImagePreview(name, file)
+  }
 
-  const brandOptions = [
-    { id: 1, name: 'Brand 1' },
-    { id: 2, name: 'Brand 2' },
-    { id: 3, name: 'Brand 3' }
-  ];
 
   const validationSchema = Yup.object({
     title: Yup.string().required('Title is required'),
@@ -72,7 +66,6 @@ const AddBlog = () => {
           },
         });
 
-        console.log(response.data);
         toastr.success(`${EntityName} Created Successfully`);
         navigate(ReactRouterPath + 'list');
       } catch (error) {
@@ -160,9 +153,7 @@ const AddBlog = () => {
                   name="image"
                   id="image-input"
                   className={`form-input w-full form-upload ${formik.touched.image && formik.errors.image && "error-class"}`}
-                  onChange={(event) => {
-                    formik.setFieldValue('image', event.currentTarget.files[0]);
-                  }}
+                  onChange={(e)=>handleFileChange(e,'image')}
                   onBlur={formik.handleBlur}
                 />
                 {formik.errors.image && formik.touched.image && <div className="text-red-500 text-sm">{formik.errors.image}</div>}
