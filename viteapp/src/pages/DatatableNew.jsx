@@ -24,9 +24,34 @@ const DatatableNew = () => {
         Header: 'Body',
         accessor: 'body',
       },
+      {
+        Header: 'Actions',
+        Cell: ({ row }) => (
+          <div>
+            <button className="btn btn-sm btn-emerald-soft" onClick={() => handleView(row)}>View</button>|
+            <button className="btn btn-sm btn-indigo-soft " onClick={() => handleEdit(row)}>Edit</button>|
+            <button className="btn btn-sm btn-red-soft" onClick={() => handleDelete(row)}>Delete</button>
+          </div>
+        ),
+      },
     ],
     []
   );
+
+  const handleView = (row) => {
+    console.log(row)
+  };
+
+  const handleEdit = (row) => {
+    console.log(row)
+
+  };
+
+  const handleDelete = (row) => {
+    console.log(row)
+
+  };
+
 
   return (
     <>
