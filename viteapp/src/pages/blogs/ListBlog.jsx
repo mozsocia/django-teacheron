@@ -2,29 +2,47 @@ import React, { useMemo, useState, useEffect } from 'react';
 import DataTableComponent from '../../components/DataTableComponent';
 import { EntityName, ApiUrl, ReactRouterPath } from './enums'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import SwalAlert from '@/utils/swalAlert'; // Assuming you have SwalAlert implemented
+import toastr from 'toastr';
 
 const ListBlog = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const getList = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(ApiUrl + 'list/');
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => response.json())
-      .then((data) => setData(data));
+    getList();
   }, []);
 
   const columns = useMemo(
     () => [
-      {
-        Header: 'ID',
-        accessor: 'id',
-      },
-      {
-        Header: 'Title',
-        accessor: 'title',
-      },
-      {
-        Header: 'Body',
-        accessor: 'body',
+      { Header: 'ID', accessor: 'id' },
+      { Header: 'Title', accessor: 'title' },
+      { Header: 'Content', accessor: 'content' },
+      { 
+        Header: 'Image', 
+        accessor: 'image',
+        Cell: ({ cell: { value } }) => (
+          <img
+            src={value}
+            alt={value}
+            style={{ maxWidth: '40px', maxHeight: '40px' }}
+          />
+        ),
       },
       {
         Header: 'Actions',
@@ -40,18 +58,39 @@ const ListBlog = () => {
     []
   );
 
-  const handleView = (row) => {
-    console.log(row)
-  };
-
-  const handleEdit = (row) => {
-    console.log(row)
+  const handleEdit = (data) => {
+    console.log(data)
+    // navigate(`${ReactRouterPath}${data.values.id}/edit`);
 
   };
 
-  const handleDelete = (row) => {
-    console.log(row)
+  const handleView = (data) => {
+    console.log(data)
+    // navigate(`${ReactRouterPath}${data.values.id}/show`);
 
+  };
+
+  const handleDelete = (data) => {
+    // console.log(data.values)
+    SwalAlert('Are you sure?', 'This action cannot be undone.', 'warning').then(
+      async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const response = await axios.post(ApiUrl + `${data.values.id}/destroy/`);
+
+            if (response.status === 204) {
+              toastr.success(`${EntityName} Deleted successfully`);
+              getList();
+            } else {
+              toastr.error(`${EntityName} Error deleting data`);
+            }
+          } catch (error) {
+            console.error('Error deleting data:', error);
+            toastr.error(`${EntityName} Error deleting data`);
+          }
+        }
+      }
+    );
   };
 
 
@@ -70,7 +109,7 @@ const ListBlog = () => {
           {/* Add member button */}
           <Link to={ReactRouterPath + 'add'}>
             <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
-              <svg class="w-4 h-4 fill-current opacity-50 mr-1 md:mr-2" viewBox="0 0 16 16">
+              <svg className="w-4 h-4 fill-current opacity-50 mr-1 md:mr-2" viewBox="0 0 16 16">
                 <path
                   d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z">
                 </path>
@@ -83,8 +122,8 @@ const ListBlog = () => {
       </header>
 
       <div className="card">
-        <header class="card-header">
-          <h2 class="card-title">{ EntityName } List</h2>
+        <header className="card-header">
+          <h2 className="card-title">{ EntityName } List</h2>
         </header>
         <div className="card-body">
           {/* Card content */}
