@@ -1,0 +1,38 @@
+{% load static %}
+{% load vite_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Hello World Django</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script>
+    if (localStorage.theme === 'dark' || !('theme' in localStorage)) {
+      document.querySelector('html').classList.add('dark');
+      document.querySelector('html').style.colorScheme = 'dark';
+    } else {
+      document.querySelector('html').classList.remove('dark');
+      document.querySelector('html').style.colorScheme = 'light';
+    }        
+  </script>   
+  
+    {% render_vite_dev_scripts %}
+    
+
+</head>
+
+<body class="font-inter antialiased bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script>
+      if (localStorage.getItem('sidebar-expanded') == 'true') {
+          document.querySelector('body').classList.add('sidebar-expanded');
+      } else {
+          document.querySelector('body').classList.remove('sidebar-expanded');
+      }
+  </script>   
+  <div id="root"></div>
+  {% render_vite_assets %}
+</body>
+
+</html>
