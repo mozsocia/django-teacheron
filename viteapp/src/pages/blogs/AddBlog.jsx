@@ -3,6 +3,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Select from 'react-select';
 import { imageValidation, fileSizeValidtion } from '../../utils/Utils'
+import { EntityName, ApiUrl, ReactRouterPath } from './enums'
+import { Link } from 'react-router-dom';
 
 const AddBlog = () => {
   const brandOptions = [
@@ -44,9 +46,31 @@ const AddBlog = () => {
 
   return (
     <div>
+      <header className="page-header">
+
+        {/* Left: Title */}
+        <div className="mb-4 md:mb-0">
+          <h1 className="page-title">{EntityName}</h1>
+        </div>
+
+        {/* Right: Actions */}
+        <div className="page-header-right-actions grid grid-cols-max-content gap-2">
+
+          {/* Add member button */}
+          <Link to={ReactRouterPath + 'list'}>
+            <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
+              <svg className="w-5 h-5 fill-current opacity-70 mr-1 md:mr-2" viewBox="0 0 24 24">
+                <path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path>
+              </svg>
+              <span className="hidden md:inline-block">List {EntityName}</span>
+            </button>
+          </Link>
+        </div>
+
+      </header>
       <div className="card">
         <header className="card-header">
-          <h2 className="card-title">Recent Activity</h2>
+          <h2 className="card-title">{EntityName}</h2>
         </header>
         <div className="card-body">
           <form onSubmit={formik.handleSubmit} className="p-4">
