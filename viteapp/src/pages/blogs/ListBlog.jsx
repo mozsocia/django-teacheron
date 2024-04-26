@@ -60,13 +60,13 @@ const ListBlog = () => {
 
   const handleEdit = (data) => {
     console.log(data)
-    // navigate(`${ReactRouterPath}${data.values.id}/edit`);
+    navigate(`${ReactRouterPath}${data.values.id}/edit`);
 
   };
 
   const handleView = (data) => {
     console.log(data)
-    // navigate(`${ReactRouterPath}${data.values.id}/show`);
+    navigate(`${ReactRouterPath}${data.values.id}/show`);
 
   };
 

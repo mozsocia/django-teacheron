@@ -10,6 +10,10 @@ import Signup from '../pages/others/Signup'
 
 import ListBlog from '../pages/blogs/ListBlog'
 import AddBlog from '../pages/blogs/AddBlog'
+import BlogDetails from '../pages/blogs/BlogDetails'
+import EditBlog from '../pages/blogs/EditBlog'
+
+
 
 
 
@@ -33,6 +37,9 @@ const publicRoutes = [
 
   { path: "/panel/blogs/list", component: <ListBlog/> },
   { path: "/panel/blogs/add", component: <AddBlog/> },
+  { path: '/panel/blogs/:id/show', component: <BlogDetails/> },
+  { path: '/panel/blogs/:id/edit', component: <EditBlog/> },
+
 
 
 

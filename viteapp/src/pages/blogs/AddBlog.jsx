@@ -1,47 +1,90 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Select from 'react-select';
-import { imageValidation, fileSizeValidtion } from '../../utils/Utils'
+import { imageValidation, fileSizeValidtion } from '@/utils/Utils'
 import { EntityName, ApiUrl, ReactRouterPath } from './enums'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import toastr from 'toastr';
 
 const AddBlog = () => {
-  const brandOptions = [
-    { id: 1, name: 'Nike' },
-    { id: 2, name: 'Apple' },
-    { id: 3, name: 'Yellow' }
+  const navigate = useNavigate();
+  const [selectOptions, setSelectOptions] = useState({ brands: [], categories: [] });
+
+
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const response = await axios.get(ApiUrl + 'related/');
+        console.log(response)
+        setSelectOptions(response.data);
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    };
+    fetchOptions();
+  }, []);
+
+  const categoryOptions = [
+    { id: 1, name: 'Category 1' },
+    { id: 2, name: 'Category 2' },
+    { id: 3, name: 'Category 3' }
   ];
 
+  const brandOptions = [
+    { id: 1, name: 'Brand 1' },
+    { id: 2, name: 'Brand 2' },
+    { id: 3, name: 'Brand 3' }
+  ];
 
   const validationSchema = Yup.object({
-    brand: Yup.number().required(),
-    name: Yup.string().required(),
-    message: Yup.string().optional().required(),
-    email: Yup.string().email('Invalid email address').required(),
-    newsletter: Yup.boolean().required(),
-    file: Yup.mixed()
-      .required() // Allow null values
+    title: Yup.string().required('Title is required'),
+    content: Yup.string().required('Content is required'),
+    image: Yup.mixed()
+      .required('Image is required') // Allow null values
       .test(...imageValidation)
       .test(...fileSizeValidtion),
-    radio_option: Yup.string().oneOf(['option1', 'option2', 'option3'], 'Invalid option').required(),
+    category: Yup.number().required('Category is required'),
+    brand: Yup.number().required('Brand is required'),
   });
-
 
   const formik = useFormik({
     initialValues: {
-      brand: null,
-      name: '',
-      message: '',
-      email: '',
-      newsletter: false,
-      file: null,
-      radio_option: ''
+      title: '',
+      content: '',
+      image: null,
+      category: null,
+      brand: null
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    }
+    onSubmit: async (values) => {
+      try {
+        const formData = new FormData();
+        Object.entries(values).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+
+        const response = await axios.post(ApiUrl + 'store/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        console.log(response.data);
+        toastr.success(`${EntityName} Created Successfully`);
+        navigate(ReactRouterPath + 'list');
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          console.error('400 Bad Request:', error, error.response.data);
+          toastr.error(`${EntityName} Form submission error`);
+        } else {
+          console.error('Form submission error:', error);
+          toastr.error(`${EntityName} Form submission error`);
+        }
+      }
+    },
   });
 
   return (
@@ -76,157 +119,83 @@ const AddBlog = () => {
           <form onSubmit={formik.handleSubmit} className="p-4">
             <div className="space-y-4">
               <div>
-                <label className="form-label">Brand</label>
-                <Select
-                  value={formik.values.brand ? brandOptions.find(option => option.id === formik.values.brand) : null}
-                  onChange={(selectedOption) => formik.setFieldValue('brand', selectedOption.id)}
-                  options={brandOptions}
-                  getOptionLabel={(option) => option.name}
-                  getOptionValue={(option) => option.id}
-                  className={`${formik.touched.brand && formik.errors.brand && "error-class"
-                    }`}
-                />
-                {formik.errors.brand && formik.touched.brand && <div className="text-red-500 text-sm">{formik.errors.brand}</div>}
-              </div>
-
-              <div>
-                <label className="form-label" htmlFor="name">
-                  Full Name <span className="text-rose-500">*</span>
+                <label className="form-label" htmlFor="title">
+                  Title <span className="text-rose-500">*</span>
                 </label>
                 <input
-                  className={`form-input w-full ${formik.touched.name && formik.errors.name && "error-class"}`}
-                  id="name"
+                  className={`form-input w-full ${formik.touched.title && formik.errors.title && "error-class"}`}
+                  id="title"
                   type="text"
-                  name="name"
-                  value={formik.values.name}
+                  name="title"
+                  value={formik.values.title}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  autoComplete="name"
+                  autoComplete="title"
                 />
-                {formik.errors.name && formik.touched.name && <div className="text-red-500 text-sm">{formik.errors.name}</div>}
+                {formik.errors.title && formik.touched.title && <div className="text-red-500 text-sm">{formik.errors.title}</div>}
               </div>
 
               <div>
-                <label className="form-label" htmlFor="message">
-                  Message
+                <label className="form-label" htmlFor="content">
+                  Content <span className="text-rose-500">*</span>
                 </label>
                 <textarea
-                  className={`form-textarea w-full ${formik.touched.message && formik.errors.message && "error-class"}`}
-                  id="message"
-                  name="message"
-                  value={formik.values.message}
+                  className={`form-textarea w-full ${formik.touched.content && formik.errors.content && "error-class"}`}
+                  id="content"
+                  name="content"
+                  value={formik.values.content}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   rows="3"
                 ></textarea>
-                {formik.errors.message && formik.touched.message && <div className="text-red-500 text-sm">{formik.errors.message}</div>}
+                {formik.errors.content && formik.touched.content && <div className="text-red-500 text-sm">{formik.errors.content}</div>}
               </div>
 
               <div>
-                <label className="form-label" htmlFor="email">
-                  Email Address <span className="text-rose-500 text-sm">*</span>
-                </label>
-                <input
-                  className={`form-input w-full ${formik.touched.email && formik.errors.email && "error-class"}`}
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-
-                />
-                {formik.errors.email && formik.touched.email && <div className="text-red-500 text-sm">{formik.errors.email}</div>}
-              </div>
-
-              <div className="mt-6">
-                <label className="flex items-center" name="newsletter" id="newsletter">
-                  <input
-                    type="checkbox"
-                    className={`form-checkbox mr-2 flex items-center ${formik.touched.newsletter && formik.errors.newsletter && "error-class"}`}
-                    name="newsletter"
-                    checked={formik.values.newsletter}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  <span className="text-sm">Email me about product news.</span>
-                </label>
-                {formik.errors.newsletter && formik.touched.newsletter && <div className="text-red-500 text-sm">{formik.errors.newsletter}</div>}
-              </div>
-
-              <div>
-                <label className="form-label" htmlFor="file">
-                  Upload File
+                <label className="form-label" htmlFor="image">
+                  Image <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="file"
-                  name="file"
-                  id="file-input"
-                  className={`form-input w-full form-upload ${formik.touched.file && formik.errors.file && "error-class"}`}
+                  name="image"
+                  id="image-input"
+                  className={`form-input w-full form-upload ${formik.touched.image && formik.errors.image && "error-class"}`}
                   onChange={(event) => {
-                    formik.setFieldValue('file', event.currentTarget.files[0]);
+                    formik.setFieldValue('image', event.currentTarget.files[0]);
                   }}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.file && formik.touched.file && <div className="text-red-500 text-sm">{formik.errors.file}</div>}
+                {formik.errors.image && formik.touched.image && <div className="text-red-500 text-sm">{formik.errors.image}</div>}
               </div>
 
               <div>
-                <span className="form-label">Style</span>
-                <div className="flex items-center space-x-8">
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="radio"
-                      className={`form-radio text-indigo-500 ${formik.touched.radio_option && formik.errors.radio_option && "error-class"}`}
-                      name="radio_option"
-                      id="radio_option1"
-                      value="option1"
-                      checked={formik.values.radio_option === 'option1'}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    <label className="inline-block" htmlFor="radio_option1">
-                      Option 1
-                    </label>
-                  </div>
+                <label className="form-label">Category <span className="text-rose-500">*</span></label>
+                <Select
+                  value={formik.values.category ? selectOptions.categories.find(option => option.id === formik.values.category) : null}
+                  onChange={(selectedOption) => formik.setFieldValue('category', selectedOption.id)}
+                  options={selectOptions.categories}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.id}
+                  className={`${formik.touched.category && formik.errors.category && "error-class"}`}
+                />
+                {formik.errors.category && formik.touched.category && <div className="text-red-500 text-sm">{formik.errors.category}</div>}
+              </div>
 
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="radio"
-                      className={`form-radio text-indigo-500 ${formik.touched.radio_option && formik.errors.radio_option && "error-class"}`}
-                      name="radio_option"
-                      id="radio_option2"
-                      value="option2"
-                      checked={formik.values.radio_option === 'option2'}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    <label className="inline-block" htmlFor="radio_option2">
-                      Option 2
-                    </label>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="radio"
-                      className={`form-radio text-indigo-500 ${formik.touched.radio_option && formik.errors.radio_option && "error-class"}`}
-                      name="radio_option"
-                      id="radio_option3"
-                      value="option3"
-                      checked={formik.values.radio_option === 'option3'}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    <label className="inline-block" htmlFor="radio_option3">
-                      Option 3
-                    </label>
-                  </div>
-                </div>
-                {formik.errors.radio_option && formik.touched.radio_option && <div className="text-red-500 text-sm">{formik.errors.radio_option}</div>}
+              <div>
+                <label className="form-label">Brand <span className="text-rose-500">*</span></label>
+                <Select
+                  value={formik.values.brand ? selectOptions.brands.find(option => option.id === formik.values.brand) : null}
+                  onChange={(selectedOption) => formik.setFieldValue('brand', selectedOption.id)}
+                  options={selectOptions.brands}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.id}
+                  className={`${formik.touched.brand && formik.errors.brand && "error-class"}`}
+                />
+                {formik.errors.brand && formik.touched.brand && <div className="text-red-500 text-sm">{formik.errors.brand}</div>}
               </div>
             </div>
             <button type="submit" className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap">
-              Save Product
+              Save Blog
             </button>
           </form>
         </div>
