@@ -1,13 +1,15 @@
 import React from "react"
 import Dashboard from '../pages/Dashboard'
-import CardCom from '../pages/CardCom'
-import CardEmpty from '../pages/CardEmpty'
-import DatatableNew from '../pages/DatatableNew'
-import AddProduct from '../pages/AddProduct'
-import AddProductValid from '../pages/AddProductValid'
-import Login from '../pages/Login'
-import Signup from '../pages/Signup'
+import CardCom from '../pages/others/CardCom'
+import CardEmpty from '../pages/others/CardEmpty'
+import DatatableNew from '../pages/others/DatatableNew'
+import AddProduct from '../pages/others/AddProduct'
+import AddProductValid from '../pages/others/AddProductValid'
+import Login from '../pages/others/Login'
+import Signup from '../pages/others/Signup'
 
+import ListBlog from '../pages/blogs/ListBlog'
+import AddBlog from '../pages/blogs/AddBlog'
 
 
 
@@ -29,9 +31,8 @@ const publicRoutes = [
   { path: "/panel/ui/login", component: <Login/> },
   { path: "/panel/ui/signup", component: <Signup/> },
 
-
-
-
+  { path: "/panel/blogs/list", component: <ListBlog/> },
+  { path: "/panel/blogs/add", component: <AddBlog/> },
 
 
 

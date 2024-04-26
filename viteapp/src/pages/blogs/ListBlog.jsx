@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import DataTableComponent from '../components/DataTableComponent';
+import DataTableComponent from '../../components/DataTableComponent';
 
-const DatatableNew = () => {
+const ListBlog = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -90,4 +90,4 @@ const DatatableNew = () => {
   );
 };
 
-export default DatatableNew;
+export default ListBlog;

@@ -35,4 +35,21 @@ export const sidebarLinks = [
       ],
     },
 
+    {
+      key: 'blog',
+      label: 'Blog',
+      icon: 'bxl-steam',
+      submenu: [
+        {
+          label: 'Blog List',
+          path: '/panel/blogs/list',
+        },
+        {
+          label: 'Add Blog',
+          path: '/panel/blogs/add',
+        },
+
+      ],
+    },
+
   ];

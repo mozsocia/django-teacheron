@@ -87,6 +87,19 @@ export const previousImagePreview = (name, file) => {
 
 export const imageValidation = [
   'fileType',
-  'Unsupported File Format',
-  (value) => !value || (value && (value.type === 'image/jpeg' || value.type === 'image/png'))
+  'Invalid file format. Only PNG, JPG, and JPEG files are allowed.',
+  (value) => {
+    if (!value) return true; // Allow null or undefined values
+    const supportedFormats = ['image/png', 'image/jpeg'];
+    return supportedFormats.includes(value.type);
+  }
+]
+
+export const fileSizeValidtion = [
+  'fileSize',
+  'File size is too large. Maximum allowed size is 5MB.',
+  (value) => {
+    if (!value) return true; // Allow null or undefined values
+    return value.size <= 5 * 1024 * 1024; // 2MB in bytes
+  }
 ]

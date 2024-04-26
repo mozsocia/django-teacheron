@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Select from 'react-select';
-
+import { imageValidation, fileSizeValidtion } from '../../utils/Utils'
 const AddProductValid = () => {
   const brandOptions = [
     { id: 1, name: 'Nike' },
@@ -18,23 +18,8 @@ const AddProductValid = () => {
     newsletter: Yup.boolean().required(),
     file: Yup.mixed()
       .required() // Allow null values
-      .test(
-        'fileType',
-        'Invalid file format. Only PNG, JPG, and JPEG files are allowed.',
-        (value) => {
-          if (!value) return true; // Allow null or undefined values
-          const supportedFormats = ['image/png', 'image/jpeg'];
-          return supportedFormats.includes(value.type);
-        }
-      )
-      .test(
-        'fileSize',
-        'File size is too large. Maximum allowed size is 2MB.',
-        (value) => {
-          if (!value) return true; // Allow null or undefined values
-          return value.size <= 2 * 1024 * 1024; // 2MB in bytes
-        }
-      ),
+      .test(...imageValidation)
+      .test(...fileSizeValidtion),
     radio_option: Yup.string().oneOf(['option1', 'option2', 'option3'], 'Invalid option').required(),
   });
 
