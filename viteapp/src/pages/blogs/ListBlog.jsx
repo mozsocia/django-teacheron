@@ -59,19 +59,19 @@ const ListBlog = () => {
   );
 
   const handleEdit = (data) => {
-    console.log(data)
+
     navigate(`${ReactRouterPath}${data.values.id}/edit`);
 
   };
 
   const handleView = (data) => {
-    console.log(data)
+
     navigate(`${ReactRouterPath}${data.values.id}/show`);
 
   };
 
   const handleDelete = (data) => {
-    // console.log(data.values)
+
     SwalAlert('Are you sure?', 'This action cannot be undone.', 'warning').then(
       async (result) => {
         if (result.isConfirmed) {
