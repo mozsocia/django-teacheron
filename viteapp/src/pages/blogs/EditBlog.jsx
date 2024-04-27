@@ -40,7 +40,7 @@ const EditBlog = () => {
         });
         previousImagePreview('image', data.image);
       } catch (error) {
-        console.error('Error fetching blog data:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -205,7 +205,14 @@ const EditBlog = () => {
               </div>
             </div>
             <button type="submit" className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap">
-              Save Blog
+              Update {EntityName}
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="btn mt-3 ms-2 btn-red-outline whitespace-nowrap"
+            >
+              Cancel
             </button>
           </form>
         </div>

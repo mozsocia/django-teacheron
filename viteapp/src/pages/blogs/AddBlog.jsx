@@ -186,7 +186,7 @@ const AddBlog = () => {
               </div>
             </div>
             <button type="submit" className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap">
-              Save Blog
+              Save {EntityName}
             </button>
           </form>
         </div>

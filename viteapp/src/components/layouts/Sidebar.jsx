@@ -190,68 +190,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 }}
               </SidebarLinkGroup>
 
-              {/* Tasks */}
-              <SidebarLinkGroup activecondition={pathname.includes('tasks')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`moz-nav-link ${pathname.includes('tasks') ? 'moz-nav-link--active' : 'moz-nav-link--inactive'
-                          }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <i
-                              className={`bx bxs-check-square moz-nav-icon ${pathname.includes('tasks') ? 'moz-nav-icon--active' : 'moz-nav-icon--inactive'
-                                }`}
-                            ></i>
-                            <span className="moz-nav-text">Tasks</span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`moz-nav-arrow ${open && 'moz-nav-arrow--open'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/test"
-                              className={({ isActive }) =>
-                                `moz-nav-child-link ${isActive ? 'moz-nav-child-link--active' : 'moz-nav-child-link--inactive'
-                                }`
-                              }
-                            >
-                              <span className="moz-nav-child-text">Kanban</span>
-                            </NavLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/test"
-                              className={({ isActive }) =>
-                                `moz-nav-child-link ${isActive ? 'moz-nav-child-link--active' : 'moz-nav-child-link--inactive'
-                                }`
-                              }
-                            >
-                              <span className="moz-nav-child-text">List</span>
-                            </NavLink>
-                          </li>
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
 
 
 
@@ -313,7 +251,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
 
               {/* Messages */}
-              <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname.includes('messages') && 'bg-slate-900'}`}>
+              {/* <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname.includes('messages') && 'bg-slate-900'}`}>
                 <NavLink
                   end
                   to="/test"
@@ -327,14 +265,14 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         Messages
                       </span>
                     </div>
-                    {/* Badge */}
+
                     <div className="flex flex-shrink-0 ml-2">
                       <span className="inline-flex items-center justify-center h-5 text-xs font-medium text-white bg-indigo-500 px-2 rounded">4</span>
                     </div>
                   </div>
                 </NavLink>
               </li>
-
+ */}
 
 
 
