@@ -5,38 +5,21 @@ import { EntityName, ApiUrl, ReactRouterPath } from './enums';
 import { useParams } from 'react-router-dom';
 
 const ProductsDetails = () => {
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState({});
   const { id } = useParams();
-  const {
-    title,
-    short_details,
-    sku,
-    points,
-    price,
-    discount,
-    previous_price,
-    image,
-    stock_count,
-    rating,
-    remark_choices,
-    category,
-    brand,
-    color,
-    size,
-    is_active,
-    is_reseller,
-    reseller_price,
-    additional_info} = products || {};
+
 
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
         const response = await axios.get(`${ApiUrl}${id}/show`);
         setProducts(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error('Error fetching blog data:', error);
       }
     };
+
 
     fetchProductsData();
   }, [id]);
@@ -76,21 +59,21 @@ const ProductsDetails = () => {
               <div className="detail-item">
                 <div className="detail-item-title">Title :</div>
                 <div className="detail-item-p">
-                  <p>{title}</p>
+                  <p>{products.title}</p>
                 </div>
               </div>
 
               <div className="detail-item">
                 <div className="detail-item-title">Image :</div>
                 <div className="detail-item-p">
-                  <img src={image} width="150px" alt="products Image" />
+                  <img src={products.image} width="150px" alt="products Image" />
                 </div>
               </div>
 
               <div className="detail-item">
                 <div className="detail-item-title">Short Details :</div>
                 <div className="detail-item-p">
-                  <p>{short_details}</p>
+                  <p>{products.short_details}</p>
                 </div>
               </div>
 
@@ -98,46 +81,46 @@ const ProductsDetails = () => {
               <div className="detail-item">
                 <div className="detail-item-title">Brand :</div>
                 <div className="detail-item-p">
-                  <p>{brand.name}</p>
+                  <p>{products.brand?.name}</p>
                 </div>
               </div>
 
               <div className="detail-item">
                 <div className="detail-item-title">Category :</div>
                 <div className="detail-item-p">
-                  <p>{category.name}</p>
+                  <p>{products.category?.name}</p>
                 </div>
               </div>
 
               <div className="detail-item">
                 <div className="detail-item-title">Remark :</div>
                 <div className="detail-item-p">
-                  <p>{remark_choices?.name}</p>
+                  <p>{products.remark}</p>
                 </div>
               </div>
 
               <div className="detail-item">
                 <div className="detail-item-title">Color :</div>
                 <div className="detail-item-p">
-                  <p>{color}</p>
+                  <p>{products.color}</p>
                 </div>
               </div>
               <div className="detail-item">
                 <div className="detail-item-title">Size :</div>
                 <div className="detail-item-p">
-                  <p>{size}</p>
+                  <p>{products.size}</p>
                 </div>
               </div>
               <div className="detail-item">
                 <div className="detail-item-title">Price :</div>
                 <div className="detail-item-p">
-                  <p>{price}</p>
+                  <p>{products.price}</p>
                 </div>
               </div>
               <div className="detail-item">
                 <div className="detail-item-title">Ratings :</div>
                 <div className="detail-item-p">
-                  <p>{rating}</p>
+                  <p>{products.rating}</p>
                 </div>
               </div>
 

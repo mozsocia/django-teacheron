@@ -211,13 +211,13 @@ def api_product_related(request):
     brand_serializer = BrandSerializer(brands, many=True)
 
     # Get choices data for the remark field
-    remark_choices = [{'id': choice[0], 'name': choice[1]} for choice in Product._meta.get_field('remark').choices]
+    remark = [{'id': choice[0], 'name': choice[1]} for choice in Product._meta.get_field('remark').choices]
 
 
     return Response({
         'categories': category_serializer.data,
         'brands': brand_serializer.data,
-        'remark_choices': remark_choices  # Include choices data for the remark field
+        'remark': remark  # Include choices data for the remark field
     })
 
 @api_view(['POST'])

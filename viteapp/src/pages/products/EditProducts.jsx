@@ -11,7 +11,7 @@ import toastr from 'toastr';
 
 const EditProducts = () => {
   const navigate = useNavigate();
-  const [selectOptions, setSelectOptions] = useState({ brands: [], categories: [], remark_choices: [] });
+  const [selectOptions, setSelectOptions] = useState({ brands: [], categories: [], remark: [] });
   const { id } = useParams();
 
   useEffect(() => {
@@ -35,10 +35,9 @@ const EditProducts = () => {
         console.log(data)
         formik.setValues({
           title: data.title,
-          image: data.image,
           category: data.category.id,
           brand: data.brand.id,
-          remark_choices: data.remark_choices.id,
+          remark: data.remark,
           price: data.price,
           points: data.points,
           discount: false,
@@ -78,7 +77,7 @@ const EditProducts = () => {
       .test(...fileSizeValidtion),
     category: Yup.number(),
     brand: Yup.number(),
-    remark_choices: Yup.string(),
+    remark: Yup.string(),
     price: Yup.number(),
     points: Yup.number(),
     discount: Yup.boolean(),
@@ -101,7 +100,7 @@ const EditProducts = () => {
       image: null,
       category: null,
       brand: null,
-      remark_choices: "",
+      remark: "",
       price: '',
       points: '',
       discount: false,
@@ -465,30 +464,30 @@ const EditProducts = () => {
               </div>
               {/* remark select */}
               <div>
-                <label className="form-label" htmlFor="remark_choices">
+                <label className="form-label" htmlFor="remark">
                   Remark <span className="text-rose-500">*</span>
                 </label>
                 <Select
                   value={
-                    formik.values.remark_choices
-                      ? selectOptions.remark_choices.find(
-                          (option) => option.id === formik.values.remark_choices
+                    formik.values.remark
+                      ? selectOptions.remark.find(
+                          (option) => option.id === formik.values.remark
                         )
                       : null
                   }
                   onChange={(selectedOption) =>
-                    formik.setFieldValue("remark_choices", selectedOption.id)
+                    formik.setFieldValue("remark", selectedOption.id)
                   }
-                  options={selectOptions.remark_choices}
+                  options={selectOptions.remark}
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.id}
                   className={`${
-                    formik.touched.remark_choices && formik.errors.remark_choices && "error-class"
+                    formik.touched.remark && formik.errors.remark && "error-class"
                   }`}
                 />
-                {formik.errors.remark_choices && formik.touched.remark_choices && (
+                {formik.errors.remark && formik.touched.remark && (
                   <div className="text-red-500 text-sm">
-                    {formik.errors.remark_choices}
+                    {formik.errors.remark}
                   </div>
                 )}
               </div>

@@ -18,7 +18,7 @@ const AddProducts = () => {
   const [selectOptions, setSelectOptions] = useState({
     brands: [],
     categories: [],
-    remark_choices: [],
+    remark: [],
   });
   useEffect(() => {
     const fetchOptions = async () => {
@@ -48,7 +48,7 @@ const AddProducts = () => {
       .test(...fileSizeValidtion),
     category: Yup.number().required("Category is required"),
     brand: Yup.number().required("Brand is required"),
-    remark_choices: Yup.string().required("Remark is required"),
+    remark: Yup.string().required("Remark is required"),
     price: Yup.number().required("Price is required"),
     points: Yup.number().required("Points is required"),
     discount: Yup.boolean(),
@@ -72,7 +72,7 @@ const AddProducts = () => {
       image: null,
       category: null,
       brand: null,
-      remark_choices: "",
+      remark: "",
       price: '',
       points: '',
       discount: false,
@@ -431,59 +431,59 @@ const AddProducts = () => {
               </div>
               {/* remark select */}
               {/* <div>
-                <label className="form-label" htmlFor="remark_choices">
+                <label className="form-label" htmlFor="remark">
                   Remark <span className="text-rose-500">*</span>
                 </label>
                 <Select
                   value={
-                    formik.values.remark_choices
-                      ? selectOptions.remark_choices.find(
-                          (option) => option.id === formik.values.remark_choices
+                    formik.values.remark
+                      ? selectOptions.remark.find(
+                          (option) => option.id === formik.values.remark
                         )
                       : null
                   }
                   onChange={(selectedOption) =>
-                    formik.setFieldValue("remark_choices", selectedOption.id)
+                    formik.setFieldValue("remark", selectedOption.id)
                   }
-                  options={selectOptions.remark_choices}
+                  options={selectOptions.remark}
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.id}
                   className={`${
-                    formik.touched.remark_choices && formik.errors.remark_choices && "error-class"
+                    formik.touched.remark && formik.errors.remark && "error-class"
                   }`}
                 />
-                {formik.errors.remark_choices && formik.touched.remark_choices && (
+                {formik.errors.remark && formik.touched.remark && (
                   <div className="text-red-500 text-sm">
-                    {formik.errors.remark_choices}
+                    {formik.errors.remark}
                   </div>
                 )}
               </div> */}
 
               <div>
-                <label className="form-label" htmlFor="remark_choices">
+                <label className="form-label" htmlFor="remark">
                   Remark <span className="text-rose-500">*</span>
                 </label>
                 <Select
                   value={
-                    formik.values.remark_choices
-                      ? selectOptions.remark_choices.find(
-                          (option) => option.id === formik.values.remark_choices
+                    formik.values.remark
+                      ? selectOptions.remark.find(
+                          (option) => option.id === formik.values.remark
                         )
                       : null
                   }
                   onChange={(selectedOption) =>
-                    formik.setFieldValue("remark_choices", selectedOption.id)
+                    formik.setFieldValue("remark", selectedOption.id)
                   }
-                  options={selectOptions.remark_choices}
+                  options={selectOptions.remark}
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.id}
                   className={`${
-                    formik.touched.remark_choices && formik.errors.remark_choices && "error-class"
+                    formik.touched.remark && formik.errors.remark && "error-class"
                   }`}
                 />
-                {formik.errors.remark_choices && formik.touched.remark_choices && (
+                {formik.errors.remark && formik.touched.remark && (
                   <div className="text-red-500 text-sm">
-                    {formik.errors.remark_choices}
+                    {formik.errors.remark}
                   </div>
                 )}
               </div>
