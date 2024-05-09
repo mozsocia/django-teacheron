@@ -26,4 +26,12 @@ urlpatterns = [
     path('blogs/<int:blog_id>/edit/', api_blog_edit),
     path('blogs/<int:blog_id>/update/', api_blog_update),
     path('blogs/<int:blog_id>/destroy/', api_blog_destroy),
+
+    path('products/list/', api_product_list),
+    path('products/related/', api_product_related),
+    path('products/store/', api_product_store),
+    path('products/<int:product_id>/show/', api_product_show),
+    path('products/<int:product_id>/edit/', api_product_edit),
+    path('products/<int:product_id>/update/', api_product_update),
+    path('products/<int:product_id>/destroy/', api_product_destroy),
 ]
