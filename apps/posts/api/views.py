@@ -192,4 +192,81 @@ def api_blog_destroy(request, blog_id):
 
     blog.delete()
     return Response({'message': 'Blog deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+@api_view(['GET'])
+def api_product_list(request):
+    products = Product.objects.all()
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def api_product_related(request):
+    categories = Category.objects.all()
+    brands = Brand.objects.all()
+
+    category_serializer = CategorySerializer(categories, many=True)
+    brand_serializer = BrandSerializer(brands, many=True)
+
+    # Get choices data for the remark field
+    remark_choices = [{'id': choice[0], 'name': choice[1]} for choice in Product._meta.get_field('remark').choices]
+
+
+    return Response({
+        'categories': category_serializer.data,
+        'brands': brand_serializer.data,
+        'remark_choices': remark_choices  # Include choices data for the remark field
+    })
+
+@api_view(['POST'])
+def api_product_store(request):
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def api_product_show(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        serializer = ProductSerializer(product)
+        return Response(serializer.data)
+    except Product.DoesNotExist:
+        return Response({'message': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+def api_product_edit(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        serializer = ProductSerializer(product)
+        return Response(serializer.data)
+    except Product.DoesNotExist:
+        return Response({'message': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def api_product_update(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response({'message': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = ProductSerializer(product, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def api_product_destroy(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response({'message': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    product.delete()
+    return Response({'message': 'Product deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
     

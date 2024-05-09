@@ -19,3 +19,8 @@ class BlogSerializer(DepthMixin, serializers.ModelSerializer):
         model = Blog
         fields = '__all__'
 
+
+class ProductSerializer(DepthMixin,serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
