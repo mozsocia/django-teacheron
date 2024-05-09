@@ -46,6 +46,21 @@ export const sidebarLinks = [
       },
     ],
   },
+  {
+    key: "products",
+    label: "Product",
+    icon: "bxs-layout",
+    submenu: [
+      {
+        label: "Product List",
+        path: "/panel/products/list",
+      },
+      {
+        label: "Add Product",
+        path: "/panel/products/add",
+      },
+    ],
+  },
 
   {
     key: "ui",

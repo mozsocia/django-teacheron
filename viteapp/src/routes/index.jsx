@@ -20,6 +20,10 @@ import AddCategories from "../pages/category/AddCategories";
 import ListCategories from "../pages/category/ListCategories";
 import CategoriesDetails from "../pages/category/CategoriesDetails";
 import EditCategories from "../pages/category/EditCategories";
+import AddProducts from "../pages/products/AddProducts";
+import ListProducts from "../pages/products/ListProducts";
+import ProductsDetails from "../pages/products/ProductsDetails";
+import EditProducts from "../pages/products/EditProducts";
 
 const publicRoutes = [
   { path: "/panel/dashboard", component: <Dashboard /> },
@@ -47,6 +51,11 @@ const publicRoutes = [
   { path: "/panel/categories/list", component: <ListCategories /> },
   { path: "/panel/categories/:id/show", component: <CategoriesDetails /> },
   { path: "/panel/categories/:id/edit", component: <EditCategories /> },
+
+  { path: "/panel/products/add", component: <AddProducts /> },
+  { path: "/panel/products/list", component: <ListProducts /> },
+  { path: "/panel/products/:id/show", component: <ProductsDetails /> },
+  { path: "/panel/products/:id/edit", component: <EditProducts /> },
 ];
 
 export { publicRoutes };
