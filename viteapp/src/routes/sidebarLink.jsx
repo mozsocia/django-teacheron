@@ -1,57 +1,85 @@
 export const sidebarLinks = [
-
   {
-    key: 'blog',
-    label: 'Blog',
-    icon: 'bxl-steam',
+    key: "blog",
+    label: "Blog",
+    icon: "bxl-steam",
     submenu: [
       {
-        label: 'Blog List',
-        path: '/panel/blogs/list',
+        label: "Blog List",
+        path: "/panel/blogs/list",
       },
       {
-        label: 'Add Blog',
-        path: '/panel/blogs/add',
+        label: "Add Blog",
+        path: "/panel/blogs/add",
       },
-
     ],
   },
+
   {
-    key: 'ui',
-    label: 'Uis',
-    icon: 'bxs-cake',
+    key: "brand",
+    label: "Brand",
+    icon: "bxs-layout",
     submenu: [
       {
-        label: 'Card Empty',
-        path: '/panel/ui/card-empty',
+        label: "Brand List",
+        path: "/panel/brands/list",
       },
       {
-        label: 'Card Com',
-        path: '/panel/ui/card-com',
+        label: "Add Brand",
+        path: "/panel/brands/add",
+      },
+    ],
+  },
+
+  {
+    key: "category",
+    label: "Category",
+    icon: "bxs-layout",
+    submenu: [
+      {
+        label: "Category List",
+        path: "/panel/categories/list",
       },
       {
-        label: 'DataTable',
-        path: '/panel/ui/datatable-new',
+        label: "Add Category",
+        path: "/panel/categories/add",
+      },
+    ],
+  },
+
+  {
+    key: "ui",
+    label: "Uis",
+    icon: "bxs-cake",
+    submenu: [
+      {
+        label: "Card Empty",
+        path: "/panel/ui/card-empty",
       },
       {
-        label: 'Add Product',
+        label: "Card Com",
+        path: "/panel/ui/card-com",
+      },
+      {
+        label: "DataTable",
+        path: "/panel/ui/datatable-new",
+      },
+      {
+        label: "Add Product",
         path: "/panel/ui/add-product",
       },
       {
-        label: 'Add Product Valid',
+        label: "Add Product Valid",
         path: "/panel/ui/add-product-valid",
       },
       {
-        label: 'Login',
+        label: "Login",
         path: "/panel/ui/login",
       },
       {
-        label: 'Signup',
+        label: "Signup",
         path: "/panel/ui/signup",
       },
     ],
   },
-
-
-
 ];
