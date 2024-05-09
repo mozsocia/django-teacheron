@@ -38,8 +38,9 @@ const EditProducts = () => {
           image: data.image,
           category: data.category.id,
           brand: data.brand.id,
-          remark: data.remark,
+          remark_choices: data.remark_choices.id,
           price: data.price,
+          points: data.points,
           discount: false,
           previous_price: data.previous_price,
           sku: data.sku,
@@ -77,8 +78,9 @@ const EditProducts = () => {
       .test(...fileSizeValidtion),
     category: Yup.number(),
     brand: Yup.number(),
-    remark: Yup.string(),
+    remark_choices: Yup.string(),
     price: Yup.number(),
+    points: Yup.number(),
     discount: Yup.boolean(),
     previous_price: Yup.number(),
     sku: Yup.string(),
@@ -96,22 +98,22 @@ const EditProducts = () => {
   const formik = useFormik({
     initialValues: {
       title: "",
-      content: "",
       image: null,
       category: null,
       brand: null,
-      remark: "",
-      price: "",
+      remark_choices: "",
+      price: '',
+      points: '',
       discount: false,
-      previous_price: "",
+      previous_price: '',
       sku: "",
-      stock_count: "",
-      rating: "",
+      stock_count: '',
+      rating: '',
       color: "",
       size: "",
       is_active: false,
       is_reseller: false,
-      reseller_price: "",
+      reseller_price: '',
       additional_info: "",
       short_details: "",
     },
@@ -263,6 +265,33 @@ const EditProducts = () => {
                   </div>
                 )}
               </div>
+
+
+                  {/* points */}
+                  <div>
+                <label className="form-label" htmlFor="points">
+                  points <span className="text-rose-500">*</span>
+                </label>
+                <input
+                   className={`form-input w-full ${
+                    formik.touched.title && formik.errors.title && "error-class"
+                  }`}
+                  id="points"
+                  type="number"
+                  name="points"
+                  value={formik.values.points}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  autoComplete="points"
+                />
+                {formik.errors.points && formik.touched.points && (
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.points}
+                  </div>
+                )}
+              </div>
+
+
                 {/* discount */}
               <div className="mt-6">
               <label className="form-label" htmlFor="discount">
@@ -436,30 +465,30 @@ const EditProducts = () => {
               </div>
               {/* remark select */}
               <div>
-                <label className="form-label" htmlFor="remark">
+                <label className="form-label" htmlFor="remark_choices">
                   Remark <span className="text-rose-500">*</span>
                 </label>
                 <Select
                   value={
-                    formik.values.remark
+                    formik.values.remark_choices
                       ? selectOptions.remark_choices.find(
-                          (option) => option.id === formik.values.brand
+                          (option) => option.id === formik.values.remark_choices
                         )
                       : null
                   }
                   onChange={(selectedOption) =>
-                    formik.setFieldValue("remark", selectedOption.id)
+                    formik.setFieldValue("remark_choices", selectedOption.id)
                   }
                   options={selectOptions.remark_choices}
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.id}
                   className={`${
-                    formik.touched.brand && formik.errors.brand && "error-class"
+                    formik.touched.remark_choices && formik.errors.remark_choices && "error-class"
                   }`}
                 />
-                {formik.errors.brand && formik.touched.brand && (
+                {formik.errors.remark_choices && formik.touched.remark_choices && (
                   <div className="text-red-500 text-sm">
-                    {formik.errors.brand}
+                    {formik.errors.remark_choices}
                   </div>
                 )}
               </div>

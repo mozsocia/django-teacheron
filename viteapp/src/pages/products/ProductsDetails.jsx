@@ -5,23 +5,43 @@ import { EntityName, ApiUrl, ReactRouterPath } from './enums';
 import { useParams } from 'react-router-dom';
 
 const ProductsDetails = () => {
-  const [blog, setBlog] = useState(null);
-  const { id } = useParams();;
+  const [products, setProducts] = useState(null);
+  const { id } = useParams();
+  const {
+    title,
+    short_details,
+    sku,
+    points,
+    price,
+    discount,
+    previous_price,
+    image,
+    stock_count,
+    rating,
+    remark_choices,
+    category,
+    brand,
+    color,
+    size,
+    is_active,
+    is_reseller,
+    reseller_price,
+    additional_info} = products || {};
 
   useEffect(() => {
-    const fetchBlogData = async () => {
+    const fetchProductsData = async () => {
       try {
         const response = await axios.get(`${ApiUrl}${id}/show`);
-        setBlog(response.data);
+        setProducts(response.data);
       } catch (error) {
         console.error('Error fetching blog data:', error);
       }
     };
 
-    fetchBlogData();
+    fetchProductsData();
   }, [id]);
 
-  if (!blog) {
+  if (!products) {
     return <p>Loading...</p>;
   }
 
@@ -56,39 +76,73 @@ const ProductsDetails = () => {
               <div className="detail-item">
                 <div className="detail-item-title">Title :</div>
                 <div className="detail-item-p">
-                  <p>{blog.title}</p>
+                  <p>{title}</p>
                 </div>
               </div>
 
               <div className="detail-item">
                 <div className="detail-item-title">Image :</div>
                 <div className="detail-item-p">
-                  <img src={blog.image} width="150px" alt="Blog Image" />
+                  <img src={image} width="150px" alt="products Image" />
                 </div>
               </div>
 
               <div className="detail-item">
-                <div className="detail-item-title">Content :</div>
+                <div className="detail-item-title">Short Details :</div>
                 <div className="detail-item-p">
-                  <p>{blog.content}</p>
+                  <p>{short_details}</p>
                 </div>
               </div>
+
 
               <div className="detail-item">
                 <div className="detail-item-title">Brand :</div>
                 <div className="detail-item-p">
-                  <p>{blog.brand.name}</p>
+                  <p>{brand.name}</p>
                 </div>
               </div>
 
               <div className="detail-item">
                 <div className="detail-item-title">Category :</div>
                 <div className="detail-item-p">
-                  <p>{blog.category.name}</p>
+                  <p>{category.name}</p>
                 </div>
               </div>
 
-              <Link to={`${ReactRouterPath}${blog.id}/edit/`}>
+              <div className="detail-item">
+                <div className="detail-item-title">Remark :</div>
+                <div className="detail-item-p">
+                  <p>{remark_choices?.name}</p>
+                </div>
+              </div>
+
+              <div className="detail-item">
+                <div className="detail-item-title">Color :</div>
+                <div className="detail-item-p">
+                  <p>{color}</p>
+                </div>
+              </div>
+              <div className="detail-item">
+                <div className="detail-item-title">Size :</div>
+                <div className="detail-item-p">
+                  <p>{size}</p>
+                </div>
+              </div>
+              <div className="detail-item">
+                <div className="detail-item-title">Price :</div>
+                <div className="detail-item-p">
+                  <p>{price}</p>
+                </div>
+              </div>
+              <div className="detail-item">
+                <div className="detail-item-title">Ratings :</div>
+                <div className="detail-item-p">
+                  <p>{rating}</p>
+                </div>
+              </div>
+
+
+              <Link to={`${ReactRouterPath}${id}/edit/`}>
                 <button className="btn btn-indigo-outline mt-3">
                   <span className="hidden md:inline-block">
                     Edit {EntityName}
