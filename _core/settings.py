@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "corsheaders",
     'apps.posts.apps.PostsConfig',
     'apps.panel.apps.PanelConfig',
+    'apps.main.apps.MainConfig',
+
 
 ]
 

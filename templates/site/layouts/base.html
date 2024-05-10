@@ -1,0 +1,48 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <!-- boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/static/site/assets/css/main.css" />
+
+  <!-- splide -->
+  <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide/dist/css/splide.min.css" />
+
+  <!-- Include Splide.js CSS -->
+  <link rel="stylesheet" href="path/to/splide.min.css" />
+
+  <title>{% block title %}My Website{% endblock %}</title>
+
+  {% block css %}
+
+  {% endblock css %}
+</head>
+
+<body>
+  {% include 'site/layouts/includes/header.html' %}
+
+  <div class="content">
+    {% block content %}
+
+    {% endblock %}
+  </div>
+
+  {% include 'site/layouts/includes/footer.html' %}
+
+  <script src="/static/site/assets/js/scripts.js"></script>
+  <script src="https://unpkg.com/@splidejs/splide/dist/js/splide.min.js"></script>
+
+  {% block js %}
+
+  {% endblock js %}
+</body>
+
+</html>
