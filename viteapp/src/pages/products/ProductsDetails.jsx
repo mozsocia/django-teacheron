@@ -14,7 +14,6 @@ const ProductsDetails = () => {
       try {
         const response = await axios.get(`${ApiUrl}${id}/show`);
         setProducts(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error('Error fetching blog data:', error);
       }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Select from 'react-select';
-import { imageValidation, fileSizeValidtion, newImagePreview, previousImagePreview } from '@/utils/Utils'
+import { imageValidation, fileSizeValidtion, newImagePreview, previousImagePreview , setFormValues, setFormSelectValues } from '@/utils/Utils'
 import { EntityName, ApiUrl, ReactRouterPath } from './enums'
 import { Link } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -27,34 +27,24 @@ const EditProducts = () => {
   }, []);
 
 
+
+
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
         const response = await axios.get(`${ApiUrl}${id}/edit/`);
         const data = response.data;
-        console.log(data)
-        formik.setValues({
-          title: data.title,
-          category: data.category.id,
-          brand: data.brand.id,
-          remark: data.remark,
-          price: data.price,
-          points: data.points,
-          discount: false,
-          previous_price: data.previous_price,
-          sku: data.sku,
-          stock_count: data.stock_count,
-          rating: data.rating,
-          color: data.color,
-          size: data.size,
-          is_active: data.is_active,
-          is_reseller: data.is_reseller,
-          reseller_price: data.reseller_price,
-          additional_info: data.additional_info,
-          short_details: data.short_details,
-        });
-       
+
+        const keys = [
+          'title', 'remark', 'price', 'points', 'discount', 'previous_price', 
+          'sku', 'stock_count', 'rating', 'color', 'size', 'is_active', 
+          'is_reseller', 'reseller_price', 'additional_info', 'short_details'
+        ];
+        setFormValues(data, formik , keys);
+        setFormSelectValues( data, formik, ['category', 'brand']);
+
         previousImagePreview('image', data.image);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -75,8 +65,8 @@ const EditProducts = () => {
     image: Yup.mixed()
       .test(...imageValidation)
       .test(...fileSizeValidtion),
-    category: Yup.number(),
-    brand: Yup.number(),
+    category: Yup.number().nullable(),
+    brand: Yup.number().nullable(),
     remark: Yup.string(),
     price: Yup.number(),
     points: Yup.number(),
@@ -97,7 +87,6 @@ const EditProducts = () => {
   const formik = useFormik({
     initialValues: {
       title: "",
-      image: null,
       category: null,
       brand: null,
       remark: "",
@@ -146,6 +135,14 @@ const EditProducts = () => {
     },
   });
 
+
+
+  const validationToast = () => {
+    console.log(formik)
+    if (!formik.isValid) {
+      toastr.error("form validation error")
+    }
+}
   return (
     <div>
       <header className="page-header">
@@ -292,20 +289,22 @@ const EditProducts = () => {
 
 
                 {/* discount */}
-              <div className="mt-6">
-              <label className="form-label" htmlFor="discount">
-                 Discounted Price <span className="text-rose-500">*</span>
+
+              <div>
+                <label className="form-label flex items-center" htmlFor="discount">
+
                   <input
-                   id="discount"
-                   name="discount"
-                   value={formik.values.discount}
-                   onChange={formik.handleChange}
-                   onBlur={formik.handleBlur}
-                   autoComplete="discount"
-                   className="form-checkbox ml-5"
-                   type="checkbox" />
+                    className="form-checkbox mr-2"
+                    id="discount"
+                    type="checkbox"
+                    name="discount"
+                    checked={formik.values.discount}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  <span className='text-sm'> Discount</span>
                 </label>
-                
+
               </div>
 
                 {/* previous price */}
@@ -613,7 +612,7 @@ const EditProducts = () => {
                   ></textarea>
                 </div>
             </div>
-            <button type="submit" className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap">
+            <button type="submit" onClick={validationToast} className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap">
               Update {EntityName}
             </button>
             <button

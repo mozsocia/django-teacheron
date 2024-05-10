@@ -103,3 +103,24 @@ export const fileSizeValidtion = [
     return value.size <= 5 * 1024 * 1024; // 2MB in bytes
   }
 ]
+
+
+
+
+export const setFormValues = (data, formik, keys) => {
+  keys.forEach(key => {
+    const value = data[key];
+    if (value !== null && value !== undefined) {
+      formik.setFieldValue(key, value);
+    }
+  });
+};
+
+export const setFormSelectValues = (data, formik, keys) => {
+  keys.forEach(key => {
+    const value = data[key];
+    if (value !== null && value !== undefined) {
+      formik.setFieldValue(key, value.id);
+    }
+  });
+};

@@ -116,6 +116,13 @@ const AddProducts = () => {
     },
   });
 
+  const validationToast = () => {
+      console.log(formik)
+      if (!formik.isValid) {
+        toastr.error("form validation error")
+      }
+  }
+
   return (
     <div>
       <header className="page-header">
@@ -259,20 +266,20 @@ const AddProducts = () => {
                 )}
               </div>
                 {/* discount */}
-              <div className="mt-6">
-              <label className="form-label" htmlFor="discount">
-                 Discounted Price <span className="text-rose-500">*</span>
+              <div>
+                <label className="form-label flex items-center" htmlFor="discount">
                   <input
-                   id="discount"
-                   name="discount"
-                   value={formik.values.discount}
-                   onChange={formik.handleChange}
-                   onBlur={formik.handleBlur}
-                   autoComplete="discount"
-                   className="form-checkbox ml-5"
-                   type="checkbox" />
+                    className="form-checkbox mr-2"
+                    id="discount"
+                    type="checkbox"
+                    name="discount"
+                    checked={formik.values.discount}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  <span className='text-sm'> Discount</span>
                 </label>
-                
+
               </div>
 
                 {/* previous price */}
@@ -430,35 +437,7 @@ const AddProducts = () => {
                 )}
               </div>
               {/* remark select */}
-              {/* <div>
-                <label className="form-label" htmlFor="remark">
-                  Remark <span className="text-rose-500">*</span>
-                </label>
-                <Select
-                  value={
-                    formik.values.remark
-                      ? selectOptions.remark.find(
-                          (option) => option.id === formik.values.remark
-                        )
-                      : null
-                  }
-                  onChange={(selectedOption) =>
-                    formik.setFieldValue("remark", selectedOption.id)
-                  }
-                  options={selectOptions.remark}
-                  getOptionLabel={(option) => option.name}
-                  getOptionValue={(option) => option.id}
-                  className={`${
-                    formik.touched.remark && formik.errors.remark && "error-class"
-                  }`}
-                />
-                {formik.errors.remark && formik.touched.remark && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.remark}
-                  </div>
-                )}
-              </div> */}
-
+ 
               <div>
                 <label className="form-label" htmlFor="remark">
                   Remark <span className="text-rose-500">*</span>
@@ -611,6 +590,7 @@ const AddProducts = () => {
             </div>
             <button
               type="submit"
+              onClick={validationToast}
               className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap"
             >
               Save {EntityName}
