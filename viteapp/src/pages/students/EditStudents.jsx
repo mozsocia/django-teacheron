@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Select from "react-select";
-import {
-  imageValidation,
-  fileSizeValidtion,
-  newImagePreview,
-  previousImagePreview,
-} from "@/utils/Utils";
 import { EntityName, ApiUrl, ReactRouterPath } from "./enums";
 import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
@@ -189,6 +182,7 @@ const EditStudent = () => {
                   id="email"
                   type="email"
                   name="email"
+                  value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   autoComplete="email"
