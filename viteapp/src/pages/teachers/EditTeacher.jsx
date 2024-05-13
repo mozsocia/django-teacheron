@@ -6,32 +6,61 @@ import {
   imageValidation,
   fileSizeValidtion,
   newImagePreview,
+  previousImagePreview,
 } from "@/utils/Utils";
 import { EntityName, ApiUrl, ReactRouterPath } from "./enums";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toastr from "toastr";
 
-const AddStudent = () => {
+const EditTeacher = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const response = await axios.get(`${ApiUrl}${id}/edit/`);
+        const data = response.data;
+        formik.setValues({
+          first_name: data.first_name,
+          last_name: data.last_name,
+          email: data.email,
+          bio: data.bio,
+          education: data.education,
+          date_of_birth: data.date_of_birth,
+          experience: data.experience,
+          qualifications: data.qualifications,
+          subjects: data.subjects,
+          is_active: data.is_active,
+          is_verified: data.is_verified,
+          phone_number: data.phone_number,
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchInitialData();
+  }, []);
 
   const handleFileChange = (event, name) => {
     const file = event.target.files[0];
     formik.setFieldValue(name, file);
-    newImagePreview(name, file);
   };
 
   const validationSchema = Yup.object({
-    first_name: Yup.string().required("First Name is required"),
-    last_name: Yup.string().required("Last Name is required"),
-    bio: Yup.string().required("Bio is required"),
-    education: Yup.string().required("Education is required"),
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    date_of_birth: Yup.date().required("Date of Birth is required"),
-    phone_number: Yup.string().required("Phone Number is required"),
+    first_name: Yup.string(),
+    last_name: Yup.string(),
+    bio: Yup.string(),
+    education: Yup.string(),
+    email: Yup.string().email("Invalid email address"),
+    date_of_birth: Yup.date(),
+    experience: Yup.number(),
+    qualifications: Yup.string(),
+    subjects: Yup.string(),
+    phone_number: Yup.string(),
     is_active: Yup.boolean(),
     is_verified: Yup.boolean(),
   });
@@ -44,6 +73,9 @@ const AddStudent = () => {
       education: "",
       email: "",
       date_of_birth: "",
+      experience: "",
+      subjects: "",
+      qualifications: "",
       phone_number: "",
       is_active: false,
       is_verified: false,
@@ -184,7 +216,9 @@ const AddStudent = () => {
                 </label>
                 <input
                   className={`form-input w-full ${
-                    formik.touched.phone_number && formik.errors.phone_number && "error-class"
+                    formik.touched.phone_number &&
+                    formik.errors.phone_number &&
+                    "error-class"
                   }`}
                   id="phone_number"
                   type="text"
@@ -246,6 +280,78 @@ const AddStudent = () => {
                   </div>
                 )}
               </div>
+
+              <div>
+                <label className="form-label" htmlFor="qualifications">
+                  Qualifications <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  className={`form-input w-full ${
+                    formik.touched.qualifications &&
+                    formik.errors.qualifications &&
+                    "error-class"
+                  }`}
+                  id="qualifications"
+                  type="text"
+                  name="qualifications"
+                  value={formik.values.qualifications}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  autoComplete="qualifications"
+                />
+                {formik.errors.qualifications &&
+                  formik.touched.qualifications && (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.qualifications}
+                    </div>
+                  )}
+              </div>
+
+              <div>
+                <label className="form-label" htmlFor="experience">
+                  Experience <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  className={`form-input w-full ${
+                    formik.touched.experience &&
+                    formik.errors.experience &&
+                    "error-class"
+                  }`}
+                  id="experience"
+                  type="text"
+                  name="experience"
+                  value={formik.values.experience}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  autoComplete="experience"
+                />
+                {formik.errors.experience && formik.touched.experience && (
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.experience}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <label className="form-label" htmlFor="subjects">
+                  Subjects <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  className={`form-input w-full ${
+                    formik.touched.subjects &&
+                    formik.errors.subjects &&
+                    "error-class"
+                  }`}
+                  id="subjects"
+                  type="text"
+                  name="subjects"
+                  value={formik.values.subjects}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  autoComplete="subjects"
+                />
+              </div>
+
               <div>
                 <label className="form-label" htmlFor="date_of_birth">
                   Date of Birth <span className="text-rose-500">*</span>
@@ -274,49 +380,55 @@ const AddStudent = () => {
               <div>
                 <label className="form-label flex mr-2" htmlFor="is_active">
                   Is Active <span className="text-rose-500">*</span>
-                <input
-                 className="form-checkbox ml-2"
-                  id="is_active"
-                  type="checkbox"
-                  name="is_active"
-                  checked={formik.values.is_active}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.errors.is_active && formik.touched.is_active && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.is_active}
-                  </div>
-                )}
+                  <input
+                    className="form-checkbox ml-2"
+                    id="is_active"
+                    type="checkbox"
+                    name="is_active"
+                    checked={formik.values.is_active}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.is_active && formik.touched.is_active && (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.is_active}
+                    </div>
+                  )}
                 </label>
               </div>
 
               <div>
                 <label className="form-label flex mr-2" htmlFor="is_verified">
                   Is Verified <span className="text-rose-500">*</span>
-                <input
-                 className="form-checkbox ml-2"
-                  id="is_verified"
-                  type="checkbox"
-                  name="is_verified"
-                  checked={formik.values.is_verified}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.errors.is_verified && formik.touched.is_verified && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.is_verified}
-                  </div>
-                )}
+                  <input
+                    className="form-checkbox ml-2"
+                    id="is_verified"
+                    type="checkbox"
+                    name="is_verified"
+                    checked={formik.values.is_verified}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.is_verified && formik.touched.is_verified && (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.is_verified}
+                    </div>
+                  )}
                 </label>
               </div>
-
             </div>
             <button
               type="submit"
               className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap"
             >
-              Save {EntityName}
+              Update {EntityName}
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="btn mt-3 ms-2 btn-red-outline whitespace-nowrap"
+            >
+              Cancel
             </button>
           </form>
         </div>
@@ -325,4 +437,4 @@ const AddStudent = () => {
   );
 };
 
-export default AddStudent;
+export default EditTeacher;

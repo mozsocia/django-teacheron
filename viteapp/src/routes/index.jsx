@@ -29,6 +29,10 @@ import StudentLists from "../pages/students/ListStudents";
 import StudentDetails from "../pages/students/StudentDetails";
 import EditStudents from "../pages/students/EditStudents";
 import ListStudents from "../pages/students/ListStudents";
+import ListTeachers from "../pages/teachers/ListTeachers";
+import AddTeacher from "../pages/teachers/AddTeacher";
+import TeacherDetails from "../pages/teachers/TeacherDetails";
+import EditTeacher from "../pages/teachers/EditTeacher";
 
 const publicRoutes = [
   { path: "/panel/dashboard", component: <Dashboard /> },
@@ -66,6 +70,11 @@ const publicRoutes = [
   { path: "panel/students/list", component: <ListStudents /> },
   { path: "panel/students/:id/show", component: <StudentDetails /> },
   { path: "panel/students/:id/edit", component: <EditStudents /> },
+  
+  { path: "panel/teachers/add", component: <AddTeacher/> },
+  { path: "panel/teachers/list", component: <ListTeachers /> },
+  { path: "panel/teachers/:id/show", component: <TeacherDetails /> },
+  { path: "panel/teachers/:id/edit", component: <EditTeacher /> },
   
 ];
 

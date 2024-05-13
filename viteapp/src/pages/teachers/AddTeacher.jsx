@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Select from "react-select";
-import {
-  imageValidation,
-  fileSizeValidtion,
-  newImagePreview,
-} from "@/utils/Utils";
 import { EntityName, ApiUrl, ReactRouterPath } from "./enums";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toastr from "toastr";
 
-const AddStudent = () => {
+const AddTeacher = () => {
   const navigate = useNavigate();
 
   const handleFileChange = (event, name) => {
@@ -31,6 +25,9 @@ const AddStudent = () => {
       .email("Invalid email address")
       .required("Email is required"),
     date_of_birth: Yup.date().required("Date of Birth is required"),
+    experience: Yup.number().required("Experience is required"),
+    qualifications: Yup.string().required("Qualifications is required"),
+    subjects: Yup.string().required("Subjects is required"),
     phone_number: Yup.string().required("Phone Number is required"),
     is_active: Yup.boolean(),
     is_verified: Yup.boolean(),
@@ -44,6 +41,9 @@ const AddStudent = () => {
       education: "",
       email: "",
       date_of_birth: "",
+      experience: "",
+      subjects: "",
+      qualifications: "",
       phone_number: "",
       is_active: false,
       is_verified: false,
@@ -246,6 +246,71 @@ const AddStudent = () => {
                   </div>
                 )}
               </div>
+
+                <div>
+                  <label className="form-label" htmlFor="qualifications">
+                    Qualifications <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    className={`form-input w-full ${
+                      formik.touched.qualifications &&  formik.errors.qualifications && "error-class"   
+                    }`}
+                    id="qualifications"
+                    type="text"
+                    name="qualifications"
+                    value={formik.values.qualifications}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    autoComplete="qualifications"
+                  />
+                  {formik.errors.qualifications && formik.touched.qualifications && (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.qualifications}
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <label className="form-label" htmlFor="experience">
+                    Experience <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    className={`form-input w-full ${
+                      formik.touched.experience &&  formik.errors.experience && "error-class"   
+                    }`}
+                    id="experience"
+                    type="text"
+                    name="experience"
+                    value={formik.values.experience}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    autoComplete="experience"
+                  />
+                  {formik.errors.experience && formik.touched.experience && (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.experience}
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <label className="form-label" htmlFor="subjects">
+                    Subjects <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    className={`form-input w-full ${
+                      formik.touched.subjects &&  formik.errors.subjects && "error-class"
+                    }`}
+                    id="subjects"
+                    type="text"
+                    name="subjects"
+                    value={formik.values.subjects}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    autoComplete="subjects"
+                  />
+                </div>
+
               <div>
                 <label className="form-label" htmlFor="date_of_birth">
                   Date of Birth <span className="text-rose-500">*</span>
@@ -325,4 +390,4 @@ const AddStudent = () => {
   );
 };
 
-export default AddStudent;
+export default AddTeacher;
