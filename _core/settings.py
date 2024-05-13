@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'apps.posts.apps.PostsConfig',
     'apps.panel.apps.PanelConfig',
     'apps.main.apps.MainConfig',
+    'apps.student.apps.StudentConfig',
+    'apps.teacher.apps.TeacherConfig',
+
 
 
 ]

@@ -26,10 +26,15 @@ urlpatterns = [
     path('', include('apps.main.urls')),
     path('posts/', include('apps.posts.urls')),
     path('panel/', include('apps.panel.urls')),
+    path('student/', include('apps.student.urls')),
+    path('teacher/', include('apps.teacher.urls')),
 
 
     # =========== api url ===============
     path('api/posts/', include('apps.posts.api.urls')),
+    path('api/student/', include('apps.student.api.urls')),
+    path('api/teacher/', include('apps.teacher.api.urls')),
+
 
 
 
