@@ -24,6 +24,11 @@ import AddProducts from "../pages/products/AddProducts";
 import ListProducts from "../pages/products/ListProducts";
 import ProductsDetails from "../pages/products/ProductsDetails";
 import EditProducts from "../pages/products/EditProducts";
+import AddStudent from "../pages/students/AddStudent";
+import StudentLists from "../pages/students/ListStudents";
+import StudentDetails from "../pages/students/StudentDetails";
+import EditStudents from "../pages/students/EditStudents";
+import ListStudents from "../pages/students/ListStudents";
 
 const publicRoutes = [
   { path: "/panel/dashboard", component: <Dashboard /> },
@@ -56,6 +61,12 @@ const publicRoutes = [
   { path: "/panel/products/list", component: <ListProducts /> },
   { path: "/panel/products/:id/show", component: <ProductsDetails /> },
   { path: "/panel/products/:id/edit", component: <EditProducts /> },
+
+  { path: "panel/students/add", component: <AddStudent /> },
+  { path: "panel/students/list", component: <ListStudents /> },
+  { path: "panel/students/:id/show", component: <StudentDetails /> },
+  { path: "panel/students/:id/edit", component: <EditStudents /> },
+  
 ];
 
 export { publicRoutes };

@@ -11,20 +11,7 @@ import toastr from 'toastr';
 
 const AddBrand = () => {
   const navigate = useNavigate();
-//   const [selectOptions, setSelectOptions] = useState({ brands: [], categories: [] });
 
-
-//   useEffect(() => {
-//     const fetchOptions = async () => {
-//       try {
-//         const response = await axios.get(ApiUrl + 'related/');
-//         setSelectOptions(response.data);
-//       } catch (error) {
-//         console.error('Error fetching options:', error);
-//       }
-//     };
-//     fetchOptions();
-//   }, []);
 
   const handleFileChange = (event, name) => {
     const file = event.target.files[0];

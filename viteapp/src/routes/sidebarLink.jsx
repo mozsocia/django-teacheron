@@ -61,6 +61,21 @@ export const sidebarLinks = [
       },
     ],
   },
+  {
+    key: "student",
+    label: "Student",
+    icon: "bxs-layout",
+    submenu: [
+      {
+        label: "Student List",
+        path: "/panel/students/list",
+      },
+      {
+        label: "Add Student",
+        path: "/panel/students/add",
+      },
+    ],
+  },
 
   {
     key: "ui",
