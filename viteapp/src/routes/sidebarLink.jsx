@@ -14,53 +14,6 @@ export const sidebarLinks = [
       },
     ],
   },
-
-  {
-    key: "brand",
-    label: "Brand",
-    icon: "bxs-layout",
-    submenu: [
-      {
-        label: "Brand List",
-        path: "/panel/brands/list",
-      },
-      {
-        label: "Add Brand",
-        path: "/panel/brands/add",
-      },
-    ],
-  },
-
-  {
-    key: "category",
-    label: "Category",
-    icon: "bxs-layout",
-    submenu: [
-      {
-        label: "Category List",
-        path: "/panel/categories/list",
-      },
-      {
-        label: "Add Category",
-        path: "/panel/categories/add",
-      },
-    ],
-  },
-  {
-    key: "products",
-    label: "Product",
-    icon: "bxs-layout",
-    submenu: [
-      {
-        label: "Product List",
-        path: "/panel/products/list",
-      },
-      {
-        label: "Add Product",
-        path: "/panel/products/add",
-      },
-    ],
-  },
   {
     key: "teacher",
     label: "Teacher",

@@ -1,0 +1,330 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+  
+
+
+
+
+<div class="container section-form">
+  <form class="custom-form">
+
+      <div class="mb-4">
+          <label for="im" class="custom-form-label">I am</label>
+          <select name="im" class="custom-form-input" id="">
+              <option value="individual">Individual Teacher</option>
+              <option value="tutor">Tutor</option>
+          </select>
+      </div>
+
+
+      <div class="mb-4">
+          <label for="fullName" class="custom-form-label">Full Name</label>
+          <input type="text" id="fullName" class="custom-form-input" placeholder="Enter your full name">
+      </div>
+
+      <div class="mb-4">
+          <label for="gender" class="custom-form-label">Gender</label>
+       <select name="gender" class="custom-form-input" id="">
+           <option value="male">Male</option>
+           <option value="female">Female</option>
+       </select>
+      </div>
+
+      <div class="mb-4">
+          <label for="birthDate" class="custom-form-label">Birth Date</label>
+          <input type="date" id="birthDate" class="custom-form-input">
+      </div>
+
+      <div class="mb-4">
+          <label for="location" class="custom-form-label">Location</label>
+          <input type="text" id="location" class="custom-form-input" placeholder="Enter your location">
+      </div>
+
+      <div class="mb-4">
+          <label for="postalCode" class="custom-form-label">Postal/Zip Code</label>
+          <input type="text" id="postalCode" class="custom-form-input" placeholder="Enter your postal/zip code">
+      </div>
+
+     <div class="mb-4">
+          <label for="phoneNumber" class="custom-form-label">Phone Number</label>
+          <input type="text" id="phoneNumber" class="custom-form-input" placeholder="Enter your phone number">   
+     </div>
+
+
+     <div class="custom-form my-4">
+      <h1 class="text-xl font-bold">Subject You Teach</h1>
+      <p>Select all that apply</p>
+     </div>
+
+     <div class="mb-4">
+      <label for="subject" class="custom-form-label">Subject</label>
+      <select name="subject" class="custom-form-input" id="">
+          <option value="math">Math</option>
+          <option value="english">English</option>
+          <option value="science">Science</option>
+      </select>
+      <h1>If not in option add above</h1>
+     </div>
+
+     <div class="mb-4">
+      <label for="level" class="custom-form-label">From Level</label>
+      <select name="level" class="custom-form-input" id="">
+          <option value="1">Grade 1</option>
+          <option value="2">Grade 2</option>
+          <option value="3">Grade 3</option>
+          <option value="4">Grade 4</option>
+          <option value="5">Grade 5</option>
+      </select>
+     </div>
+
+     <div class="mb-4">
+      <label for="level" class="custom-form-label">To Level</label>
+      <select name="level" class="custom-form-input" id="">
+          <option value="10">Grade 10</option>
+          <option value="12">Grade 12</option>
+          <option value="13">Grade 13</option>
+          <option value="14">Grade 14</option>
+          <option value="15">Grade 15</option>
+      </select>
+     </div>
+
+
+     <div class="custom-form my-4">
+      <h1 class="text-xl font-bold">Teaching and Professional Experience:</h1>
+     </div>
+
+     <div class="custom-form my-2">
+      <h1 class="text-xl font-bold">Add Experience <span class="text-sm">or</span> <span class="text-primary text-sm">GO to Next Step</span> </h1>
+     <div class="mb-4">
+      <label for="organization" class="custom-form-label">Organization Name with City</label>
+      <input type="text" id="organization" class="custom-form-input" placeholder="Enter your organization name">
+     </div>
+
+     <div class="mb-4">
+      <label for="designation" class="custom-form-label">Designation</label>
+      <input type="text" id="designation" class="custom-form-input" placeholder="Enter your designation">
+     </div>
+
+     <div class="mb-4">
+      <label for="startDate" class="custom-form-label">Start Date</label>
+      <input type="date" id="startDate" class="custom-form-input">
+     </div>
+
+     <div class="mb-4">
+      <label for="endDate" class="custom-form-label">End Date <span class="text-sm text-primary">leave blank if still working</span></label>
+      <input type="date" id="endDate" class="custom-form-input">
+
+     </div>
+
+     <div class="mb-4">
+      <label for="association" class="custom-form-label">Association</label>
+      <select name="association" class="custom-form-input" id="">
+          <option value="parttime">Part-time</option>
+           <option value="fulltime">Full-time</option>
+      </select>
+     </div>
+
+     <div class="mb-4">
+      <label for="jobdescription" class="custom-form-label">Job Description</label>
+      <textarea name="jobdescription" id="jobdescription" rows="3" class="custom-form-textarea"></textarea>
+     </div>
+
+     <div class="mb-4">
+      <label for="details" class="custom-form-label">Detailed lessons plan</label>
+      <textarea name="details" id="details" rows="3" class="custom-form-textarea"></textarea>
+     </div>
+
+
+     <div class="custom-form my-4">
+      <h1 class="text-xl font-bold">Teaching Details</h1>
+     </div>
+
+     <div class="mb-4">
+      <label for="feeinbdt" class="custom-form-label">Fee in BDT</label>
+      <div class="grid grid-cols-3 gap-4">
+          <div class="mb-4">
+             <label for="icharge" class="custom-form-label">I charge</label>
+              <select name="timing" class="custom-form-input" id="">
+                  <option value="hourly">Hourly</option>
+                  <option value="monthly">Monthly</option>
+              </select>
+          </div>
+          <div class="mb-4">
+              <label for="maximum" class="custom-form-label">Maximum Fee</label>
+              <input type="text" id="feeinbdt" class="custom-form-input" placeholder="Enter your fee">
+          </div>
+          <div class="mb-4">
+              <label for="minimum" class="custom-form-label">Minimum Fee</label>
+              <input type="text" id="feeinbdt" class="custom-form-input" placeholder="Enter your fee">
+          </div>
+     </div>
+     </div>
+
+     <div class="mb-4">
+      <label for="feedetail" class="custom-form-label">Fee Details</label>
+      <textarea name="feedetail" id="feedetail" rows="3" class="custom-form-textarea"></textarea>
+     </div>
+
+     <div class="mb-4">
+      <label for="tutotexperience" class="custom-form-label">Year of Tutor Experience</label>
+      <input type="text" id="tutotexperience" class="custom-form-input" placeholder="Enter your experience">
+     </div>
+
+     <div class="mb-4">
+      <label for="industryexperience" class="custom-form-label">Year of Industry Experience</label>
+      <input type="text" id="industryexperience" class="custom-form-input" placeholder="Enter your experience">
+     </div>
+
+     <div class="mb-4">
+      <label for="onlineteachingexperience" class="custom-form-label">Year of Online Teaching Experience"></label>
+      <input type="text" id="onlineteachingexperience" class="custom-form-input" placeholder="Enter your experience">
+     </div>
+
+     <div class="mb-4">
+      <label for="areWiling" class="custom-form-label">Are you willing to travel to Student?</label>
+      <div class="custom-form-radio-group">
+          <input type="radio" name="arewilling" class="custom-form-radio" id="">
+          <label for="yes" class="custom-form-radio-label">Yes</label>
+          <input type="radio" name="arewilling" class="custom-form-radio" id="">
+          <label for="no" class="custom-form-radio-label">No</label>
+      </div>
+     </div>
+     <div class="mb-4">
+      <label for="onlineteaching" class="custom-form-label">Available for online Teaching?
+      </label>
+      <div class="custom-form-radio-group">
+          <input type="radio" name="onlineteaching" class="custom-form-radio" id="">
+          <label for="yes" class="custom-form-radio-label">Yes</label>
+          <input type="radio" name="onlineteaching" class="custom-form-radio" id="">
+          <label for="no" class="custom-form-radio-label">No</label>
+      </div>
+     </div>
+     <div class="mb-4">
+      <label for="digitalpen" class="custom-form-label">Do you have a digital pen?</label>
+      <div class="custom-form-radio-group">
+          <input type="radio" name="digitalpen" class="custom-form-radio" id="">
+          <label for="yes" class="custom-form-radio-label">Yes</label>
+          <input type="radio" name="digitalpen" class="custom-form-radio" id="">
+          <label for="no" class="custom-form-radio-label">No</label>
+      </div>
+     </div>
+     <div class="mb-4">
+      <label for="homeworkandassignments" class="custom-form-label">Do you help with homework and assignments?</label>
+      <div class="custom-form-radio-group">
+          <input type="radio" name="homeworkandassignments" class="custom-form-radio" id="">
+          <label for="yes" class="custom-form-radio-label">Yes</label>
+          <input type="radio" name="homeworkandassignments" class="custom-form-radio" id="">
+          <label for="no" class="custom-form-radio-label">No</label>
+      </div>
+     </div>
+     <div class="mb-4">
+      <label for="employed" class="custom-form-label">Are you currently a full-time teacher employed by a School/College?</label>
+      <div class="custom-form-radio-group">
+          <input type="radio" name="employed" class="custom-form-radio" id="">
+          <label for="yes" class="custom-form-radio-label">Yes</label>
+          <input type="radio" name="employed" class="custom-form-radio" id="">
+          <label for="no" class="custom-form-radio-label">No</label>
+      </div>
+     </div>
+
+     <div class="mb-4">
+      <label for="oportunities" class="custom-form-label">Opportunities you are interested in</label>
+      <select name="oportunities" id="" class="custom-form-input">
+          <option value="fulltime">Full Time</option>
+          <option value="parttime">Part Time</option>
+      </select>
+     </div>
+
+   <div class="custom-form my-4">
+      <h1 class="text-4xl font-bold">Education & Certifications</h1>
+   </div>
+
+   <div>
+      <label for="instituteandcity" class="custom-form-label">Institute name with city</label>
+      <input type="text" id="education" class="custom-form-input" placeholder="Enter your institute">
+   </div>
+
+   <div class="mb-4">
+      <label for="degreeType" class="custom-form-label"> Degree Type</label>
+      <select name="degreeType" id="">
+          <option value="bachelor">Bachelor</option>
+          <option value="master">Master</option>
+          <option value="phd">PhD</option>
+      </select>
+   </div>
+
+   <div class="mb-4">
+      <label for="degreename" class="custom-form-label">Degree Name</label>
+      <input type="text" id="degreename" class="custom-form-input" placeholder="Enter your degree name">
+   </div>
+
+   <div class="mb-4">
+      <label for="startDate" class="custom-form-label">Start Date</label>
+      <input type="date" id="startDate" class="custom-form-input">
+     </div>
+
+     <div class="mb-4">
+      <label for="endDate" class="custom-form-label">End Date <span class="text-sm text-primary">leave blank if still working</span></label>
+      <input type="date" id="endDate" class="custom-form-input">
+     </div>
+
+     <div class="mb-4">
+      <label for="association" class="custom-form-label">Association</label>
+      <select name="association" class="custom-form-input" id="">
+          <option value="parttime">Part-time</option>
+           <option value="fulltime">Full-time</option>
+      </select>
+     </div>
+
+     <div class="mb-4">
+      <label for="specalities" class="custom-form-label">Specality</label>
+      <input type="text" id="specalities" class="custom-form-input" placeholder="Enter your specalities">
+     </div>
+
+     <div>
+      <label for="score" class="custom-form-label">Score <span class="text-sm">Optional</span></label>
+      <input type="text" id="score" class="custom-form-input" placeholder="Enter your score">
+     </div>
+
+     <div class="custom-form my-4">
+      <h1 class="text-4xl font-bold">Profile Description</h1>
+     </div>
+     <div class="mb-4">
+      <h4>This is most important section for you</h4>
+      <p>80 % Student will hire you based on what yout write here </p>
+
+      <label for="dontshare" class="custom-form-label"> Dont share with any contact info</label>
+      <textarea name="profileDescription" id="profileDescription" cols="30" rows="10" class="custom-form-input"></textarea>
+     </div>
+
+     <div class="custom-form my-4">
+      <h1 class="text-4xl font-bold">Upload id proof</h1>
+
+     </div>
+
+     <div class="mb-4">
+      <label for="doctype" class="custom-form-label">Document Type</label>
+      <select name="doctype" class="custom-form-input" id="">
+          <option value="passport">Passport</option>
+          <option value="drivinglicense">Driving License</option>
+      </select>
+     </div>
+
+
+     <div class="custom-form my-5">
+      <input type="submit" value="Submit" class="btn btn-primary btn-block">
+     </div>
+
+  </form>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

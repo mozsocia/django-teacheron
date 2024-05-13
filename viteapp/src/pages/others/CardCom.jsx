@@ -34,7 +34,7 @@ function CardCom() {
 
 
         <div className="mb-4 md:mb-0">
-          <h1 className="text-slate-800 dark:text-slate-100 font-bold text-2xl md:text-3xl">Acme Inc. ✨</h1>
+          <h1 className="text-slate-800 dark:text-slate-100 font-bold text-2xl md:text-3xl">TeacheON ✨</h1>
         </div>
 
         <div className="grid grid-cols-max-content gap-2 md:justify-end md:grid-flow-col">

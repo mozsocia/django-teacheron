@@ -58,7 +58,7 @@ const DatatableNew = () => {
       <header className="page-header">
         {/* Left: Title */}
         <div className="mb-4 md:mb-0">
-          <h1 className="page-title">Acme Inc. ✨</h1>
+          <h1 className="page-title">TeacherON ✨</h1>
         </div>
 
         {/* Right: Actions */}

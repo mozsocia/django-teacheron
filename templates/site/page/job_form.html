@@ -1,0 +1,125 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+  
+
+
+
+
+<div class="container section-form">
+  <form class="form-hr">
+   <div class="form-hr-row">
+    <label for="location" class="form-hr-label">Location</label>
+     <input type="text" id="location" class="form-hr-input" placeholder="Enter your location"></label>
+   </div>
+  
+   <div class="form-hr-row">
+    <label for="phone" class="form-hr-label">Phone</label>
+     <input type="text" id="phone" class="form-hr-input" placeholder="Enter your phone number">
+   </div>
+  <div class="form-hr-row">
+    <label for="details" class="form-hr-label">Details of your requirement
+    </label>
+    <textarea name="details" class="form-hr-textarea" id="details" cols="30" rows="10" id=""></textarea>
+  </div>
+  
+  <div class="form-hr-row">
+    <label for="subject" class="form-hr-label">Subject</label>
+    <input type="text" id="subject" class="form-hr-input" placeholder="Enter your subject">
+  </div>
+  <div class="form-hr-row">
+    <label for="level" class="form-hr-label">Level</label>
+    <select name="level" class="form-hr-input" id="">
+      <option value="beginner">Beginner</option>
+      <option value="intermediate">Intermediate</option>
+      <option value="advanced">Advanced</option>
+    </select>
+  </div>
+  
+  <div class="form-hr-row">
+    <label for="iwant" class="form-hr-label">I want to</label>
+    <select name="iwant" class="form-hr-input" id="">
+      <option value="learn">Learn</option>
+      <option value="teach">Teach</option>
+      <option value="both">Both</option>
+    </select>
+  </div>
+  
+  <div class="form-hr-row">
+    <label for="meeting" class="form-hr-label">Meeting</label>
+    <div>
+      <label for="online" class="form-hr-radio-label">
+        <input type="radio" id="meeting" name="meeting" class="form-hr-radio">
+        <span class="form-hr-radio-label">Online</span>
+      </label>
+      <label for="offline" class="form-hr-radio-label">
+        <input type="radio" id="meeting" name="meeting" class="form-hr-radio">
+        <span>Offline</span>
+      </label>
+    </div>
+  </div>
+  
+    <div class="form-hr-row">
+      <label for="howmuchtravel" class="form-hr-label">How much you can travel to tutor?</label>
+      <input type="text" id="howmuchtravel" class="form-hr-input" placeholder="Enter your travel amount">
+  
+    </div>
+  
+    <div class="form-hr-row">
+      <label for="budget" class="form-hr-label">Budget</label>
+      <select name="budget" class="form-hr-input" id="">
+        <option value="5000">5000</option>
+        <option value="1000">1000</option>
+  
+      </select>
+    </div>
+  
+    <div class="form-hr-row">
+      <label for="gender" class="form-hr-label">Gender Preference</label>
+      <select name="gender" class="form-hr-input" id="">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+  
+    <div class="form-hr-row">
+      <label for="tutorWanted" class="form-hr-label">Tutors wanted</label>
+      <select name="tutorWanted" class="form-hr-input" id="">
+        <option value="yes">only one</option>
+        <option value="yes">more then one</option>
+        <option value="no">NO</option>
+      </select>
+    </div>
+  
+    <div class="form-hr-row">
+      <label for="needsomeone" class="form-hr-label">I need someone</label>
+      <select name="needsomeone" class="form-hr-input" id="">
+        <option value="yes">Full time</option>
+        <option value="no">Part time</option>
+      </select>
+    </div>
+    <div class="form-hr-row">
+      <label for="language" class="form-hr-label">I can communicate with the tutor in</label>
+      <input type="text" class="form-hr-input" name="" id="">
+    </div>
+  
+    <div class="form-hr-row">
+      <label for="file" class="form-hr-label">Upload files</label>
+      <input type="file" name="file" id="file" class="form-hr-file">
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </form>
+  
+  </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
