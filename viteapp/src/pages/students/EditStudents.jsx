@@ -1,92 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { EntityName, ApiUrl, ReactRouterPath } from "./enums";
+
+import { EntityName, ReactRouterPath } from "./enums";
 import { Link } from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import toastr from "toastr";
+import { useNavigate } from "react-router-dom";
+import { addHandleSubmit, validationToast } from "./formUtils";
 
-const EditStudent = () => {
+const AddStudent = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      try {
-        const response = await axios.get(`${ApiUrl}${id}/edit/`);
-        const data = response.data;
-        formik.setValues({
-          first_name: data.first_name,
-          last_name: data.last_name,
-          bio: data.bio,
-          education: data.education,
-          email: data.email,
-          date_of_birth: data.date_of_birth,
-          is_active: data.is_active,
-          is_verified: data.is_verified,
-          phone_number: data.phone_number,
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchInitialData();
-  }, []);
-
-  const handleFileChange = (event, name) => {
-    const file = event.target.files[0];
-    formik.setFieldValue(name, file);
-  };
 
   const validationSchema = Yup.object({
     first_name: Yup.string(),
     last_name: Yup.string(),
     bio: Yup.string(),
     education: Yup.string(),
-    email: Yup.string(),
+    email: Yup.string().email("Invalid email address"),
     date_of_birth: Yup.date(),
+    phone_number: Yup.string(),
     is_active: Yup.boolean(),
     is_verified: Yup.boolean(),
   });
 
   const formik = useFormik({
     initialValues: {
-        first_name: "",
-        last_name: "",
-        bio: "",
-        education: "",
-        email: "",
-        date_of_birth: "",
-        is_active: false,
-        is_verified: false,
+      first_name: "",
+      last_name: "",
+      education: "",
+      date_of_birth: "",
+      phone_number: "",
+      is_active: false,
+      is_verified: false,
+      bio: "",
+      email: "",
     },
     validationSchema,
     onSubmit: async (values) => {
-      try {
-        const formData = new FormData();
-        Object.entries(values).forEach(([key, value]) => {
-          formData.append(key, value);
-        });
-
-        const response = await axios.post(`${ApiUrl}${id}/update/`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-
-        toastr.success(`${EntityName} Updated Successfully`);
-        navigate(`${ReactRouterPath}${response.data.id}/show`);
-      } catch (error) {
-        if (error.response && error.response.status === 400) {
-          console.error("400 Bad Request:", error, error.response.data);
-          toastr.error(`${EntityName} Form submission error`);
-        } else {
-          console.error("Form submission error:", error);
-          toastr.error(`${EntityName} Form submission error`);
-        }
-      }
+      await addHandleSubmit(values, navigate);
     },
   });
 
@@ -120,8 +70,8 @@ const EditStudent = () => {
         </header>
         <div className="card-body">
           <form onSubmit={formik.handleSubmit} className="p-4">
-          <div className="space-y-4">
-              <div>
+            <div className="space-y-4">
+              <div className="mt-6">
                 <label className="form-label" htmlFor="first_name">
                   First Name <span className="text-rose-500">*</span>
                 </label>
@@ -145,8 +95,7 @@ const EditStudent = () => {
                   </div>
                 )}
               </div>
-
-              <div>
+              <div className="mt-6">
                 <label className="form-label" htmlFor="last_name">
                   Last Name <span className="text-rose-500">*</span>
                 </label>
@@ -172,6 +121,32 @@ const EditStudent = () => {
               </div>
 
               <div>
+                <label className="form-label" htmlFor="date_of_birth">
+                  Date of Birth <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  className={`form-input w-full ${
+                    formik.touched.date_of_birth &&
+                    formik.errors.date_of_birth &&
+                    "error-class"
+                  }`}
+                  id="date_of_birth"
+                  type="date"
+                  name="date_of_birth"
+                  value={formik.values.date_of_birth}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  autoComplete="date_of_birth"
+                />
+                {formik.errors.date_of_birth &&
+                  formik.touched.date_of_birth && (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.date_of_birth}
+                    </div>
+                  )}
+              </div>
+
+              <div className="mt-6">
                 <label className="form-label" htmlFor="email">
                   Email <span className="text-rose-500">*</span>
                 </label>
@@ -194,13 +169,15 @@ const EditStudent = () => {
                 )}
               </div>
 
-              <div>
+              <div className="mt-6">
                 <label className="form-label" htmlFor="phone_number">
                   Phone Number <span className="text-rose-500">*</span>
                 </label>
                 <input
                   className={`form-input w-full ${
-                    formik.touched.phone_number && formik.errors.phone_number && "error-class"
+                    formik.touched.phone_number &&
+                    formik.errors.phone_number &&
+                    "error-class"
                   }`}
                   id="phone_number"
                   type="text"
@@ -208,6 +185,7 @@ const EditStudent = () => {
                   value={formik.values.phone_number}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  autoComplete="phone_number"
                 />
                 {formik.errors.phone_number && formik.touched.phone_number && (
                   <div className="text-red-500 text-sm">
@@ -216,7 +194,7 @@ const EditStudent = () => {
                 )}
               </div>
 
-              <div>
+              <div className="mt-6">
                 <label className="form-label" htmlFor="bio">
                   Bio <span className="text-rose-500">*</span>
                 </label>
@@ -238,108 +216,90 @@ const EditStudent = () => {
                 )}
               </div>
 
-              <div>
+              <div className="mt-6">
                 <label className="form-label" htmlFor="education">
                   Education <span className="text-rose-500">*</span>
                 </label>
                 <input
-                  className={`form-input w-full ${
+                  className={`form-textarea w-full ${
                     formik.touched.education &&
                     formik.errors.education &&
                     "error-class"
                   }`}
                   id="education"
-                  type="text"
                   name="education"
                   value={formik.values.education}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  autoComplete="education"
-                />
+                  rows="3"
+                ></input>
                 {formik.errors.education && formik.touched.education && (
                   <div className="text-red-500 text-sm">
                     {formik.errors.education}
                   </div>
                 )}
               </div>
-              <div>
-                <label className="form-label" htmlFor="date_of_birth">
-                  Date of Birth <span className="text-rose-500">*</span>
-                </label>
-                <input
-                  className={`form-input w-full ${
-                    formik.touched.date_of_birth &&
-                    formik.errors.date_of_birth &&
-                    "error-class"
-                  }`}
-                  id="date_of_birth"
-                  type="date"
-                  name="date_of_birth"
-                  value={formik.values.date_of_birth}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.errors.date_of_birth &&
-                  formik.touched.date_of_birth && (
-                    <div className="text-red-500 text-sm">
-                      {formik.errors.date_of_birth}
-                    </div>
-                  )}
-              </div>
-
-              <div>
-                <label className="form-label flex mr-2" htmlFor="is_active">
-                  Is Active <span className="text-rose-500">*</span>
-                <input
-                 className="form-checkbox ml-2"
-                  id="is_active"
-                  type="checkbox"
+              <div className="mt-6">
+                <label
+                  className="flex items-center"
                   name="is_active"
-                  checked={formik.values.is_active}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
+                  id="is_active"
+                >
+                  <input
+                    type="checkbox"
+                    className={`form-checkbox mr-2 flex items-center ${
+                      formik.touched.is_active &&
+                      formik.errors.is_active &&
+                      "error-class"
+                    }`}
+                    name="is_active"
+                    checked={formik.values.is_active}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  <span className="text-sm">Is active</span>
+                </label>
                 {formik.errors.is_active && formik.touched.is_active && (
                   <div className="text-red-500 text-sm">
                     {formik.errors.is_active}
                   </div>
                 )}
-                </label>
               </div>
-
-              <div>
-                <label className="form-label flex mr-2" htmlFor="is_verified">
-                  Is Verified <span className="text-rose-500">*</span>
-                <input
-                 className="form-checkbox ml-2"
-                  id="is_verified"
-                  type="checkbox"
+              <div className="mt-6">
+                <label
+                  className="flex items-center"
                   name="is_verified"
-                  checked={formik.values.is_verified}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
+                  id="is_verified"
+                >
+                  <input
+                    type="checkbox"
+                    className={`form-checkbox mr-2 flex items-center ${
+                      formik.touched.is_verified &&
+                      formik.errors.is_verified &&
+                      "error-class"
+                    }`}
+                    name="is_verified"
+                    checked={formik.values.is_verified}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  <span className="text-sm">Is verified</span>
+                </label>
                 {formik.errors.is_verified && formik.touched.is_verified && (
                   <div className="text-red-500 text-sm">
                     {formik.errors.is_verified}
                   </div>
                 )}
-                </label>
               </div>
-
             </div>
+
+            {/* submit button */}
             <button
               type="submit"
+              onClick={() => validationToast(formik)}
               className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap"
             >
-              Update {EntityName}
-            </button>
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="btn mt-3 ms-2 btn-red-outline whitespace-nowrap"
-            >
-              Cancel
+              Save {EntityName}
             </button>
           </form>
         </div>
@@ -348,4 +308,4 @@ const EditStudent = () => {
   );
 };
 
-export default EditStudent;
+export default AddStudent;

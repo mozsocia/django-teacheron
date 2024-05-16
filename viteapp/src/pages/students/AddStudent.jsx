@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import Select from "react-select";
-import {
-  imageValidation,
-  fileSizeValidtion,
-  newImagePreview,
-} from "@/utils/Utils";
-import { EntityName, ApiUrl, ReactRouterPath } from "./enums";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import toastr from "toastr";
+import React, { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import { EntityName, ReactRouterPath } from './enums'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { addHandleSubmit,  validationToast } from './formUtils';
 
 const AddStudent = () => {
   const navigate = useNavigate();
-
-  const handleFileChange = (event, name) => {
-    const file = event.target.files[0];
-    formik.setFieldValue(name, file);
-    newImagePreview(name, file);
-  };
 
   const validationSchema = Yup.object({
     first_name: Yup.string().required("First Name is required"),
@@ -36,49 +24,29 @@ const AddStudent = () => {
     is_verified: Yup.boolean(),
   });
 
+
   const formik = useFormik({
     initialValues: {
-      first_name: "",
-      last_name: "",
-      bio: "",
-      education: "",
-      email: "",
-      date_of_birth: "",
-      phone_number: "",
+      first_name: '',
+      last_name: '',
+      education: '',
+      date_of_birth: '',
+      phone_number: '',
       is_active: false,
       is_verified: false,
+      bio: '',
+      email: '',
     },
     validationSchema,
     onSubmit: async (values) => {
-      try {
-        const formData = new FormData();
-        Object.entries(values).forEach(([key, value]) => {
-          formData.append(key, value);
-        });
-
-        const response = await axios.post(ApiUrl + "store/", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-
-        toastr.success(`${EntityName} Created Successfully`);
-        navigate(ReactRouterPath + "list");
-      } catch (error) {
-        if (error.response && error.response.status === 400) {
-          console.error("400 Bad Request:", error, error.response.data);
-          toastr.error(`${EntityName} Form submission error`);
-        } else {
-          console.error("Form submission error:", error);
-          toastr.error(`${EntityName} Form submission error`);
-        }
-      }
+      await addHandleSubmit(values, navigate);
     },
   });
 
   return (
     <div>
       <header className="page-header">
+
         {/* Left: Title */}
         <div className="mb-4 md:mb-0">
           <h1 className="page-title">{EntityName}</h1>
@@ -86,19 +54,18 @@ const AddStudent = () => {
 
         {/* Right: Actions */}
         <div className="page-header-right-actions grid grid-cols-max-content gap-2">
+
           {/* Add member button */}
-          <Link to={ReactRouterPath + "list"}>
+          <Link to={ReactRouterPath + 'list'}>
             <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
-              <svg
-                className="w-5 h-5 fill-current opacity-70 mr-1 md:mr-2"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-5 h-5 fill-current opacity-70 mr-1 md:mr-2" viewBox="0 0 24 24">
                 <path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path>
               </svg>
               <span className="hidden md:inline-block">List {EntityName}</span>
             </button>
           </Link>
         </div>
+
       </header>
       <div className="card">
         <header className="card-header">
@@ -107,16 +74,12 @@ const AddStudent = () => {
         <div className="card-body">
           <form onSubmit={formik.handleSubmit} className="p-4">
             <div className="space-y-4">
-              <div>
+              <div className='mt-6'>
                 <label className="form-label" htmlFor="first_name">
                   First Name <span className="text-rose-500">*</span>
                 </label>
                 <input
-                  className={`form-input w-full ${
-                    formik.touched.first_name &&
-                    formik.errors.first_name &&
-                    "error-class"
-                  }`}
+                  className={`form-input w-full ${formik.touched.first_name && formik.errors.first_name && "error-class"}`}
                   id="first_name"
                   type="text"
                   name="first_name"
@@ -125,23 +88,14 @@ const AddStudent = () => {
                   onBlur={formik.handleBlur}
                   autoComplete="first_name"
                 />
-                {formik.errors.first_name && formik.touched.first_name && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.first_name}
-                  </div>
-                )}
+                {formik.errors.first_name && formik.touched.first_name && <div className="text-red-500 text-sm">{formik.errors.first_name}</div>}
               </div>
-
-              <div>
+              <div className='mt-6'>
                 <label className="form-label" htmlFor="last_name">
                   Last Name <span className="text-rose-500">*</span>
                 </label>
                 <input
-                  className={`form-input w-full ${
-                    formik.touched.last_name &&
-                    formik.errors.last_name &&
-                    "error-class"
-                  }`}
+                  className={`form-input w-full ${formik.touched.last_name && formik.errors.last_name && "error-class"}`}
                   id="last_name"
                   type="text"
                   name="last_name"
@@ -150,64 +104,68 @@ const AddStudent = () => {
                   onBlur={formik.handleBlur}
                   autoComplete="last_name"
                 />
-                {formik.errors.last_name && formik.touched.last_name && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.last_name}
-                  </div>
-                )}
+                {formik.errors.last_name && formik.touched.last_name && <div className="text-red-500 text-sm">{formik.errors.last_name}</div>}
               </div>
 
-              <div>
+        <div>
+          <label className="form-label" htmlFor="date_of_birth">
+            Date of Birth <span className="text-rose-500">*</span>
+          </label>
+          <input
+            className={`form-input w-full ${formik.touched.date_of_birth && formik.errors.date_of_birth && "error-class"}`}
+            id="date_of_birth"
+            type="date"
+            name="date_of_birth"
+            value={formik.values.date_of_birth}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            autoComplete="date_of_birth"
+          />
+          {formik.errors.date_of_birth && formik.touched.date_of_birth && <div className="text-red-500 text-sm">{formik.errors.date_of_birth}</div>}
+            
+        </div>
+
+              <div className='mt-6'>
                 <label className="form-label" htmlFor="email">
                   Email <span className="text-rose-500">*</span>
                 </label>
                 <input
-                  className={`form-input w-full ${
-                    formik.touched.email && formik.errors.email && "error-class"
-                  }`}
+                  className={`form-input w-full ${formik.touched.email && formik.errors.email && "error-class"}`}
                   id="email"
                   type="email"
                   name="email"
+                  value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  autoComplete="email"
                 />
-                {formik.errors.email && formik.touched.email && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.email}
-                  </div>
-                )}
+                {formik.errors.email && formik.touched.email && <div className="text-red-500 text-sm">{formik.errors.email}</div>}
               </div>
 
-              <div>
+              <div className='mt-6'>
                 <label className="form-label" htmlFor="phone_number">
                   Phone Number <span className="text-rose-500">*</span>
                 </label>
                 <input
-                  className={`form-input w-full ${
-                    formik.touched.phone_number && formik.errors.phone_number && "error-class"
-                  }`}
+                  className={`form-input w-full ${formik.touched.phone_number && formik.errors.phone_number && "error-class"}`}
                   id="phone_number"
                   type="text"
                   name="phone_number"
                   value={formik.values.phone_number}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  autoComplete="phone_number"
                 />
-                {formik.errors.phone_number && formik.touched.phone_number && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.phone_number}
-                  </div>
-                )}
+                {formik.errors.phone_number && formik.touched.phone_number && <div className="text-red-500 text-sm">{formik.errors.phone_number}</div>} 
               </div>
 
-              <div>
+
+              <div className='mt-6'>
                 <label className="form-label" htmlFor="bio">
                   Bio <span className="text-rose-500">*</span>
                 </label>
                 <textarea
-                  className={`form-textarea w-full ${
-                    formik.touched.bio && formik.errors.bio && "error-class"
-                  }`}
+                  className={`form-textarea w-full ${formik.touched.bio && formik.errors.bio && "error-class"}`}
                   id="bio"
                   name="bio"
                   value={formik.values.bio}
@@ -215,107 +173,59 @@ const AddStudent = () => {
                   onBlur={formik.handleBlur}
                   rows="3"
                 ></textarea>
-                {formik.errors.bio && formik.touched.bio && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.bio}
-                  </div>
-                )}
+                {formik.errors.bio && formik.touched.bio && <div className="text-red-500 text-sm">{formik.errors.bio}</div>}
               </div>
 
-              <div>
+              <div className='mt-6'>
                 <label className="form-label" htmlFor="education">
                   Education <span className="text-rose-500">*</span>
                 </label>
                 <input
-                  className={`form-input w-full ${
-                    formik.touched.education &&
-                    formik.errors.education &&
-                    "error-class"
-                  }`}
+                  className={`form-textarea w-full ${formik.touched.education && formik.errors.education && "error-class"}`}
                   id="education"
-                  type="text"
                   name="education"
                   value={formik.values.education}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  autoComplete="education"
-                />
-                {formik.errors.education && formik.touched.education && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.education}
-                  </div>
-                )}
+                  rows="3"
+                ></input>
+                {formik.errors.education && formik.touched.education && <div className="text-red-500 text-sm">{formik.errors.education}</div>}
               </div>
-              <div>
-                <label className="form-label" htmlFor="date_of_birth">
-                  Date of Birth <span className="text-rose-500">*</span>
+              <div className="mt-6">
+                <label className="flex items-center" name="is_active" id="is_active">
+                  <input
+                    type="checkbox"
+                    className={`form-checkbox mr-2 flex items-center ${formik.touched.is_active && formik.errors.is_active && "error-class"}`}
+                    name="is_active"
+                    checked={formik.values.is_active}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  <span className="text-sm">Is active</span>
                 </label>
-                <input
-                  className={`form-input w-full ${
-                    formik.touched.date_of_birth &&
-                    formik.errors.date_of_birth &&
-                    "error-class"
-                  }`}
-                  id="date_of_birth"
-                  type="date"
-                  name="date_of_birth"
-                  value={formik.values.date_of_birth}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.errors.date_of_birth &&
-                  formik.touched.date_of_birth && (
-                    <div className="text-red-500 text-sm">
-                      {formik.errors.date_of_birth}
-                    </div>
-                  )}
+                {formik.errors.is_active && formik.touched.is_active && <div className="text-red-500 text-sm">{formik.errors.is_active}</div>}
               </div>
-
-              <div>
-                <label className="form-label flex mr-2" htmlFor="is_active">
-                  Is Active <span className="text-rose-500">*</span>
-                <input
-                 className="form-checkbox ml-2"
-                  id="is_active"
-                  type="checkbox"
-                  name="is_active"
-                  checked={formik.values.is_active}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.errors.is_active && formik.touched.is_active && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.is_active}
-                  </div>
-                )}
+              <div className="mt-6">
+                <label className="flex items-center" name="is_verified" id="is_verified">
+                  <input
+                    type="checkbox"
+                    className={`form-checkbox mr-2 flex items-center ${formik.touched.is_verified && formik.errors.is_verified && "error-class"}`}
+                    name="is_verified"
+                    checked={formik.values.is_verified}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  <span className="text-sm">Is verified</span>
                 </label>
-              </div>
-
-              <div>
-                <label className="form-label flex mr-2" htmlFor="is_verified">
-                  Is Verified <span className="text-rose-500">*</span>
-                <input
-                 className="form-checkbox ml-2"
-                  id="is_verified"
-                  type="checkbox"
-                  name="is_verified"
-                  checked={formik.values.is_verified}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.errors.is_verified && formik.touched.is_verified && (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.is_verified}
-                  </div>
-                )}
-                </label>
+                {formik.errors.is_verified && formik.touched.is_verified && <div className="text-red-500 text-sm">{formik.errors.is_verified}</div>}
               </div>
 
             </div>
-            <button
-              type="submit"
-              className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap"
-            >
+
+            {/* submit button */}
+            <button type="submit"
+            onClick={()=>validationToast(formik)}
+            className="btn mt-3 bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap">
               Save {EntityName}
             </button>
           </form>
