@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { ApiUrl, EntityName, ReactRouterPath } from "./enums";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { addHandleSubmit, validationToast } from "./formUtils";
+import { editHandleSubmit, validationToast } from "./formUtils";
 import axios from "axios";
 import { previousImagePreview } from "../../utils/Utils";
 
@@ -40,7 +40,7 @@ const AddStudent = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      await addHandleSubmit(values, navigate);
+      await editHandleSubmit(id, values, navigate);
     },
   });
 
