@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { EntityName, ReactRouterPath } from "./enums";
-import { Link } from "react-router-dom";
+import { ApiUrl, EntityName, ReactRouterPath } from "./enums";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { addHandleSubmit, validationToast } from "./formUtils";
+import { editHandleSubmit, validationToast } from "./formUtils";
+import axios from "axios";
+import { previousImagePreview } from "../../utils/Utils";
 
 const AddStudent = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
 
   const validationSchema = Yup.object({
     first_name: Yup.string(),
@@ -36,9 +40,37 @@ const AddStudent = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      await addHandleSubmit(values, navigate);
+      await editHandleSubmit(id, values, navigate);
     },
   });
+
+  
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const response = await axios.get(`${ApiUrl}${id}/edit/`);
+        const data = response.data;
+        formik.setValues({
+          first_name: data.first_name,
+          last_name: data.last_name,
+          education: data.education,
+          date_of_birth: data.date_of_birth,
+          phone_number: data.phone_number,
+         
+          is_active: data.is_active,
+          is_verified: data.is_verified,
+          bio: data.bio,
+          email: data.email,
+        });
+
+        previousImagePreview("image", data.image);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchInitialData();
+  }, []);
 
   return (
     <div>
