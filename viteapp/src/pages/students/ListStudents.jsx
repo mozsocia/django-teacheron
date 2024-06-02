@@ -32,7 +32,9 @@ const ListStudents = () => {
   const columns = useMemo(
     () => [
       { Header: 'ID', accessor: 'id' },
-      { Header: 'Name', accessor: 'first_name' },
+      { Header: 'Name', accessor: 'user.name' },
+      { Header: 'Email', accessor: 'user.email' },
+      { Header: 'Phone', accessor: 'user.phone' },
       { Header: 'Bio', accessor: 'bio' },
       { Header: 'Education', accessor: 'education' },
       {

@@ -57,20 +57,20 @@ const StudentDetails = () => {
                 <div className="detail-item-title">Name :</div>
                 <div className="detail-item-p">
                   <p>
-                    {student.first_name} {student.last_name}
+                    {student.user.name}
                   </p>
                 </div>
               </div>
               <div className="detail-item">
                 <div className="detail-item-title">Email :</div>
                 <div className="detail-item-p">
-                  <p>{student.email}</p>
+                  <p>{student.user.email}</p>
                 </div>
               </div>
               <div className="detail-item">
                 <div className="detail-item-title">Phone :</div>
                 <div className="detail-item-p">
-                  <p>{student.phone_number}</p>
+                  <p>{student.user.phone}</p>
                 </div>
               </div>
               <div className="detail-item">
@@ -89,7 +89,7 @@ const StudentDetails = () => {
               <div className="detail-item">
                 <div className="detail-item-title">Date of Birth :</div>
                 <div className="detail-item-p">
-                  <p>{student.date_of_birth}</p>
+                  <p>{student.user.date_of_birth}</p>
                 </div>
               </div>
 
