@@ -212,9 +212,9 @@
 }
 
 .detail-item-title {
-  @apply md:w-36 2xl:w-64 md:mb-0 mb-3 flex-shrink-0 flex flex-col font-semibold capitalize
+  @apply md:w-72 2xl:w-72 md:mb-0 mb-3 flex-shrink-0 flex flex-col font-semibold capitalize 
 }
 
 .detail-item-p {
-  @apply md:flex-grow
+  @apply md:flex-grow px-3
 }

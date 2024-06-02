@@ -21,6 +21,72 @@ const TeacherDetails = () => {
     fetchBlogData();
   }, [id]);
 
+  const formatDate = (dateString) => {
+    // Create a Date object from the string, considering the time zone information
+    const date = new Date(dateString.replace('Z', ''));
+  
+    // Use the Intl.DateTimeFormat API for formatting
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      timeZone: 'UTC', // Specify UTC time zone for accurate formatting
+    };
+  
+    // Format the date according to the options
+    return date.toLocaleString(undefined, options);
+  };
+  
+  const renderDetailItem = (key, value) => {
+    // Remove underscores from the key
+    const formattedKey = key.replace(/_/g, ' ');
+  
+    // Check if the value is a boolean
+    if (typeof value === 'boolean') {
+      return (
+        <div className="detail-item" key={key}>
+          <div className="detail-item-title">{formattedKey}:</div>
+          <div className="detail-item-p">
+            <p>{value ? 'Yes' : 'No'}</p>
+          </div>
+        </div>
+      );
+    } else if (typeof value === 'string' && value.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      // Check if the value is a date string (YYYY-MM-DD)
+      return (
+        <div className="detail-item" key={key}>
+          <div className="detail-item-title">{formattedKey}:</div>
+          <div className="detail-item-p">
+            <p>{formatDate(value)}</p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="detail-item" key={key}>
+          <div className="detail-item-title">{formattedKey}:</div>
+          <div className="detail-item-p">
+            <p>{value}</p>
+          </div>
+        </div>
+      );
+    }
+  };
+  
+  
+  const renderProfileDetails = () => {
+    return Object.entries(teacher).map(([key, value]) => {
+      if (key !== 'user') {
+        return renderDetailItem(key, value);
+      } else {
+        return null; // Don't render the user object directly
+      }
+    });
+  };
+
   if (!teacher) {
     return <p>Loading...</p>;
   }
@@ -53,80 +119,8 @@ const TeacherDetails = () => {
         <div className="card-body">
           <div className="space-y-1">
             <div className="detail-section">
-              <div className="detail-item">
-                <div className="detail-item-title">Name :</div>
-                <div className="detail-item-p">
-                  <p>
-                    {teacher.first_name} {teacher.last_name}
-                  </p>
-                </div>
-              </div>
-              <div className="detail-item">
-                <div className="detail-item-title">Email :</div>
-                <div className="detail-item-p">
-                  <p>{teacher.email}</p>
-                </div>
-              </div>
-              <div className="detail-item">
-                <div className="detail-item-title">Phone :</div>
-                <div className="detail-item-p">
-                  <p>{teacher.phone_number}</p>
-                </div>
-              </div>
-              <div className="detail-item">
-                <div className="detail-item-title">Education :</div>
-                <div className="detail-item-p">
-                  <p>{teacher.education}</p>
-                </div>
-              </div>
-              <div className="detail-item">
-                <div className="detail-item-title">Qualification :</div>
-                <div className="detail-item-p">
-                  <p>{teacher.qualifications}</p>
-                </div>
-              </div>
 
-              <div className="detail-item">
-                <div className="detail-item-title">Experience :</div>
-                <div className="detail-item-p">
-                  <p>{teacher.experience}</p>
-                </div>
-              </div>
-
-              <div className="detail-item">
-                <div className="detail-item-title">Subjects :</div>
-                <div className="detail-item-p">
-                  <p>{teacher.subjects}</p>
-                </div>
-              </div>
-
-              <div className="detail-item">
-                <div className="detail-item-title">Bio :</div>
-                <div className="detail-item-p">
-                  <p>{teacher.bio}</p>
-                </div>
-              </div>
-              <div className="detail-item">
-                <div className="detail-item-title">Date of Birth :</div>
-                <div className="detail-item-p">
-                  <p>{teacher.date_of_birth}</p>
-                </div>
-              </div>
-
-              <div className="detail-item">
-                <div className="detail-item-title">Is Active: </div>
-                <div className="detail-item-p">
-                  <p>{teacher.is_active ? "Yes" : "No"}</p>
-                </div>
-              </div>
-
-              <div className="detail-item">
-                <div className="detail-item-title">Is Verified: </div>
-                <div className="detail-item-p">
-                  <p>{teacher.is_verified ? "Yes" : "No"}</p>
-                </div>
-              </div>
-
+              {renderProfileDetails()}
 
               <Link to={`${ReactRouterPath}${teacher.id}/edit/`}>
                 <button className="btn btn-indigo-outline mt-3">
