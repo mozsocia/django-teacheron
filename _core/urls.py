@@ -28,6 +28,7 @@ urlpatterns = [
     path('panel/', include('apps.panel.urls')),
     path('student/', include('apps.student.urls')),
     path('teacher/', include('apps.teacher.urls')),
+    path('accounts/', include('apps.accounts.urls')),
 
 
     # =========== api url ===============

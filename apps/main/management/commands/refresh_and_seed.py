@@ -27,6 +27,11 @@ class Command(BaseCommand):
         migrations_dirs = [
                 'apps/posts/migrations',
                 'apps/panel/migrations',
+                'apps/main/migrations',
+                'apps/student/migrations',
+                'apps/teacher/migrations',
+                'apps/accounts/migrations',
+
 
         
             ]

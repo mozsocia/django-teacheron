@@ -14,12 +14,13 @@
   <link rel="stylesheet" href="/static/site/assets/css/main.css" />
 
   <!-- splide -->
-  <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide/dist/css/splide.min.css" />
+  <!-- <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide/dist/css/splide.min.css" /> -->
 
-  <!-- Include Splide.js CSS -->
-  <link rel="stylesheet" href="path/to/splide.min.css" />
+
 
   <title>{% block title %}My Website{% endblock %}</title>
+
+  {% include 'site/layouts/includes/base_css.html' %}
 
   {% block css %}
 
@@ -27,6 +28,7 @@
 </head>
 
 <body>
+  <div id="alert-container" class="fixed top-0 right-0 p-3 z-50"></div>
   {% include 'site/layouts/includes/header.html' %}
 
   <div class="content">
@@ -37,8 +39,10 @@
 
   {% include 'site/layouts/includes/footer.html' %}
 
-  <script src="/static/site/assets/js/scripts.js"></script>
-  <script src="https://unpkg.com/@splidejs/splide/dist/js/splide.min.js"></script>
+  <!-- <script src="/static/site/assets/js/scripts.js"></script> -->
+  <!-- <script src="https://unpkg.com/@splidejs/splide/dist/js/splide.min.js"></script> -->
+
+  {% include 'site/layouts/includes/base_js.html' %}
 
   {% block js %}
 
