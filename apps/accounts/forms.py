@@ -12,6 +12,7 @@ class SignupForm(forms.Form):
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
     accept_terms = forms.BooleanField(label='Accept all the Terms & Conditions')
+    role = forms.ChoiceField(choices=(('student', 'Student'), ('teacher', 'Teacher')))
 
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
@@ -51,6 +52,31 @@ class SignupForm(forms.Form):
 
 
 
+class SignInForm(forms.Form):
+    email = forms.EmailField( )
+    password = forms.CharField( )
+    remember_me = forms.BooleanField(
+        label='Remember Me',
+        required=False,
+        initial=False,
+
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        password = cleaned_data.get('password')
+
+        if email and password:
+            user = CustomUser.objects.filter(email=email).first()
+            if user and not user.check_password(password):
+                print('not valid')
+                raise forms.ValidationError('Invalid email or password.')
+            elif not user:
+                print('not valid 2')
+                raise forms.ValidationError('Invalid email or password.')
+
+        return cleaned_data
 
 # forms.py
 from django import forms

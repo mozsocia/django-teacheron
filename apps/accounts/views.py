@@ -26,28 +26,32 @@ from apps.teacher.models import *
 
 
 
+
 def signin(request):
     if request.method == 'POST':
-        phone = request.POST['phone']
-        password = request.POST['password']
+        form = SignInForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            remember_me = form.cleaned_data['remember_me']
 
-        remember_me = request.POST.get('check', False)
-        
-        user = authenticate(request, phone=phone, password=password)
+            user = authenticate(request, email=email, password=password)
 
-        if user is not None:
-            login(request, user)
+            if user is not None:
+                login(request, user)
 
-            if not remember_me:
-                request.session.set_expiry(0)
+                if not remember_me:
+                    request.session.set_expiry(0)
 
-            messages.success(request, "User logged in successfully.")
-            return redirect('/')
+                messages.success(request, "User logged in successfully.")
+                return redirect('/')
         else:
-            messages.error(request, 'Invalid phone or password.')
-            return render(request, 'site/auth/login.html')
-        
-    return render(request, 'site/page/auth/login.html')
+            messages.error(request, "Invalid email or password.")
+    else:
+        form = SignInForm()
+
+    return render(request, 'site/page/auth/login.html', {'form': form})
 
 
 def signup(request):
@@ -56,7 +60,6 @@ def signup(request):
         request.POST['accept_terms'] = True
 
         form = SignupForm(request.POST)
-        print(request.POST)
         if form.is_valid():
             with transaction.atomic():
                 new_user = CustomUser(

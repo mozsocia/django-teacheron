@@ -47,7 +47,7 @@ def create_teachers():
         },
     ]
 
-    for teacher_data in teachers:
-        Teacher.objects.create(**teacher_data)
+    # for teacher_data in teachers:
+    #     Teacher.objects.create(**teacher_data)
 
     print("Teachers created successfully.")

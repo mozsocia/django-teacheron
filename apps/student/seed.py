@@ -61,8 +61,8 @@ def create_students():
         },
     ]
 
-    for student_data in students:
-        # Create the student instance
-        Student.objects.create(**student_data)
+    # for student_data in students:
+    #     # Create the student instance
+    #     Student.objects.create(**student_data)
 
     print("Students created successfully.")
