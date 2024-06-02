@@ -54,7 +54,7 @@ class FormFieldClassMixin:
     _default_classes = {
         'text': 'custom-form-input',
         'textarea': 'custom-form-input',
-        'select': 'custom-form-input',
+        'select': 'custom-form-input-select',
         'checkbox': 'form-check-input',
         'radio': 'form-check-input',
         'file': 'custom-form-input',

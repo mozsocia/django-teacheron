@@ -1,68 +1,85 @@
 import datetime
 from django.contrib.auth.hashers import make_password
 from .models import Student
+from django.contrib.auth import get_user_model
 
 def create_students():
+    CustomUser = get_user_model()
     students = [
         {
-            "first_name": "John",
-            "last_name": "Doe",
-            "email": "john@example.com",
-            "date_of_birth": "1995-05-20",
-            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "education": "Bachelor's Degree in Computer Science",
-            "phone_number": "1234567890",
-            "is_active": True,
-            "is_verified": False,
-        },
-        {
-            "first_name": "Jane",
-            "last_name": "Smith",
-            "email": "jane@example.com",
-            "date_of_birth": "1998-10-15",
-            "bio": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-            "education": "Master's Degree in Business Administration",
-            "phone_number": "9876543210",
-            "is_active": True,
-            "is_verified": True,
-        },
-                {
-            "first_name": "Alice",
-            "last_name": "Johnson",
-            "email": "alice@example.com",
-            "date_of_birth": "1997-03-10",
-            "bio": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce maximus justo vel tellus ullamcorper, eu dictum purus consequat.",
-            "education": "Bachelor's Degree in Engineering",
-            "phone_number": "5551234567",
+            "user": {
+                "name": "Alice Johnson",
+                "phone": "123-555-7890",
+                "email": "alice.johnson@example.com",
+                "is_student": True,
+                "accept_terms": True,
+            },
+            "bio": "High school student passionate about science and technology.",
+            "education": "Currently in 11th grade at Science High School.",
             "is_active": True,
             "is_verified": True,
         },
         {
-            "first_name": "Michael",
-            "last_name": "Brown",
-            "email": "michael@example.com",
-            "date_of_birth": "1999-07-25",
-            "bio": "Sed sed libero vel odio venenatis gravida vel at nisi. Donec aliquam ante vel sollicitudin lacinia.",
-            "education": "Associate's Degree in Nursing",
-            "phone_number": "1239876543",
+            "user": {
+                "name": "Bob Williams",
+                "phone": "987-555-3210",
+                "email": "bob.williams@example.com",
+                "is_student": True,
+                "accept_terms": True,
+            },
+            "bio": "College freshman majoring in English Literature.",
+            "education": "1st year at State University, English Literature major.",
             "is_active": True,
             "is_verified": False,
         },
         {
-            "first_name": "Sophia",
-            "last_name": "Davis",
-            "email": "sophia@example.com",
-            "date_of_birth": "1996-11-05",
-            "bio": "Integer nec tortor malesuada, tempus nulla sed, viverra dolor. Aliquam erat volutpat. Nulla non sem auctor, tincidunt tortor quis, gravida odio.",
-            "education": "Bachelor's Degree in Psychology",
-            "phone_number": "9995554321",
-            "is_active": False,
-            "is_verified": False,
+            "user": {
+                "name": "Carol Davis",
+                "phone": "456-555-8901",
+                "email": "carol.davis@example.com",
+                "is_student": True,
+                "accept_terms": True,
+            },
+            "bio": "Math enthusiast preparing for calculus olympiad.",
+            "education": "8th grade at Math Academy, participating in math competitions.",
+            "is_active": True,
+            "is_verified": True,
         },
+        {
+            "user": {
+                "name": "David Brown",
+                "phone": "789-555-2345",
+                "email": "david.brown@example.com",
+                "is_student": True,
+                "accept_terms": True,
+            },
+            "bio": "History buff focusing on World War II era.",
+            "education": "Senior at Liberal Arts College, History major with focus on 20th century.",
+            "is_active": True,
+            "is_verified": True,
+        },
+        {
+            "user": {
+                "name": "Eva Martinez",
+                "phone": "234-555-6789",
+                "email": "eva.martinez@example.com",
+                "is_student": True,
+                "accept_terms": True,
+            },
+            "bio": "Aspiring artist taking online courses to improve skills.",
+            "education": "Self-taught, completed various online art and design courses.",
+            "is_active": True,
+            "is_verified": False,
+        }
     ]
 
-    # for student_data in students:
-    #     # Create the student instance
-    #     Student.objects.create(**student_data)
+    for student_data in students:
+        user_data = student_data.pop("user")
+        user = CustomUser.objects.create(**user_data)
+        user.set_password("password")
+        user.save()
+        
+        student = Student.objects.create(user=user, **student_data)
+        
 
     print("Students created successfully.")
