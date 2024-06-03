@@ -52,22 +52,7 @@
         <p>{{ job_req.get_meeting_display }}</p>
       </div>
     </div>
-    <!-- class JobRequirement(models.Model):
 
-    location = models.CharField(max_length=255)
-    phone = models.CharField(max_length=20)
-    details = models.TextField()
-    subjects = models.CharField(max_length=255,help_text="Comma-separated list of subjects")
-    level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
-    i_want = models.CharField(max_length=20, choices=IWANT_CHOICES)
-    meeting = models.CharField(max_length=20, choices=MEETING_CHOICES)
-    how_much_travel = models.CharField(max_length=255)
-    budget = models.IntegerField()
-    gender_preference = models.CharField(max_length=10, choices=GENDER_CHOICES)
-    tutors_wanted = models.CharField(max_length=20, choices=TUTORS_WANTED_CHOICES)
-    need_someone = models.CharField(max_length=20, choices=NEED_SOMEONE_CHOICES)
-    communication_language = models.CharField(max_length=255)
-    uploaded_file = models.FileField(upload_to='job_requirements/') -->
 
     <div class="detail-item">
       <div class="detail-item-title">How Much Travel :</div>
@@ -118,6 +103,44 @@
       <a href="{% url 'delete_job_requirement' pk=job_req.pk %}" class="btn btn-error mx-2">Delete</a>
     
     </div>
+
+    <br>
+
+    <br>
+
+<h2 class="text-2xl font-semibold mb-4">Applications ({{ applications|length }})</h2>
+{% for application in applications %}
+<div class="bg-white rounded-lg shadow-md p-6 mb-4">
+  <div class="flex items-center mb-4">
+    <!-- <img src="{{ application.teacher.profile_picture.url }}" alt="{{ application.teacher.full_name }}" class="w-16 h-16 rounded-full mr-4"> -->
+    <div>
+      <h3 class="text-xl font-semibold"><a href="{% url 'teacher_detail' teacher_id=application.teacher.pk %}">{{ application.teacher.user.name }}</a> </h3>
+      <p class="text-gray-600">{{ application.teacher.get_gender_display }} |Location: {{ application.teacher.location }}</p>
+    </div>
+  </div>
+  <p class="text-gray-700 mb-4">{{ application.cover_letter }}</p>
+  <div class="flex justify-between items-center">
+    <div>
+      <strong>Status:</strong>
+      {% if application.status == 'pending' %}
+        <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded">Pending</span>
+      {% elif application.status == 'accepted' %}
+        <span class="bg-green-200 text-green-800 px-2 py-1 rounded">Accepted</span>
+      {% else %}
+        <span class="bg-red-200 text-red-800 px-2 py-1 rounded">Rejected</span>
+      {% endif %}
+    </div>
+    <div class="space-x-2">
+      <a href="" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-sm">Accept</a>
+      <a href="" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm">Reject</a>
+    </div>
+  </div>
+</div>
+{% empty %}
+<div class="bg-white rounded-lg shadow-md p-6 text-center">
+  <p class="text-gray-600">No applications found for this job yet.</p>
+</div>
+{% endfor %}
   </div>
 
 </div>

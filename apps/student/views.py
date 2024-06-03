@@ -3,7 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import *
 from .forms import *
+from apps.teacher.models import *
 from django.http import HttpResponseForbidden
+from django.http import Http404
 
 
 @login_required
@@ -32,6 +34,16 @@ def create_job_requirement(request):
 
 @login_required
 def view_job_requirement(request, pk):
+    try:
+        job_requirement = JobRequirement.objects.get(pk=pk, user=request.user)
+    except JobRequirement.DoesNotExist:
+        raise Http404("Job requirement not found or you don't have permission to view it.")
+    
+    applications = Application.objects.filter(job=job_requirement).select_related('teacher')
+    return render(request, 'site/page/student/view_job_requirement.html', {
+        'job_req': job_requirement,
+        'applications': applications,
+    })
     job_req = get_object_or_404(JobRequirement, pk=pk)
     return render(request, 'site/page/student/view_job_requirement.html', {'job_req': job_req})
 

@@ -5,7 +5,12 @@
 {% block content %}
 <div class="container section-form">
 
-<h1 class="text-xl font-bold mb-6">Job Requirements</h1>
+  <a href="{% url 'create_job_requirement' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded mb-4">
+    + Create New
+  </a>
+  <br>
+
+<h1 class="text-xl font-bold mb-6 mt-6">My Job Requirements list</h1>
 {% for job_req in job_reqs %}
   <div class="card mb-3">
     <div class="card-body">

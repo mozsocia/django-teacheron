@@ -89,7 +89,11 @@
         <p class="text-sm text-gray-700">{{ job_requirement.details }}</p>
       </div>
       <!-- apply button for this url "path('applications/create/<int:job_id>/', create_application, name='create_application')," -->
-      <a class="btn btn-primary mt-3" href="{% url 'create_application' job_requirement.id %}" class="btn btn-primary mt-3">Apply</a>
+        <!-- check if user.is_teacher then show apply button-->
+        {% if user.is_teacher %}
+          <a class="btn btn-primary mt-3" href="{% url 'create_application' job_requirement.id %}" class="btn btn-primary mt-3">Apply</a>
+        {% endif %}
+
     </div>
   </div>
 

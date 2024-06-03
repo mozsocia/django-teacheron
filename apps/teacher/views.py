@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import TeacherProfileForm
+from .forms import *
+from .models import *
 
 # @login_required
 def create_teacher_profile(request):
@@ -18,6 +19,9 @@ def create_teacher_profile(request):
 
 
 
+def teacher_detail(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    return render(request, 'site/page/teachers/detail.html', {'teacher': teacher})
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -28,6 +32,10 @@ def has_applied(teacher, job):
 
 @login_required
 def create_application(request, job_id):
+    if not request.user.is_teacher:
+        messages.error(request, "You are not a teacher.")
+        return redirect('job_requirement_detail', pk=job_id)
+    
     job = get_object_or_404(JobRequirement, id=job_id)
     teacher = request.user.teacher
 

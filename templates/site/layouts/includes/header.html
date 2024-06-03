@@ -176,7 +176,7 @@
                 <li class="hover-underline-animation"><a href="{% url 'application_list' %}">My Applications</a></li>
                 {% endif %}
                 {% if user.student %}
-                <li class="hover-underline-animation"><a href="{% url 'profile' %}">My Profile</a></li>
+                <li class="hover-underline-animation"><a href="{% url 'list_job_requirements' %}">Job Requirements</a></li>
                 {% endif %}
                 <li class="hover-underline-animation"><a href="{% url 'signout' %}">Logout</a></li>
               {% else %}
