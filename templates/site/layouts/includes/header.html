@@ -158,10 +158,26 @@
         </div>
         <div class="">
           <div class="dropdown dropdown-hover rounded-full">
-            Login
+            <!-- show user.name if logged in -->
+            {% if user.is_authenticated %}
+              <div tabindex="0" role="button" class="flex juctify-center items-center dropdwon-title-rn">
+                {{ user.name }}
+              </div>
+            {% else %}
+              <div tabindex="0" role="button" class="flex juctify-center items-center dropdwon-title-rn">
+                Login
+              </div>
+            {% endif %}
+
             <ul tabindex="0" class="dropdown-content dropdown-rn -left-28 lg:-left-10 w-40">
+              <!-- show profile page link and logout button if logged in -->
+              {% if user.is_authenticated %}
+                <li class="hover-underline-animation"><a href="#">Profile</a></li>
+                <li class="hover-underline-animation"><a href="{% url 'signout' %}">Logout</a></li>
+              {% else %}
               <li class="hover-underline-animation"><a href="{% url 'login' %}">Login</a></li>
               <li class="hover-underline-animation"><a href="{% url 'signup' %}">Register</a></li>
+              {% endif %}
             </ul>
           </div>
         </div>

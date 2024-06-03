@@ -24,7 +24,7 @@ const TeacherDetails = () => {
   const formatDate = (dateString) => {
     // Create a Date object from the string, considering the time zone information
     const date = new Date(dateString.replace('Z', ''));
-  
+
     // Use the Intl.DateTimeFormat API for formatting
     const options = {
       year: 'numeric',
@@ -35,15 +35,15 @@ const TeacherDetails = () => {
       second: 'numeric',
       timeZone: 'UTC', // Specify UTC time zone for accurate formatting
     };
-  
+
     // Format the date according to the options
     return date.toLocaleString(undefined, options);
   };
-  
+
   const renderDetailItem = (key, value) => {
     // Remove underscores from the key
     const formattedKey = key.replace(/_/g, ' ');
-  
+
     // Check if the value is a boolean
     if (typeof value === 'boolean') {
       return (
@@ -75,8 +75,8 @@ const TeacherDetails = () => {
       );
     }
   };
-  
-  
+
+
   const renderProfileDetails = () => {
     return Object.entries(teacher).map(([key, value]) => {
       if (key !== 'user') {
@@ -119,6 +119,27 @@ const TeacherDetails = () => {
         <div className="card-body">
           <div className="space-y-1">
             <div className="detail-section">
+
+              <div className="detail-item">
+                <div className="detail-item-title">Name :</div>
+                <div className="detail-item-p">
+                  <p>
+                    {teacher.user.name}
+                  </p>
+                </div>
+              </div>
+              <div className="detail-item">
+                <div className="detail-item-title">Email :</div>
+                <div className="detail-item-p">
+                  <p>{teacher.user.email}</p>
+                </div>
+              </div>
+              <div className="detail-item">
+                <div className="detail-item-title">Phone :</div>
+                <div className="detail-item-p">
+                  <p>{teacher.user.phone}</p>
+                </div>
+              </div>
 
               {renderProfileDetails()}
 
