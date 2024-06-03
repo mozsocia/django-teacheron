@@ -2,8 +2,9 @@
 
 {% block content %}
 <div class="container section-form">
-  <h1 class="text-xl font-bold mb-6">Create Job Requirement</h1>
-
+  <div class="text-center">
+  <h1 class="text-2xl font-bold mb-10 ">Create Job Requirement</h1>
+  </div>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -13,8 +14,8 @@
       {% endfor %}
     {% endif %}
 
-    <div class="mb-4">
-      <label for="{{ form.location.id_for_label }}" class="custom-form-label">Location</label>
+    <div class="form-hr-row">
+      <label for="{{ form.location.id_for_label }}" class="form-hr-label">Location</label>
       {{ form.location }}
 
       {% for error in form.location.errors %}
@@ -22,8 +23,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.phone.id_for_label }}" class="custom-form-label">Phone</label>
+    <div class="form-hr-row">
+      <label for="{{ form.phone.id_for_label }}" class="form-hr-label">Phone</label>
       {{ form.phone }}
       
       {% for error in form.phone.errors %}
@@ -31,8 +32,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.details.id_for_label }}" class="custom-form-label">Details</label>
+    <div class="form-hr-row">
+      <label for="{{ form.details.id_for_label }}" class="form-hr-label">Details</label>
       {{ form.details }}
 
       {% for error in form.details.errors %}
@@ -40,8 +41,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.subjects.id_for_label }}" class="custom-form-label">Subjects (comma-separated)</label>
+    <div class="form-hr-row">
+      <label for="{{ form.subjects.id_for_label }}" class="form-hr-label">Subjects (comma-separated)</label>
       {{ form.subjects }}
 
       {% for error in form.subjects.errors %}
@@ -49,8 +50,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.level.id_for_label }}" class="custom-form-label">Level</label>
+    <div class="form-hr-row">
+      <label for="{{ form.level.id_for_label }}" class="form-hr-label">Level</label>
       {{ form.level }}
 
       {% for error in form.level.errors %}
@@ -58,8 +59,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.i_want.id_for_label }}" class="custom-form-label">I Want</label>
+    <div class="form-hr-row">
+      <label for="{{ form.i_want.id_for_label }}" class="form-hr-label">I Want</label>
       {{ form.i_want }}
 
       {% for error in form.i_want.errors %}
@@ -67,8 +68,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.meeting.id_for_label }}" class="custom-form-label">Meeting</label>
+    <div class="form-hr-row">
+      <label for="{{ form.meeting.id_for_label }}" class="form-hr-label">Meeting</label>
       {{ form.meeting }}
 
       {% for error in form.meeting.errors %}
@@ -76,8 +77,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.how_much_travel.id_for_label }}" class="custom-form-label">How Much Travel</label>
+    <div class="form-hr-row">
+      <label for="{{ form.how_much_travel.id_for_label }}" class="form-hr-label">How Much Travel</label>
       {{ form.how_much_travel }}
 
       {% for error in form.how_much_travel.errors %}
@@ -85,8 +86,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.budget.id_for_label }}" class="custom-form-label">Budget</label>
+    <div class="form-hr-row">
+      <label for="{{ form.budget.id_for_label }}" class="form-hr-label">Budget</label>
       {{ form.budget }}
 
       {% for error in form.budget.errors %}
@@ -94,8 +95,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.gender_preference.id_for_label }}" class="custom-form-label">Gender Preference</label>
+    <div class="form-hr-row">
+      <label for="{{ form.gender_preference.id_for_label }}" class="form-hr-label">Gender Preference</label>
       {{ form.gender_preference }}
 
       {% for error in form.gender_preference.errors %}
@@ -103,8 +104,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.tutors_wanted.id_for_label }}" class="custom-form-label">Tutors Wanted</label>
+    <div class="form-hr-row">
+      <label for="{{ form.tutors_wanted.id_for_label }}" class="form-hr-label">Tutors Wanted</label>
       {{ form.tutors_wanted }}
 
       {% for error in form.tutors_wanted.errors %}
@@ -112,8 +113,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.need_someone.id_for_label }}" class="custom-form-label">Need Someone</label>
+    <div class="form-hr-row">
+      <label for="{{ form.need_someone.id_for_label }}" class="form-hr-label">Need Someone</label>
       {{ form.need_someone }}
 
       {% for error in form.need_someone.errors %}
@@ -122,8 +123,8 @@
     </div>
 
 
-    <div class="mb-4">
-      <label for="{{ form.communication_language.id_for_label }}" class="custom-form-label">Communication Language</label>
+    <div class="form-hr-row">
+      <label for="{{ form.communication_language.id_for_label }}" class="form-hr-label">Communication Language</label>
       {{ form.communication_language }}
 
       {% for error in form.communication_language.errors %}
@@ -131,8 +132,8 @@
       {% endfor %}
     </div>
 
-    <div class="mb-4">
-      <label for="{{ form.uploaded_file.id_for_label }}" class="custom-form-label">Upload File</label>
+    <div class="form-hr-row">
+      <label for="{{ form.uploaded_file.id_for_label }}" class="form-hr-label">Upload File</label>
       {{ form.uploaded_file }}
 
       {% for error in form.uploaded_file.errors %}

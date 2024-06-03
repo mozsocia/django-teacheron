@@ -20,7 +20,14 @@ def create_job_requirement(request):
             messages.error(request, 'Please correct the errors below.')
             print(form.errors)
     else:
-        form = JobRequirementForm()
+        custom_classes = {
+            'text': 'form-hr-input',
+            'textarea': 'form-hr-textarea',
+            'select': 'form-hr-input-select',
+            'file': 'form-hr-file',
+        }
+        form = JobRequirementForm().apply_classes(custom_classes)
+
     return render(request, 'site/page/student/create_job_requirement.html', {'form': form})
 
 @login_required
