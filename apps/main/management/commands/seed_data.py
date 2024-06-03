@@ -20,5 +20,7 @@ class Command(BaseCommand):
         create_blogs()
         create_teachers()
         create_students()
+        create_job_requirements()
+        create_applications()
 
         self.stdout.write(self.style.SUCCESS('Data seeded successfully!'))

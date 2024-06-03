@@ -1,6 +1,6 @@
 import datetime
 from django.contrib.auth.hashers import make_password
-from .models import Student
+from .models import *
 from django.contrib.auth import get_user_model
 
 def create_students():
@@ -83,3 +83,85 @@ def create_students():
         
 
     print("Students created successfully.")
+
+
+import random
+import datetime
+from django.contrib.auth import get_user_model
+
+def create_job_requirements():
+    CustomUser = get_user_model()
+    users = CustomUser.objects.filter(is_student=True)
+
+    if not users:
+        print("No users found. Please create some users first.")
+        return
+
+    job_requirements = [
+        {
+            "location": "New York, NY",
+            "phone": "+1 (212) 555-1234",
+            "details": "Looking for a math tutor to help with calculus and linear algebra.",
+            "subjects": "Math, Calculus, Linear Algebra",
+            "level": "intermediate",
+            "i_want": "learn",
+            "meeting": "online",
+            "how_much_travel": "No travel required",
+            "budget": 50,
+            "gender_preference": "none",
+            "tutors_wanted": "only_one",
+            "need_someone": "part_time",
+            "communication_language": "English"
+        },
+        {
+            "location": "London, UK",
+            "phone": "+44 20 7946 0958",
+            "details": "I'm an experienced programmer willing to teach Python and Django.",
+            "subjects": "Programming, Python, Django",
+            "level": "advanced",
+            "i_want": "teach",
+            "meeting": "offline",
+            "how_much_travel": "Within London",
+            "budget": 75,
+            "gender_preference": "none",
+            "tutors_wanted": "no",
+            "need_someone": "full_time",
+            "communication_language": "English, French"
+        },
+        {
+            "location": "Tokyo, Japan",
+            "phone": "+81 3-1234-5678",
+            "details": "Seeking language exchange partner for Japanese and English.",
+            "subjects": "Language, Japanese, English",
+            "level": "beginner",
+            "i_want": "both",
+            "meeting": "online",
+            "how_much_travel": "No travel required",
+            "budget": 30,
+            "gender_preference": "none",
+            "tutors_wanted": "more_than_one",
+            "need_someone": "part_time",
+            "communication_language": "Japanese, English"
+        }
+    ]
+
+    for job_req in job_requirements:
+        JobRequirement.objects.create(
+            location=job_req["location"],
+            phone=job_req["phone"],
+            details=job_req["details"],
+            subjects=job_req["subjects"],
+            level=job_req["level"],
+            i_want=job_req["i_want"],
+            meeting=job_req["meeting"],
+            how_much_travel=job_req["how_much_travel"],
+            budget=job_req["budget"],
+            gender_preference=job_req["gender_preference"],
+            tutors_wanted=job_req["tutors_wanted"],
+            need_someone=job_req["need_someone"],
+            communication_language=job_req["communication_language"],
+            uploaded_file=None,  # You can add a default file or leave it as None
+            user=random.choice(users),
+        )
+        
+    print("Job requirements created successfully.")

@@ -13,23 +13,10 @@ class Student(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Job(models.Model):
-    job_status_choices = (
-        ('pending', 'Pending'),
-        ('accepted', 'Accepted'),
-        ('rejected', 'Rejected'),
-    )
-    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    subject_area = models.CharField(max_length=100, blank=True, null=True)
-    date_posted = models.DateField()
-    deadline = models.DateField()
-    pay_rate = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=20, choices=job_status_choices)
-    
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.user.name
+
+
 
 
 class JobRequirement(models.Model):
@@ -50,14 +37,10 @@ class JobRequirement(models.Model):
         ('offline', 'Offline'),
     ]
 
-    BUDGET_CHOICES = [
-        (5000, '5000'),
-        (1000, '1000'),
-    ]
-
     GENDER_CHOICES = [
         ('male', 'Male'),
         ('female', 'Female'),
+        ('none', 'None'),
     ]
 
     TUTORS_WANTED_CHOICES = [
@@ -74,23 +57,25 @@ class JobRequirement(models.Model):
     location = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
     details = models.TextField()
-    subject = models.CharField(max_length=255)
+    subjects = models.CharField(max_length=255,help_text="Comma-separated list of subjects")
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
     i_want = models.CharField(max_length=20, choices=IWANT_CHOICES)
     meeting = models.CharField(max_length=20, choices=MEETING_CHOICES)
     how_much_travel = models.CharField(max_length=255)
-    budget = models.IntegerField(choices=BUDGET_CHOICES)
+    budget = models.IntegerField()
     gender_preference = models.CharField(max_length=10, choices=GENDER_CHOICES)
     tutors_wanted = models.CharField(max_length=20, choices=TUTORS_WANTED_CHOICES)
     need_someone = models.CharField(max_length=20, choices=NEED_SOMEONE_CHOICES)
     communication_language = models.CharField(max_length=255)
     uploaded_file = models.FileField(upload_to='job_requirements/')
 
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.subject} - {self.location}"
+        return f"{self.subjects} - {self.location}"
 
     class Meta:
         ordering = ['-created_at']

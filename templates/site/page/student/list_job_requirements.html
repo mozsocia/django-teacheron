@@ -1,0 +1,27 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}Job Requirements{% endblock %}
+
+{% block content %}
+<div class="container section-form">
+
+<h1 class="text-xl font-bold mb-6">Job Requirements</h1>
+{% for job_req in job_reqs %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-text text-xl font-medium ">Job Requirement by:  {{ job_req.user.name }}</h5>
+      <p class="card-text"><strong>Location:</strong> {{ job_req.location }}</p>
+      <p class="card-text"><strong>Details:</strong> {{ job_req.details }}</p>
+      <p class="card-text"><strong>Subjects:</strong> {{ job_req.subjects }}</p>
+      <p class="card-text"><strong>Level:</strong> {{ job_req.get_level_display }}</p>
+      <a href="{% url 'view_job_requirement' pk=job_req.pk %}" class="btn btn-primary">View Details</a>
+    </div>
+  </div>
+  <!-- in this below div class add all margin padding from 1-10 class of tailwind -->
+  <div class="mb-10 "></div>
+{% empty %}
+  <p>No job requirements found.</p>
+{% endfor %}
+
+</div>
+{% endblock %}

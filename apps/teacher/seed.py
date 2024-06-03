@@ -373,3 +373,64 @@ def create_teachers():
 
 
     print("Teachers created successfully.")
+
+
+
+
+
+
+import random
+import datetime
+from django.utils import timezone
+from apps.teacher.models import *
+from apps.student.models import *
+
+def create_applications():
+    teachers = Teacher.objects.all()
+    job_requirements = JobRequirement.objects.all()
+
+    if not teachers:
+        print("No teachers found. Please create some teachers first.")
+        return
+
+    if not job_requirements:
+        print("No job requirements found. Please create some job requirements first.")
+        return
+
+    cover_letters = [
+        "I am an experienced math tutor with over 5 years of experience teaching calculus and linear algebra. I have helped numerous students improve their grades and understand complex mathematical concepts. I believe my expertise makes me the perfect fit for your requirements.",
+        
+        "As a passionate language teacher, I have been teaching English to Japanese speakers for the past 3 years. I also have a JLPT N2 certification in Japanese. I'm excited about the opportunity to engage in a language exchange, as it would benefit both of us.",
+        
+        "I have been a professional software developer for 7 years, with a strong focus on Python and Django. I've built and maintained several large-scale web applications. Teaching is my way of giving back to the community, and I'd love to share my knowledge with you.",
+        
+        "My expertise lies in teaching advanced physics, particularly quantum mechanics and relativity. I have a Ph.D. in Theoretical Physics and have been tutoring graduate students. I'm interested in your posting as it aligns well with my skill set.",
+        
+        "I am a native French speaker with a degree in French Literature. I've been teaching French online for the past 2 years, focusing on conversational skills and cultural nuances. I believe language learning should be fun and engaging."
+    ]
+
+    applications = []
+    for _ in range(10):  # Creating 10 random applications
+        job = random.choice(job_requirements)
+        teacher = random.choice(teachers)
+        cover_letter = random.choice(cover_letters)
+        status = random.choice(['pending', 'accepted', 'rejected'])
+        
+        # Ensure the teacher hasn't already applied to this job
+        while any(a for a in applications if a[0] == job and a[1] == teacher):
+            job = random.choice(job_requirements)
+            teacher = random.choice(teachers)
+
+        applications.append((job, teacher, cover_letter, status))
+
+    for job, teacher, cover_letter, status in applications:
+        applied_at = timezone.now() - datetime.timedelta(days=random.randint(0, 30))
+        Application.objects.create(
+            job=job,
+            teacher=teacher,
+            cover_letter=cover_letter,
+            status=status,
+            applied_at=applied_at
+        )
+    
+    print("Applications created successfully.")

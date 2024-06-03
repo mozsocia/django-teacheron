@@ -124,8 +124,11 @@ class Application(models.Model):
         ('accepted', 'Accepted'),
         ('rejected', 'Rejected'),
     )
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    job = models.ForeignKey(JobRequirement, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     cover_letter = models.TextField()
     status = models.CharField(max_length=20, choices=application_status_choices)
     applied_at = models.DateTimeField(auto_now_add=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

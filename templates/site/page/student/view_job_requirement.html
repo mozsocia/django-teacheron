@@ -1,0 +1,125 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}Job Requirement Details{% endblock %}
+
+
+{% block content %}
+<div class="container section-form">
+
+  <h1 class="text-xl font-bold mb-6">Job Requirement Details</h1>
+  <div class="detail-section">
+
+
+    <div class="detail-item">
+      <div class="detail-item-title">Location :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.location }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Phone :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.phone }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Details :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.details }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Subjects :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.subjects }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Level :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.get_level_display }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">I Want :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.get_i_want_display }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Meeting :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.get_meeting_display }}</p>
+      </div>
+    </div>
+    <!-- class JobRequirement(models.Model):
+
+    location = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+    details = models.TextField()
+    subjects = models.CharField(max_length=255,help_text="Comma-separated list of subjects")
+    level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
+    i_want = models.CharField(max_length=20, choices=IWANT_CHOICES)
+    meeting = models.CharField(max_length=20, choices=MEETING_CHOICES)
+    how_much_travel = models.CharField(max_length=255)
+    budget = models.IntegerField()
+    gender_preference = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    tutors_wanted = models.CharField(max_length=20, choices=TUTORS_WANTED_CHOICES)
+    need_someone = models.CharField(max_length=20, choices=NEED_SOMEONE_CHOICES)
+    communication_language = models.CharField(max_length=255)
+    uploaded_file = models.FileField(upload_to='job_requirements/') -->
+
+    <div class="detail-item">
+      <div class="detail-item-title">How Much Travel :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.how_much_travel }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Budget :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.budget }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Gender Preference :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.get_gender_preference_display }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Tutors Wanted :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.get_tutors_wanted_display }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Need Someone :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.get_need_someone_display }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-title">Communication Language :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.communication_language }}</p>
+      </div>
+    </div>
+    
+    <div class="detail-item">
+      <div class="detail-item-title">Uploaded File :</div>
+      <div class="detail-item-p">
+        <p>{{ job_req.uploaded_file }}</p>
+      </div>
+    </div>
+
+    <div class="detail-item">
+      <a href="{% url 'edit_job_requirement' pk=job_req.pk %}" class="btn btn-primary">Edit</a>
+      <a href="{% url 'delete_job_requirement' pk=job_req.pk %}" class="btn btn-error mx-2">Delete</a>
+    
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
