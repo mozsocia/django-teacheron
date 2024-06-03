@@ -48,22 +48,42 @@
           </svg>
           Not available for home tutoring
         </p>
-        <p class="flex items-center">
+   
+          <p class="flex items-center text-sm text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+            </svg>
+            Can communicate in: {{ job_requirement.communication_language }}
+          </p>
+
+
+        <!-- <p class="flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
           </svg>
           Can not travel
-        </p>
+        </p> -->
+
+        <p class="text-gray-600 mb-2">Tutors Wanted: {{ job_requirement.get_tutors_wanted_display }}</p>
+        <p class="text-gray-600 mb-2">Need Someone: {{ job_requirement.get_need_someone_display }}</p>
+
+        {% if job_requirement.uploaded_file %}
+          <p class="text-gray-600 mb-2">Uploaded File: <a href="{{ job_requirement.uploaded_file.url }}">{{ job_requirement.uploaded_file.name }}</a></p>
+          {% else %}
+          <p class="text-gray-600 mb-2">No file uploaded.</p>
+          {% endif %}
+
+          <p class="text-gray-600 mb-2">I Want: {{ job_requirement.get_i_want_display }}</p>
+          <p class="text-gray-600 mb-2">Meeting: {{ job_requirement.get_meeting_display }}</p>
+          <p class="text-gray-600 mb-2">How Much Travel: {{ job_requirement.how_much_travel }}</p>
+          <p class="text-gray-600 mb-2">Budget: {{ job_requirement.budget }}</p>
+
+
+          <p class="text-gray-600 mb-2">Created At: {{ job_requirement.created_at }}</p>
+          <p class="text-gray-600 mb-2">Updated At: {{ job_requirement.updated_at }}</p>
       </div>
   
-      <div class="mt-4">
-        <p class="flex items-center text-sm text-gray-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
-          </svg>
-          Can communicate in: English
-        </p>
-      </div>
+
   
       <div class="mt-4 p-4 bg-gray-100 rounded-md">
         <p class="text-sm text-gray-700">{{ job_requirement.details }}</p>
