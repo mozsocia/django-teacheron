@@ -1,0 +1,97 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}All Tutors{% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto py-8">
+  <h1 class="text-3xl font-bold mb-4">Teacher List</h1>
+  <div class="bg-white  divide-y divide-gray-200 p-3 ">
+    {% for teacher in teachers %}
+    <a href="{% url 'tutor_detail' teacher.pk %}" class="flex items-center bg-white rounded-md shadow-md p-4 mb-4">
+
+      <div class="ml-4">
+        <h2 class="text-lg font-semibold">{{ teacher.user.name }}</h2>
+        <p class="text-gray-600">Expert in maths</p>
+        <div class="flex space-x-2 mt-2">
+          <div class="bg-gray-200 rounded-md px-2 py-1 text-sm">Maths & Reasoning</div>
+          <div class="bg-gray-200 rounded-md px-2 py-1 text-sm">Maths (12th)</div>
+        </div>
+        <p class="mt-2 text-gray-700">{{ teacher.profile_description|truncatechars:150 }}</p>
+        <div class="flex items-center mt-2">
+          <div class="flex items-center mr-4">
+            <svg class="w-5 h-5 text-gray-500 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-gray-600">{{ teacher.location }}</span>
+          </div>
+          <div class="flex items-center mr-4">
+            <svg class="w-5 h-5 text-gray-500 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-gray-600">${{ teacher.min_fee }}&ndash;{{ teacher.max_fee }}/hour</span>
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-gray-500 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-gray-600">{{ teacher.tutor_experience_years }} yr.</span>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% empty %}
+    <li class="p-4 text-gray-600">No teachers found.</li>
+    {% endfor %}
+  </div>
+
+
+  <!-- Pagination -->
+  <div class="mt-8 flex justify-center">
+    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+      {% if teachers.has_previous %}
+      <a href="?page=1" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+        <span class="sr-only">First</span>
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      {% endif %}
+
+      {% if teachers.has_previous %}
+      <a href="?page={{ teachers.previous_page_number }}" class="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      {% endif %}
+
+      {% for page_num in teachers.paginator.page_range %}
+      {% if page_num == teachers.number %}
+      <span class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">{{ page_num }}</span>
+      {% elif page_num > teachers.number|add:"-2" and page_num < teachers.number|add:"3" %} <a href="?page={{ page_num }}" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">{{ page_num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if teachers.has_next %}
+        <a href="?page={{ teachers.next_page_number }}" class="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        {% endif %}
+
+        {% if teachers.has_next %}
+        <a href="?page={{ teachers.paginator.num_pages }}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+          <span class="sr-only">Last</span>
+          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        {% endif %}
+    </nav>
+  </div>
+</div>
+
+{% endblock %}
