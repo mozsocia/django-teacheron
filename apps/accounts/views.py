@@ -45,7 +45,15 @@ def signin(request):
                     request.session.set_expiry(0)
 
                 messages.success(request, "User logged in successfully.")
-                return redirect('/')
+
+                # Retrieve the next parameter from the URL
+                next_url = request.GET.get('next')
+                if next_url:
+                    # Redirect the user to the specified URL
+                    return redirect(next_url)
+                else:
+                    # If next parameter is not present, redirect to the default URL
+                    return redirect('/')
         else:
             messages.error(request, "Invalid email or password.")
     else:

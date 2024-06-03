@@ -52,7 +52,7 @@
 
   <header class="main-nav">
     <!-- header main -->
-    <section class="flex justify-between items-center gap-8 contain py-3 lg:py-6">
+    <section class="flex justify-between items-center gap-8 px-10 py-3 lg:py-6">
       <div class="drawer z-50 w-auto block lg:hidden">
         <input id="my-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content">
@@ -172,7 +172,12 @@
             <ul tabindex="0" class="dropdown-content dropdown-rn -left-28 lg:-left-10 w-40">
               <!-- show profile page link and logout button if logged in -->
               {% if user.is_authenticated %}
-                <li class="hover-underline-animation"><a href="#">Profile</a></li>
+                {% if user.teacher %}
+                <li class="hover-underline-animation"><a href="{% url 'application_list' %}">My Applications</a></li>
+                {% endif %}
+                {% if user.student %}
+                <li class="hover-underline-animation"><a href="{% url 'profile' %}">My Profile</a></li>
+                {% endif %}
                 <li class="hover-underline-animation"><a href="{% url 'signout' %}">Logout</a></li>
               {% else %}
               <li class="hover-underline-animation"><a href="{% url 'login' %}">Login</a></li>

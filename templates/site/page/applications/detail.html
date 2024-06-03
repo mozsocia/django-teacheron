@@ -1,0 +1,23 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<div class="container section-form">
+
+  <h1 class="text-xl font-bold mb-6">Application Details</h1>
+  <p><strong>Job Details :</strong> {{ application.job.details }}</p>
+  <p><strong>Job Subjects:</strong> {{ application.job.subjects }} - {{ application.job.location }}</p>
+  <p><strong>Status:</strong> {{ application.get_status_display }}</p>
+  <p><strong>Applied at:</strong> {{ application.applied_at }}</p>
+  <br>
+  <p><strong>Cover Letter:</strong></p>
+  <p class="p-3 shadow border rounded">{{ application.cover_letter }}</p>
+  <br>
+
+  <a class="btn btn-primary" href="{% url 'update_application' application.id %}">Edit</a>
+  <a class="btn btn-error" href="{% url 'delete_application' application.id %}">Delete</a>
+  
+</div>
+
+{% endblock %}

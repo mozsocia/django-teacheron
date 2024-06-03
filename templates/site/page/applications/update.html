@@ -1,0 +1,22 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}Update Application{% endblock %}
+
+{% block content %}
+<div class="container section-form">
+
+  <h1 class="text-xl font-bold mb-6">Edit Application</h1>
+  <br>
+  <form method="post">
+      {% csrf_token %}
+      <label class="custom-form-label">Cover Letter</label>
+      <textarea class="custom-form-textarea" name="cover_letter" rows="5">{{ application.cover_letter }}</textarea>
+      <button class="btn btn-primary mt-3" type="submit">Update</button>
+      <!-- cancel button -->
+      <a class="btn btn-error ml-3" href="{% url 'application_detail' application.id %}">Cancel</a>
+  </form>
+  
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}Delete Application{% endblock %}
+
+{% block content %}
+<div class="container section-form">
+
+  <h1 class="text-xl font-bold mb-6">Delete Application</h1>
+  <p class="text-lg">Are you sure you want to delete your application for {{ application.job.subjects }} - {{ application.job.location }}?</p>
+  <form method="post">
+      {% csrf_token %}
+      <button class="btn btn-error mt-3 text-white" type="submit">Yes, Delete</button>
+      <a type="button" class="btn btn-primary ml-3 mt-3" href="{% url 'application_detail' application.id %}">No, Go Back</a>
+  </form>
+  
+</div>
+
+{% endblock %}

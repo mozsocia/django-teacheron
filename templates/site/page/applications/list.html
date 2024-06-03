@@ -1,0 +1,24 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}List Applications{% endblock %}
+
+{% block content %}
+<div class="container section-form">
+
+  <h1 class="text-xl font-bold mb-6">My Applications</h1>
+  {% for application in applications %}
+  <div class="mb-5 shadow-md p-3 rounded-md">
+    <h2 class="text-xl font-medium mb-3 ">{{ application.job.details }}</h2>
+    <p><strong>Job Location:</strong> {{ application.job.location }}</p>
+    <p><strong>Job Subjects:</strong> {{ application.job.subjects }}</p>
+    <p><strong>Status:</strong> {{ application.get_status_display }}</p>
+    <p><strong>Applied at:</strong> {{ application.applied_at }}</p>
+    <a class="btn btn-primary mt-3" href="{% url 'application_detail' application.id %}">View</a>
+  </div>
+  {% empty %}
+  <p>No applications found.</p>
+  {% endfor %}
+
+</div>
+
+{% endblock %}
