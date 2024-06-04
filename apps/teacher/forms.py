@@ -14,3 +14,9 @@ class TeacherProfileForm(FormFieldClassMixin,forms.ModelForm):
         self.fields['has_digital_pen'].widget = forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')])
         self.fields['helps_with_homework'].widget = forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')])
         self.fields['is_full_time_teacher'].widget = forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')])
+
+
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        exclude = ['user', 'is_profile_completed', 'is_active', 'is_verified', 'created_at', 'updated_at']

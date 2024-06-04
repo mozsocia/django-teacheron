@@ -1,0 +1,72 @@
+{% extends 'site/layouts/base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<div class="container section-form p-8">
+  <h1 class="text-xl font-bold mb-6">Name: {{ teacher.user.name }}</h1>
+
+  <h2 class="  text-lg font-semibold mt-6 mb-1">Basic Information</h2>
+  <p><strong>Type:</strong> {{ teacher.get_teacher_type_display }}</p>
+  <p><strong>Gender:</strong> {{ teacher.get_gender_display }}</p>
+  <p><strong>Location:</strong> {{ teacher.location }} ({{ teacher.postal_code }})</p>
+
+  <h2 class="  text-lg font-semibold mt-6 mb-1">Contact Information</h2>
+  <p><strong>Email:</strong> {{ teacher.user.email }}</p>
+  <p><strong>Phone:</strong> {{ teacher.user.phone }}</p>
+  
+  <h2 class="  text-lg font-semibold mt-6 mb-1">Teaching Information</h2>
+  <p><strong>Subjects:</strong> {{ teacher.subjects }}</p>
+  <p><strong>Grade Levels:</strong> {{ teacher.from_level }} to {{ teacher.to_level }}</p>
+  <p><strong>Fee Type:</strong> {{ teacher.get_fee_type_display }}</p>
+  <p><strong>Fee Range:</strong> ${{ teacher.min_fee }} - ${{ teacher.max_fee }} {{ teacher.fee_type }}</p>
+  {% if teacher.fee_details %}<p><strong>Fee Details:</strong> {{ teacher.fee_details }}</p>{% endif %}
+  
+  <h2 class="  text-lg font-semibold mt-6 mb-1">Experience</h2>
+  <p><strong>Organization:</strong> {{ teacher.organization }}</p>
+  <p><strong>Designation:</strong> {{ teacher.designation }}</p>
+  <p><strong>Duration:</strong> {{ teacher.experience_start_date }} to {% if teacher.experience_end_date %}{{ teacher.experience_end_date }}{% else %}Present{% endif %} ({{ teacher.get_association_display }})</p>
+  <p><strong>Job Description:</strong> {{ teacher.job_description }}</p>
+  <p><strong>Lesson Plan Details:</strong> {{ teacher.lesson_plan_details }}</p>
+  
+  <p><strong>Years of Experience:</strong></p>
+  <ul>
+    <li>Tutoring: {{ teacher.tutor_experience_years }} years</li>
+    <li>Industry: {{ teacher.industry_experience_years }} years</li>
+    <li>Online Teaching: {{ teacher.online_teaching_experience_years }} years</li>
+  </ul>
+  
+  <h2 class="  text-lg font-semibold mt-6 mb-1">Education</h2>
+  <p><strong>Institute:</strong> {{ teacher.institute }}</p>
+  <p><strong>Degree:</strong> {{ teacher.get_degree_type_display }} in {{ teacher.degree_name }}</p>
+  <p><strong>Duration:</strong> {{ teacher.education_start_date }} to {% if teacher.education_end_date %}{{ teacher.education_end_date }}{% else %}Present{% endif %} ({{ teacher.get_education_association_display }})</p>
+  <p><strong>Specialities:</strong> {{ teacher.specialities }}</p>
+  {% if teacher.score %}<p><strong>Score:</strong> {{ teacher.score }}</p>{% endif %}
+  
+  <h2 class="  text-lg font-semibold mt-6 mb-1">Additional Information</h2>
+  <ul>
+    <li>Willing to travel: {% if teacher.willing_to_travel %}Yes{% else %}No{% endif %}</li>
+    <li>Available for online teaching: {% if teacher.available_for_online_teaching %}Yes{% else %}No{% endif %}</li>
+    <li>Has digital pen: {% if teacher.has_digital_pen %}Yes{% else %}No{% endif %}</li>
+    <li>Helps with homework: {% if teacher.helps_with_homework %}Yes{% else %}No{% endif %}</li>
+    <li>Full-time teacher: {% if teacher.is_full_time_teacher %}Yes{% else %}No{% endif %}</li>
+    <li>Interested in: {{ teacher.get_interested_opportunities_display }} opportunities</li>
+  </ul>
+  
+  <h2 class="  text-lg font-semibold mt-6 mb-1">Profile Description</h2>
+  <p>{{ teacher.profile_description }}</p>
+  
+  {% if user.is_staff %}
+  <h2 class="  text-lg font-semibold mt-6 mb-1">Administration</h2>
+  <p><strong>Status:</strong> {% if teacher.is_active %}Active{% else %}Inactive{% endif %}, {% if teacher.is_verified %}Verified{% else %}Not Verified{% endif %}</p>
+  <p><strong>Profile Completion:</strong> {% if teacher.is_profile_completed %}Completed{% else %}Incomplete{% endif %}</p>
+  <p><strong>ID Document:</strong> {{ teacher.get_document_type_display }} ({{ teacher.document_file }})</p>
+  {% endif %}
+
+  <a href="{% url 'edit_teacher_profile' teacher.id %}" class="btn btn-primary btn-nm my-4 rounded-none">Edit Profile</a>
+  
+
+  
+</div>
+
+{% endblock %}

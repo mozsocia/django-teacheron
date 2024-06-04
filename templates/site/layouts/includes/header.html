@@ -174,6 +174,7 @@
               {% if user.is_authenticated %}
                 {% if user.teacher %}
                 <li class="hover-underline-animation"><a href="{% url 'application_list' %}">My Applications</a></li>
+                <li class="hover-underline-animation"><a href="{% url 'teacher_profile'%}">Profile</a></li>
                 {% endif %}
                 {% if user.student %}
                 <li class="hover-underline-animation"><a href="{% url 'list_job_requirements' %}">Job Requirements</a></li>

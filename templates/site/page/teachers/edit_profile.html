@@ -1,0 +1,113 @@
+{% extends 'site/layouts/base.html' %}
+{% load form_tags %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="container seciton-form p-8">
+
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Edit Teacher Profile</h1>
+    
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+      {% csrf_token %}
+      
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Basic Information</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {% for field in form %}
+            {% if field.name in 'teacher_type,gender,location,postal_code' %}
+              <div>
+                <label class="block text-gray-700 mb-2">{{ field.label }}</label>
+                {{ field|add_class:"w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+                {% if field.errors %}<p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>{% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Subjects & Levels</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {% for field in form %}
+            {% if field.name in 'subjects,from_level,to_level' %}
+              <div>
+                <label class="block text-gray-700 mb-2">{{ field.label }}</label>
+                {{ field|add_class:"w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+                {% if field.errors %}<p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>{% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+  
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Teaching Experience & Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {% for field in form %}
+            {% if field.name in 'organization,designation,experience_start_date,experience_end_date,association,job_description,lesson_plan_details,fee_type,max_fee,min_fee,fee_details,tutor_experience_years,industry_experience_years,online_teaching_experience_years' %}
+              <div>
+                <label class="block text-gray-700 mb-2">{{ field.label }}</label>
+                {{ field|add_class:"w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+                {% if field.errors %}<p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>{% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {% for field in form %}
+            {% if field.name in 'willing_to_travel,available_for_online_teaching,has_digital_pen,helps_with_homework,is_full_time_teacher,interested_opportunities' %}
+              <div>
+                <label class="inline-flex items-center">
+                  {{ field|add_class:"form-checkbox text-blue-500 rounded" }}
+                  <span class="ml-2 text-gray-700">{{ field.label }}</span>
+                </label>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+  
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Education</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {% for field in form %}
+            {% if field.name in 'institute,degree_type,degree_name,education_start_date,education_end_date,education_association,specialities,score' %}
+              <div>
+                <label class="block text-gray-700 mb-2">{{ field.label }}</label>
+                {{ field|add_class:"w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+                {% if field.errors %}<p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>{% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+  
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Profile & Identification</h2>
+        {% for field in form %}
+          {% if field.name in 'profile_description,document_type,document_file' %}
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2">{{ field.label }}</label>
+              {% if field.name == 'profile_description' %}
+                {{ field|add_class:"w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 h-32" }}
+              {% else %}
+                {{ field|add_class:"w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+              {% endif %}
+              {% if field.errors %}<p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>{% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <div class="flex justify-start mt-4">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+  
+</div>
+
+{% endblock %}

@@ -106,7 +106,7 @@ class Teacher(models.Model):
         ('drivinglicense', 'Driving License'),
     ]
     document_type = models.CharField(max_length=20, choices=DOC_TYPE_CHOICES)
-    document_file = models.FileField(upload_to='teacher_ids/')
+    document_file = models.FileField(upload_to='teacher_ids/' , blank=True, null=True)
 
 
 

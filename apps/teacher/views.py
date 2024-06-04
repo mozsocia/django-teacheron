@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
+from django.contrib import messages
 
 # @login_required
 def create_teacher_profile(request):
@@ -18,15 +19,36 @@ def create_teacher_profile(request):
     return render(request, 'site/page/register_form.html', {'form': form})
 
 
-
+def teacher_profile(request):
+    teacher = get_object_or_404(Teacher, id=request.user.teacher.id)
+    return render(request, 'site/page/teachers/profile.html', {'teacher': teacher})
 def teacher_detail(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     return render(request, 'site/page/teachers/detail.html', {'teacher': teacher})
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Application, JobRequirement
-from django.contrib import messages
+
+
+
+def edit_teacher_profile(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, request.FILES, instance=teacher)
+        if form.is_valid():
+            form.save()
+            return redirect('teacher_profile')  # Redirect to teacher's profile page
+    else:
+        form = TeacherForm(instance=teacher)
+    
+    return render(request, 'site/page/teachers/edit_profile.html', {'form': form, 'teacher': teacher})
+
+
+
+
+
+
+
+
 def has_applied(teacher, job):
     return Application.objects.filter(teacher=teacher, job=job).exists()
 
