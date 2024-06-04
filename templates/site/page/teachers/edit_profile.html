@@ -11,7 +11,7 @@
     <form method="post" enctype="multipart/form-data" class="space-y-6">
       {% csrf_token %}
       
-      <div class="bg-white shadow-md rounded-lg p-6">
+      <div class="bg-white shadow-md rounded-lg p-6 my-2">
         <h2 class="text-xl font-semibold mb-4">Basic Information</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {% for field in form %}
@@ -26,7 +26,7 @@
         </div>
       </div>
       
-      <div class="bg-white shadow-md rounded-lg p-6">
+      <div class="bg-white shadow-md rounded-lg p-6 my-2">
         <h2 class="text-xl font-semibold mb-4">Subjects & Levels</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {% for field in form %}
@@ -41,7 +41,7 @@
         </div>
       </div>
   
-      <div class="bg-white shadow-md rounded-lg p-6">
+      <div class="bg-white shadow-md rounded-lg p-6 my-2">
         <h2 class="text-xl font-semibold mb-4">Teaching Experience & Details</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {% for field in form %}
@@ -54,7 +54,7 @@
             {% endif %}
           {% endfor %}
         </div>
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
           {% for field in form %}
             {% if field.name in 'willing_to_travel,available_for_online_teaching,has_digital_pen,helps_with_homework,is_full_time_teacher,interested_opportunities' %}
               <div>
@@ -68,7 +68,7 @@
         </div>
       </div>
   
-      <div class="bg-white shadow-md rounded-lg p-6">
+      <div class="bg-white shadow-md rounded-lg p-6 my-2">
         <h2 class="text-xl font-semibold mb-4">Education</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {% for field in form %}
