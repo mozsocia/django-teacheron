@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 from django.contrib import messages
+from django.views.decorators.http import require_GET, require_POST
 
 # @login_required
 def create_teacher_profile(request):

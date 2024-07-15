@@ -1,5 +1,5 @@
 from django import forms
-from .models import Teacher
+from .models import *
 from apps.helpers import *
 
 class TeacherProfileForm(FormFieldClassMixin,forms.ModelForm):

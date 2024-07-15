@@ -6,6 +6,7 @@ from .forms import *
 from apps.teacher.models import *
 from django.http import HttpResponseForbidden
 from django.http import Http404
+from django.views.decorators.http import require_GET, require_POST
 
 
 @login_required

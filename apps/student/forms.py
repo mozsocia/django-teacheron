@@ -1,5 +1,5 @@
 from django import forms
-from .models import JobRequirement
+from .models import *
 from apps.helpers import *
 
 class JobRequirementForm(EnhancedFormMixin,forms.ModelForm):
