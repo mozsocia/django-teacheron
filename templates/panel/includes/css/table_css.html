@@ -1,50 +1,16 @@
+<link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css">
 <style>
-  .datatable-input {
-  min-width: 250px;
-  color: #455161;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #bcc5cc;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 0.375rem;
-  
+  .dataTables_wrapper {
+    padding: 20px;
   }
-  .datatable-input:focus {
-    outline: 1px solid #696cff;
-  }
-
-  .datatable-selector {
-  min-width: 50px;
-    color: #455161;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #bcc5cc;
-
-  border-radius: 0.375rem;
-  
-  }
-  .datatable-table {
-    margin-top: 0.8rem;
-  }
-  .datatables-basic tr td:first-child {
-    padding-left: 20px !important;
-  }
-  .datatables-basic tr th:first-child {
-    padding-left: 15px !important;
-  }
-
-  .datatables-basic tr td:last-child {
-    padding-right: 25px !important;
-  }
-  .datatables-basic tr th:last-child {
-    padding-right: 25px !important;
-  }
-
-  .datatable-table th button, .datatable-pagination-list button {
-
-    padding-right: 20px;
+  .dataTables_wrapper div.dt-row {
+    margin-left: -20px!important;
+    margin-right: -20px!important;
 }
 
+div.dataTables_wrapper div.dt-row {
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 </style>
