@@ -1,0 +1,44 @@
+
+@require_GET
+def panel_[[model_name_lower]]_list(request):
+    object_list = [[model_name]].objects.all()
+    return render(request, '[[dir_name]]/[[model_name_lower]]/list.html', {'object_list': object_list})
+
+@require_GET
+def panel_[[model_name_lower]]_create(request):
+    form = [[model_name]]PanelForm()
+    return render(request, '[[dir_name]]/[[model_name_lower]]/create.html', {'form': form})
+
+@require_POST
+def panel_[[model_name_lower]]_store(request):
+    form = [[model_name]]PanelForm(request.POST, request.FILES)
+    if form.is_valid():
+        object = form.save()
+        return redirect('panel_[[model_name_lower]]_detail', pk=object.id)
+    return render(request, '[[dir_name]]/[[model_name_lower]]/create.html', {'form': form})
+
+@require_GET
+def panel_[[model_name_lower]]_detail(request, pk):
+    object = get_object_or_404([[model_name]], pk=pk)
+    return render(request, '[[dir_name]]/[[model_name_lower]]/detail.html', {'object': object})
+
+@require_GET
+def panel_[[model_name_lower]]_edit(request, pk):
+    object = get_object_or_404([[model_name]], pk=pk)
+    form = [[model_name]]PanelForm(instance=object)
+    return render(request, '[[dir_name]]/[[model_name_lower]]/edit.html', {'form': form, 'object': object})
+
+@require_POST
+def panel_[[model_name_lower]]_update(request, pk):
+    object = get_object_or_404([[model_name]], pk=pk)
+    form = [[model_name]]PanelForm(request.POST, request.FILES, instance=object)
+    if form.is_valid():
+        form.save()
+        return redirect('panel_[[model_name_lower]]_detail', pk=object.id)
+    return render(request, '[[dir_name]]/[[model_name_lower]]/edit.html', {'form': form, 'object': object})
+
+@require_POST
+def panel_[[model_name_lower]]_delete(request, pk):
+    object = get_object_or_404([[model_name]], pk=pk)
+    object.delete()
+    return redirect('panel_[[model_name_lower]]_list')
