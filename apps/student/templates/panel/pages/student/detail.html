@@ -1,0 +1,45 @@
+{% extends 'panel/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+  <div class="d-flex justify-content-between align-items-center px-2 mb-3">
+    <h4 class="fw-bold py-3 m-0"><span class="">Student </h4>
+    <div class="d-flex align-items-center">
+      <a href="{% url 'panel_student_list' %}" class="btn btn-primary"><i class="bx bx-arrow-back" style="height: 20px;"></i> List</a>
+    </div>
+  </div>
+
+
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Student Details</h5>
+
+    </div>
+    <div class="card-body">
+      <p><p><strong>ID: </strong> {{ object.id }}</p>
+<p><strong>User: </strong> {{ object.user }}</p>
+<p><strong>Bio: </strong> {{ object.bio }}</p>
+<p><strong>Education: </strong> {{ object.education }}</p>
+<p><strong>Is active: </strong> {{ object.is_active }}</p>
+<p><strong>Is verified: </strong> {{ object.is_verified }}</p>
+<p><strong>Created at: </strong> {{ object.created_at }}</p>
+<p><strong>Updated at: </strong> {{ object.updated_at }}</p>
+</p>
+
+
+      <div class="d-flex justify-content-start mb-3">
+        <a href="{% url 'panel_student_edit' object.pk %}" class="btn btn-primary me-2">Update</a>
+        <!-- delete is a post request -->
+        <form method="post" action="{% url 'panel_student_delete' object.pk %}">
+          {% csrf_token %}
+          <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

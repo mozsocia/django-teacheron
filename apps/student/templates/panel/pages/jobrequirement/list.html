@@ -1,0 +1,101 @@
+
+{% extends 'panel/base.html' %}
+{% load static %}
+
+{% block css %}
+ {% include 'panel/includes/css/table_css.html' %}
+{% endblock css %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+  <div class="d-flex justify-content-between align-items-center px-2 mb-3">
+    <h4 class="fw-bold py-3 m-0"><span class="">Jobrequirement </h4>
+    <div class="d-flex align-items-center">
+      <a href="{% url 'panel_jobrequirement_create' %}" class="btn btn-primary"><i class="bx bx-plus" style="height: 20px;"></i> Add Jobrequirement</a>
+    </div>
+  </div>
+
+              <!-- Basic Bootstrap Table -->
+              <div class="card pb-3">
+                <h5 class="card-header">Jobrequirement Table</h5>
+                <div class="card-datatable table-responsive">
+                
+
+                  <table id="example" class="datatables-basic  table border-top table-striped" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>id</th>
+<th>location</th>
+<th>phone</th>
+<th>details</th>
+<th>subjects</th>
+<th>level</th>
+<th>i_want</th>
+<th>meeting</th>
+<th>how_much_travel</th>
+<th>budget</th>
+<th>gender_preference</th>
+<th>tutors_wanted</th>
+<th>need_someone</th>
+<th>communication_language</th>
+<th>uploaded_file</th>
+<th>user</th>
+<th>created_at</th>
+<th>updated_at</th>
+
+                        
+                                <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      {% for object in object_list %}
+                      <tr>
+                        <td>{{ object.id }}</td>
+<td>{{ object.location }}</td>
+<td>{{ object.phone }}</td>
+<td>{{ object.details }}</td>
+<td>{{ object.subjects }}</td>
+<td>{{ object.level }}</td>
+<td>{{ object.i_want }}</td>
+<td>{{ object.meeting }}</td>
+<td>{{ object.how_much_travel }}</td>
+<td>{{ object.budget }}</td>
+<td>{{ object.gender_preference }}</td>
+<td>{{ object.tutors_wanted }}</td>
+<td>{{ object.need_someone }}</td>
+<td>{{ object.communication_language }}</td>
+<td>{{ object.uploaded_file }}</td>
+<td>{{ object.user }}</td>
+<td>{{ object.created_at }}</td>
+<td>{{ object.updated_at }}</td>
+
+              
+                        <td>
+                          <div class="d-flex" aria-label="Basic example">
+                            <a href="{% url 'panel_jobrequirement_detail' object.pk %}" class="btn btn-sm btn-outline-primary me-1">View</a>
+                            <a href="{% url 'panel_jobrequirement_edit' object.pk %}" class="btn btn-sm btn-outline-warning me-1">Edit</a>
+                            <form method="post" action="{% url 'panel_jobrequirement_delete' object.pk %}">
+                              {% csrf_token %}
+                              <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+
+                </div>
+              <!--/ Basic Bootstrap Table -->
+              </div>
+    
+
+</div>
+{% endblock content %}
+
+{% block js %}
+{% include 'panel/includes/js/table_js.html' %}
+
+{% endblock js %}
+

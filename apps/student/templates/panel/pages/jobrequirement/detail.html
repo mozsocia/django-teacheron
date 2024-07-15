@@ -1,0 +1,55 @@
+{% extends 'panel/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+  <div class="d-flex justify-content-between align-items-center px-2 mb-3">
+    <h4 class="fw-bold py-3 m-0"><span class="">Jobrequirement </h4>
+    <div class="d-flex align-items-center">
+      <a href="{% url 'panel_jobrequirement_list' %}" class="btn btn-primary"><i class="bx bx-arrow-back" style="height: 20px;"></i> List</a>
+    </div>
+  </div>
+
+
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Jobrequirement Details</h5>
+
+    </div>
+    <div class="card-body">
+      <p><p><strong>ID: </strong> {{ object.id }}</p>
+<p><strong>Location: </strong> {{ object.location }}</p>
+<p><strong>Phone: </strong> {{ object.phone }}</p>
+<p><strong>Details: </strong> {{ object.details }}</p>
+<p><strong>Subjects: </strong> {{ object.subjects }}</p>
+<p><strong>Level: </strong> {{ object.level }}</p>
+<p><strong>I want: </strong> {{ object.i_want }}</p>
+<p><strong>Meeting: </strong> {{ object.meeting }}</p>
+<p><strong>How much travel: </strong> {{ object.how_much_travel }}</p>
+<p><strong>Budget: </strong> {{ object.budget }}</p>
+<p><strong>Gender preference: </strong> {{ object.gender_preference }}</p>
+<p><strong>Tutors wanted: </strong> {{ object.tutors_wanted }}</p>
+<p><strong>Need someone: </strong> {{ object.need_someone }}</p>
+<p><strong>Communication language: </strong> {{ object.communication_language }}</p>
+<p><strong>Uploaded file: </strong> {{ object.uploaded_file }}</p>
+<p><strong>User: </strong> {{ object.user }}</p>
+<p><strong>Created at: </strong> {{ object.created_at }}</p>
+<p><strong>Updated at: </strong> {{ object.updated_at }}</p>
+</p>
+
+
+      <div class="d-flex justify-content-start mb-3">
+        <a href="{% url 'panel_jobrequirement_edit' object.pk %}" class="btn btn-primary me-2">Update</a>
+        <!-- delete is a post request -->
+        <form method="post" action="{% url 'panel_jobrequirement_delete' object.pk %}">
+          {% csrf_token %}
+          <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -2,27 +2,74 @@
 <li class="menu-header small text-uppercase">
   <span class="menu-header-text">Pages</span>
 </li>
-<li class="menu-item">
+
+
+
+
+
+<!--# CRUD for student-->
+<li class="menu-item {% if 'panel/student' in request.path %} active  open{% endif %}">
   <a href="javascript:void(0);" class="menu-link menu-toggle">
     <i class="menu-icon tf-icons bx bx-dock-top"></i>
-    <div data-i18n="Account Settings">Accounts</div>
+    <div >Student</div>
   </a>
   <ul class="menu-sub">
-    <li class="menu-item">
-      <a href="pages-account-settings-account.html" class="menu-link">
-        <div data-i18n="Account">Account</div>
+    <li class="menu-item {% if 'student/list' in request.path %} active {% endif %}">
+      <a href="{% url 'panel_student_list' %}" class="menu-link">
+        <div>Student list</div>
       </a>
     </li>
-    <li class="menu-item">
-      <a href="pages-account-settings-notifications.html" class="menu-link">
-        <div data-i18n="Notifications">Notifications</div>
+    <li class="menu-item {% if 'student/create' in request.path %} active {% endif %}">
+      <a href="{% url 'panel_student_create' %}" class="menu-link">
+        <div>Student add</div>
       </a>
     </li>
-    <li class="menu-item">
-      <a href="pages-account-settings-connections.html" class="menu-link">
-        <div data-i18n="Connections">Connections</div>
-      </a>
-    </li>
+
   </ul>
 </li>
 
+
+
+<!--# CRUD for jobrequirement-->
+<li class="menu-item {% if 'jobrequirement' in request.path %} active  open{% endif %}">
+  <a href="javascript:void(0);" class="menu-link menu-toggle">
+    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+    <div >Job requirement</div>
+  </a>
+  <ul class="menu-sub">
+    <li class="menu-item {% if 'jobrequirement/list' in request.path %} active {% endif %}">
+      <a href="{% url 'panel_jobrequirement_list' %}" class="menu-link">
+        <div>Job requirement list</div>
+      </a>
+    </li>
+    <li class="menu-item {% if 'jobrequirement/create' in request.path %} active {% endif %}">
+      <a href="{% url 'panel_jobrequirement_create' %}" class="menu-link">
+        <div>Job requirement add</div>
+      </a>
+    </li>
+
+  </ul>
+</li>
+
+
+
+<!--# CRUD for teacher-->
+<li class="menu-item {% if 'teacher' in request.path %} active  open{% endif %}">
+  <a href="javascript:void(0);" class="menu-link menu-toggle">
+    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+    <div >Teacher</div>
+  </a>
+  <ul class="menu-sub">
+    <li class="menu-item {% if 'teacher/list' in request.path %} active {% endif %}">
+      <a href="{% url 'panel_teacher_list' %}" class="menu-link">
+        <div>Teacher list</div>
+      </a>
+    </li>
+    <li class="menu-item {% if 'teacher/create' in request.path %} active {% endif %}">
+      <a href="{% url 'panel_teacher_create' %}" class="menu-link">
+        <div>Teacher add</div>
+      </a>
+    </li>
+
+  </ul>
+</li>

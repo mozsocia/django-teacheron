@@ -1,0 +1,82 @@
+{% extends 'panel/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+  <div class="d-flex justify-content-between align-items-center px-2 mb-3">
+    <h4 class="fw-bold py-3 m-0"><span class="">Teacher </h4>
+    <div class="d-flex align-items-center">
+      <a href="{% url 'panel_teacher_list' %}" class="btn btn-primary"><i class="bx bx-arrow-back" style="height: 20px;"></i> List</a>
+    </div>
+  </div>
+
+
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Teacher Details</h5>
+
+    </div>
+    <div class="card-body">
+      <p><p><strong>ID: </strong> {{ object.id }}</p>
+<p><strong>User: </strong> {{ object.user }}</p>
+<p><strong>Is profile completed: </strong> {{ object.is_profile_completed }}</p>
+<p><strong>Is active: </strong> {{ object.is_active }}</p>
+<p><strong>Is verified: </strong> {{ object.is_verified }}</p>
+<p><strong>Teacher type: </strong> {{ object.teacher_type }}</p>
+<p><strong>Gender: </strong> {{ object.gender }}</p>
+<p><strong>Location: </strong> {{ object.location }}</p>
+<p><strong>Postal code: </strong> {{ object.postal_code }}</p>
+<p><strong>Subjects: </strong> {{ object.subjects }}</p>
+<p><strong>From level: </strong> {{ object.from_level }}</p>
+<p><strong>To level: </strong> {{ object.to_level }}</p>
+<p><strong>Organization: </strong> {{ object.organization }}</p>
+<p><strong>Designation: </strong> {{ object.designation }}</p>
+<p><strong>Experience start date: </strong> {{ object.experience_start_date }}</p>
+<p><strong>Experience end date: </strong> {{ object.experience_end_date }}</p>
+<p><strong>Association: </strong> {{ object.association }}</p>
+<p><strong>Job description: </strong> {{ object.job_description }}</p>
+<p><strong>Lesson plan details: </strong> {{ object.lesson_plan_details }}</p>
+<p><strong>Fee type: </strong> {{ object.fee_type }}</p>
+<p><strong>Max fee: </strong> {{ object.max_fee }}</p>
+<p><strong>Min fee: </strong> {{ object.min_fee }}</p>
+<p><strong>Fee details: </strong> {{ object.fee_details }}</p>
+<p><strong>Tutor experience years: </strong> {{ object.tutor_experience_years }}</p>
+<p><strong>Industry experience years: </strong> {{ object.industry_experience_years }}</p>
+<p><strong>Online teaching experience years: </strong> {{ object.online_teaching_experience_years }}</p>
+<p><strong>Willing to travel: </strong> {{ object.willing_to_travel }}</p>
+<p><strong>Available for online teaching: </strong> {{ object.available_for_online_teaching }}</p>
+<p><strong>Has digital pen: </strong> {{ object.has_digital_pen }}</p>
+<p><strong>Helps with homework: </strong> {{ object.helps_with_homework }}</p>
+<p><strong>Is full time teacher: </strong> {{ object.is_full_time_teacher }}</p>
+<p><strong>Interested opportunities: </strong> {{ object.interested_opportunities }}</p>
+<p><strong>Institute: </strong> {{ object.institute }}</p>
+<p><strong>Degree type: </strong> {{ object.degree_type }}</p>
+<p><strong>Degree name: </strong> {{ object.degree_name }}</p>
+<p><strong>Education start date: </strong> {{ object.education_start_date }}</p>
+<p><strong>Education end date: </strong> {{ object.education_end_date }}</p>
+<p><strong>Education association: </strong> {{ object.education_association }}</p>
+<p><strong>Specialities: </strong> {{ object.specialities }}</p>
+<p><strong>Score: </strong> {{ object.score }}</p>
+<p><strong>Profile description: </strong> {{ object.profile_description }}</p>
+<p><strong>Document type: </strong> {{ object.document_type }}</p>
+<p><strong>Document file: </strong> {{ object.document_file }}</p>
+<p><strong>Created at: </strong> {{ object.created_at }}</p>
+<p><strong>Updated at: </strong> {{ object.updated_at }}</p>
+</p>
+
+
+      <div class="d-flex justify-content-start mb-3">
+        <a href="{% url 'panel_teacher_edit' object.pk %}" class="btn btn-primary me-2">Update</a>
+        <!-- delete is a post request -->
+        <form method="post" action="{% url 'panel_teacher_delete' object.pk %}">
+          {% csrf_token %}
+          <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

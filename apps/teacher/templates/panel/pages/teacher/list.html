@@ -1,0 +1,155 @@
+
+{% extends 'panel/base.html' %}
+{% load static %}
+
+{% block css %}
+ {% include 'panel/includes/css/table_css.html' %}
+{% endblock css %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+  <div class="d-flex justify-content-between align-items-center px-2 mb-3">
+    <h4 class="fw-bold py-3 m-0"><span class="">Teacher </h4>
+    <div class="d-flex align-items-center">
+      <a href="{% url 'panel_teacher_create' %}" class="btn btn-primary"><i class="bx bx-plus" style="height: 20px;"></i> Add Teacher</a>
+    </div>
+  </div>
+
+              <!-- Basic Bootstrap Table -->
+              <div class="card pb-3">
+                <h5 class="card-header">Teacher Table</h5>
+                <div class="card-datatable table-responsive">
+                
+
+                  <table id="example" class="datatables-basic  table border-top table-striped" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>id</th>
+<th>user</th>
+<th>is_profile_completed</th>
+<th>is_active</th>
+<th>is_verified</th>
+<th>teacher_type</th>
+<th>gender</th>
+<th>location</th>
+<th>postal_code</th>
+<th>subjects</th>
+<th>from_level</th>
+<th>to_level</th>
+<th>organization</th>
+<th>designation</th>
+<th>experience_start_date</th>
+<th>experience_end_date</th>
+<th>association</th>
+<th>job_description</th>
+<th>lesson_plan_details</th>
+<th>fee_type</th>
+<th>max_fee</th>
+<th>min_fee</th>
+<th>fee_details</th>
+<th>tutor_experience_years</th>
+<th>industry_experience_years</th>
+<th>online_teaching_experience_years</th>
+<th>willing_to_travel</th>
+<th>available_for_online_teaching</th>
+<th>has_digital_pen</th>
+<th>helps_with_homework</th>
+<th>is_full_time_teacher</th>
+<th>interested_opportunities</th>
+<th>institute</th>
+<th>degree_type</th>
+<th>degree_name</th>
+<th>education_start_date</th>
+<th>education_end_date</th>
+<th>education_association</th>
+<th>specialities</th>
+<th>score</th>
+<th>profile_description</th>
+<th>document_type</th>
+<th>document_file</th>
+<th>created_at</th>
+<th>updated_at</th>
+
+                        
+                                <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      {% for object in object_list %}
+                      <tr>
+                        <td>{{ object.id }}</td>
+<td>{{ object.user }}</td>
+<td>{{ object.is_profile_completed }}</td>
+<td>{{ object.is_active }}</td>
+<td>{{ object.is_verified }}</td>
+<td>{{ object.teacher_type }}</td>
+<td>{{ object.gender }}</td>
+<td>{{ object.location }}</td>
+<td>{{ object.postal_code }}</td>
+<td>{{ object.subjects }}</td>
+<td>{{ object.from_level }}</td>
+<td>{{ object.to_level }}</td>
+<td>{{ object.organization }}</td>
+<td>{{ object.designation }}</td>
+<td>{{ object.experience_start_date }}</td>
+<td>{{ object.experience_end_date }}</td>
+<td>{{ object.association }}</td>
+<td>{{ object.job_description }}</td>
+<td>{{ object.lesson_plan_details }}</td>
+<td>{{ object.fee_type }}</td>
+<td>{{ object.max_fee }}</td>
+<td>{{ object.min_fee }}</td>
+<td>{{ object.fee_details }}</td>
+<td>{{ object.tutor_experience_years }}</td>
+<td>{{ object.industry_experience_years }}</td>
+<td>{{ object.online_teaching_experience_years }}</td>
+<td>{{ object.willing_to_travel }}</td>
+<td>{{ object.available_for_online_teaching }}</td>
+<td>{{ object.has_digital_pen }}</td>
+<td>{{ object.helps_with_homework }}</td>
+<td>{{ object.is_full_time_teacher }}</td>
+<td>{{ object.interested_opportunities }}</td>
+<td>{{ object.institute }}</td>
+<td>{{ object.degree_type }}</td>
+<td>{{ object.degree_name }}</td>
+<td>{{ object.education_start_date }}</td>
+<td>{{ object.education_end_date }}</td>
+<td>{{ object.education_association }}</td>
+<td>{{ object.specialities }}</td>
+<td>{{ object.score }}</td>
+<td>{{ object.profile_description }}</td>
+<td>{{ object.document_type }}</td>
+<td>{{ object.document_file }}</td>
+<td>{{ object.created_at }}</td>
+<td>{{ object.updated_at }}</td>
+
+              
+                        <td>
+                          <div class="d-flex" aria-label="Basic example">
+                            <a href="{% url 'panel_teacher_detail' object.pk %}" class="btn btn-sm btn-outline-primary me-1">View</a>
+                            <a href="{% url 'panel_teacher_edit' object.pk %}" class="btn btn-sm btn-outline-warning me-1">Edit</a>
+                            <form method="post" action="{% url 'panel_teacher_delete' object.pk %}">
+                              {% csrf_token %}
+                              <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+
+                </div>
+              <!--/ Basic Bootstrap Table -->
+              </div>
+    
+
+</div>
+{% endblock content %}
+
+{% block js %}
+{% include 'panel/includes/js/table_js.html' %}
+
+{% endblock js %}
+

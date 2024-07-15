@@ -76,3 +76,15 @@ class JobRequirementForm(EnhancedFormMixin,forms.ModelForm):
         if not phone.isdigit() or len(phone) < 10:
             raise forms.ValidationError("Please enter a valid phone number.")
         return phone
+
+
+class StudentPanelForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = '__all__'
+
+
+class JobrequirementPanelForm(forms.ModelForm):
+    class Meta:
+        model = JobRequirement
+        fields = '__all__'

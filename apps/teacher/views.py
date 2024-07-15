@@ -109,3 +109,51 @@ def delete_application(request, application_id):
         return redirect('application_list')
 
     return render(request, 'site/page/applications/delete.html', {'application': application})
+
+
+
+
+# CRUD for teacher
+@require_GET
+def panel_teacher_list(request):
+    object_list = Teacher.objects.all()
+    return render(request, 'panel/pages/teacher/list.html', {'object_list': object_list})
+
+@require_GET
+def panel_teacher_create(request):
+    form = TeacherPanelForm()
+    return render(request, 'panel/pages/teacher/create.html', {'form': form})
+
+@require_POST
+def panel_teacher_store(request):
+    form = TeacherPanelForm(request.POST, request.FILES)
+    if form.is_valid():
+        object = form.save()
+        return redirect('panel_teacher_detail', pk=object.id)
+    return render(request, 'panel/pages/teacher/create.html', {'form': form})
+
+@require_GET
+def panel_teacher_detail(request, pk):
+    object = get_object_or_404(Teacher, pk=pk)
+    return render(request, 'panel/pages/teacher/detail.html', {'object': object})
+
+@require_GET
+def panel_teacher_edit(request, pk):
+    object = get_object_or_404(Teacher, pk=pk)
+    form = TeacherPanelForm(instance=object)
+    return render(request, 'panel/pages/teacher/edit.html', {'form': form, 'object': object})
+
+@require_POST
+def panel_teacher_update(request, pk):
+    object = get_object_or_404(Teacher, pk=pk)
+    form = TeacherPanelForm(request.POST, request.FILES, instance=object)
+    if form.is_valid():
+        form.save()
+        return redirect('panel_teacher_detail', pk=object.id)
+    return render(request, 'panel/pages/teacher/edit.html', {'form': form, 'object': object})
+
+@require_POST
+def panel_teacher_delete(request, pk):
+    object = get_object_or_404(Teacher, pk=pk)
+    object.delete()
+    return redirect('panel_teacher_list')

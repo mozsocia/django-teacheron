@@ -20,3 +20,9 @@ class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
         exclude = ['user', 'is_profile_completed', 'is_active', 'is_verified', 'created_at', 'updated_at']
+
+
+class TeacherPanelForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = '__all__'
