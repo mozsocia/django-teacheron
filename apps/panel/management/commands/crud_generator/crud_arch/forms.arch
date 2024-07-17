@@ -1,6 +1,0 @@
-
-
-class [[model_name]]PanelForm(forms.ModelForm):
-    class Meta:
-        model = [[model_name]]
-        fields = '__all__'

@@ -1,8 +1,0 @@
-
-    path('panel/[[model_name_lower]]/list/', panel_[[model_name_lower]]_list, name='panel_[[model_name_lower]]_list'),
-    path('panel/[[model_name_lower]]/create/', panel_[[model_name_lower]]_create, name='panel_[[model_name_lower]]_create'),
-    path('panel/[[model_name_lower]]/store/', panel_[[model_name_lower]]_store, name='panel_[[model_name_lower]]_store'),
-    path('panel/[[model_name_lower]]/<int:pk>/detail/', panel_[[model_name_lower]]_detail, name='panel_[[model_name_lower]]_detail'),
-    path('panel/[[model_name_lower]]/<int:pk>/edit/', panel_[[model_name_lower]]_edit, name='panel_[[model_name_lower]]_edit'),
-    path('panel/[[model_name_lower]]/<int:pk>/update/', panel_[[model_name_lower]]_update, name='panel_[[model_name_lower]]_update'),
-    path('panel/[[model_name_lower]]/<int:pk>/delete/', panel_[[model_name_lower]]_delete, name='panel_[[model_name_lower]]_delete'),
