@@ -1,0 +1,335 @@
+/* Slider css */
+.slide-item{
+    @apply  bg-cover bg-center bg-no-repeat w-full h-[550px]
+}
+
+
+.slide-banner{
+    @apply bg-[#181d38de] w-full h-full flex justify-center items-center flex-col opacity-90 -z-10  px-2 md:px-5   lg:px-0
+}
+.banner-content-ns{
+    @apply w-full lg:px-64  space-y-5  flex justify-center items-center flex-col text-center
+}
+.slide-title{
+    @apply lg:text-6xl md:text-5xl text-2xl text-white font-bold
+}
+.slide-description{
+    @apply text-white lg:text-2xl md:text-lg text-base
+}
+
+
+/* addmission css */
+
+.addmission-main{
+    @apply w-full  bg-transparent bg-cover bg-center bg-no-repeat
+}
+.addmission-section{
+    @apply w-full bg-white pt-20 lg:pt-8  lg:px-28 lg:flex justify-center items-center lg:h-[500px]
+}
+
+.leftDiv{
+    @apply w-full lg:w-1/2 h-[350px] overflow-hidden
+}
+.rightDiv{
+    @apply w-full lg:w-1/2 h-[350px] bg-cover bg-center bg-no-repeat bg-fixed
+}
+
+.right-div-content{
+    @apply  bg-[#181d38de]  lg:p-8 p-5 text-white h-full w-full flex flex-col justify-center space-y-5
+
+}
+
+.card-div{
+    @apply  bg-transparent lg:grid grid-cols-4 lg:px-28 lg:-mt-[59px] lg:absolute w-full
+}
+
+.card-one{
+    @apply bg-primary py-8 px-2 flex justify-center items-center gap-5  text-white
+}
+.card-two{
+    @apply bg-secondary py-8 px-2 flex justify-center items-center gap-5 text-white
+}
+.card-three{
+    @apply bg-emerald-500 py-8 px-2 flex justify-center items-center gap-5 text-white
+}
+.card-four{
+    @apply bg-accent py-8 px-4 flex justify-center items-center gap-5 text-white
+}
+
+.card-title{
+    @apply text-base md:text-lg font-bold
+}
+.card-description{
+    @apply text-base
+}
+
+/* about css */
+
+.about-section-bg{
+    @apply  bg-fixed bg-cover bg-center bg-no-repeat w-full lg:h-[800px]
+}
+
+.about-section-ns{
+    @apply w-full bg-[#181d38de] h-full lg:px-28 lg:flex flex-col justify-center items-center py-8
+}
+
+
+
+/* Catagories Section CSS */
+
+.section-rn{
+    @apply w-full pt-20 bg-primary/10 lg:px-28
+}
+.sec-title{
+    @apply text-4xl font-bold text-base-content pt-3
+}
+.top-title-rn{
+    @apply relative w-full text-xl  px-2 md:px-5   lg:px-0
+}
+
+.top-title-rn::before{
+    content: "";
+    position: absolute;
+    top: 13px;
+    left: -3.5rem;
+    margin: auto;
+    width: 3.5rem;
+    height: 1px;
+    background: #d7d7d7;
+    z-index: -1;
+}
+
+.top-title-rn::after{
+    content: "";
+    position: absolute;
+    top: 13px;
+    right: -3.5rem;
+    margin: auto;
+    width: 3.5rem;
+    height: 1px;
+    background: #d7d7d7;
+    z-index: -1;
+}
+
+.sec-title-div{
+    @apply relative w-full pb-10
+}
+
+.sec-title-div::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url(../image/border.png);
+    height: 16px;
+    opacity: 0.2;
+}
+
+.cat-card-sec{
+    @apply w-full flex lg:flex-row flex-col gap-5 my-10  px-2 md:px-5   lg:px-0
+}
+
+.cata-card{
+    @apply bg-white py-5 px-2 md:px-3 rounded-md text-center flex flex-col justify-center items-center gap-5
+}
+.card-title{
+    @apply text-sm md:text-xl text-base-content font-bold
+}
+
+.cata-bottom-sec{
+    @apply bg-cover bg-center bg-no-repeat w-full bg-fixed 
+}
+.cata-bottom{
+    @apply bg-[#181d38d0] flex lg:flex-row flex-col justify-center items-center mt-20
+}
+.cata-bottom-div1{
+    @apply px-10 py-24 text-white text-center flex-col flex justify-center items-center 
+}
+.cata-bottom-div2{
+    @apply px-10 py-24 text-white text-center flex-col flex justify-center items-center bg-[#181d38]
+}
+.cata-bottom-div3{
+    @apply px-10 py-24 text-white text-center flex-col flex justify-center items-center
+}
+
+
+/* all courses css */
+
+.all-course-card-sec{
+    @apply w-full grid lg:grid-cols-3 grid-cols-1 gap-5 pt-10 pb-20  px-2 md:px-5   lg:px-0
+}
+
+.all-course-card{
+    @apply bg-white p-5 rounded-md flex flex-col gap-5 overflow-hidden
+}
+.all-course-card-bottom{
+    @apply border-t-2 text-sm border-dotted flex justify-between items-center pt-5
+}
+.all-course-card-title{
+    @apply font-bold hover:text-primary
+}
+
+
+/* join our community section */
+
+.join-community{
+    @apply  bg-fixed relative bg-cover bg-center bg-no-repeat w-full;
+}
+.join-community-sec{
+    @apply w-full bg-[#181d38de] h-full lg:px-28  px-2 md:px-5    flex flex-col lg:flex-row justify-center items-center gap-10 py-28
+}
+
+/* upcomming event */
+
+.upcoming-event-card-div{
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-3
+}
+
+.upcoming-event-card{
+    @apply bg-white p-3 rounded-sm flex gap-5 shadow-md
+}
+.upcoming-event-card-sec{
+    @apply grid grid-cols-1 lg:grid-cols-3 lg:gap-10 pt-10 pb-20  px-2 md:px-5   lg:px-0
+}
+
+
+/* learn from expert CSS */
+
+.learnFromExpart{
+    @apply bg-fixed bg-cover bg-center bg-no-repeat w-full
+}
+
+.learnFormExpart-title-div{
+    @apply w-full text-center text-white pb-10 relative
+}
+
+.learnFormExpart-title{
+    @apply text-4xl font-bold
+}
+
+.learnFormExpart-title-div::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    background-image: url(../image/border.png);
+    height: 16px;
+    opacity: 0.2;
+}
+
+.lfe-top-title-rn{
+    @apply relative w-full text-xl  px-2 md:px-5   lg:px-0
+}
+
+.lfe-top-title-rn::before{
+    content: "";
+    position: absolute;
+    top: 13px;
+    left: -3.5rem;
+    margin: auto;
+    width: 3.5rem;
+    height: 1px;
+    background: #ffffff;
+    z-index: 1;
+}
+
+.lfe-top-title-rn::after{
+    content: "";
+    position: absolute;
+    top: 13px;
+    right: -3.5rem;
+    margin: auto;
+    width: 3.5rem;
+    height: 1px;
+    background: #ffffff;
+    z-index: 1;
+}
+
+.learnFromExpart-card-sec{
+    @apply w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 pt-10 pb-20
+}
+
+
+.learnFromExpart-card {
+    @apply w-full overflow-hidden relative;
+}
+
+.learnFromExpart-card-content {
+    @apply w-80 md:w-4/5 p-5 mx-auto bottom-14 relative md:left-40 left-1/4 lg:left-[40%] transform -translate-x-1/2 flex flex-col justify-center items-center bg-white rounded-md transition-all duration-300 ease-in-out;
+}
+
+.learnFromExpart-card:hover .learnFromExpart-card-content {
+   @apply bottom-20
+}
+
+.learnFromExpart-card-content:hover {
+    @apply bottom-20
+}
+
+
+
+
+/* home two css */
+
+
+.slide-item-two{
+    @apply  bg-cover bg-center bg-no-repeat w-full h-[550px] 
+}
+
+
+.slide-banner-two{
+    @apply bg-[#181d38de] w-full h-full flex justify-center items-center flex-col opacity-90 -z-10  px-2 md:px-5   lg:px-0
+}
+.banner-content-ns{
+    @apply w-full lg:px-40  space-y-5  flex justify-start items-start flex-col text-start
+}
+.slide-title{
+    @apply lg:text-6xl md:text-5xl text-2xl text-white font-bold
+}
+.slide-description{
+    @apply text-white lg:text-2xl md:text-lg text-base
+}
+
+
+.card-div-two{
+    @apply  bg-transparent lg:grid grid-cols-4 lg:px-40 mt-5 lg:-mt-72 lg:absolute w-full
+}
+
+.card-one-two{
+    @apply bg-primary py-8 px-10 flex flex-col justify-center items-center  text-white 
+}
+.card-two-two{
+    @apply bg-secondary py-8 px-10 flex justify-center items-center flex-col text-white
+}
+.card-three-two{
+    @apply bg-emerald-500 py-8 px-10 flex justify-center items-center flex-col text-white
+}
+.card-four-two{
+    @apply bg-accent py-8 px-10 flex justify-center items-center flex-col text-white
+}
+
+.card-title-two{
+    @apply text-base md:text-lg font-bold text-white text-center
+}
+.card-description-two{
+    @apply text-base text-center
+}
+
+.about-section-two{
+    @apply w-full bg-primary/10 py-20 px-2 md:px-5   lg:px-40
+}
+
+.title-div{
+    @apply relative pb-5
+}
+.title-div::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 3rem;
+    border-bottom: 4px dotted #333;
+}

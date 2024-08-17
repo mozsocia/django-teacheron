@@ -1,0 +1,68 @@
+.main-dashboard{
+    @apply my-8
+}
+
+.user-dashboard-section{
+    @apply lg:grid grid-cols-4
+}
+
+.left_side{ 
+    @apply lg:mx-3 bg-[#f8f8f8] shadow-md rounded-md border overflow-hidden
+}
+
+
+.profile-div{
+    @apply w-full h-[150px] overflow-hidden 
+}
+
+.profile-content{
+     @apply h-[185px] relative -top-12
+}
+.profile-img{
+    @apply w-24 h-24 mx-auto bg-white rounded-full p-2 
+}
+.dashboard-user-info{
+    @apply w-full mx-auto mt-3 border-b border-base-content/25 pb-3 text-center  
+}
+
+.dashboard-menu{
+    @apply  -mt-12 py-1
+}
+.dashboard-menu-item{
+    @apply text-lg font-bold px-5  w-full hover:px-4 py-3 hover:bg-primary/10 hover:border-l-4 hover:text-primary flex items-center gap-5 hover:border-l-primary 
+}
+
+/* right_side css */
+
+.right_side{
+    @apply lg:mx-3 col-span-3 bg-[#f8f8f8] shadow-md rounded-md overflow-hidden p-8
+}
+
+
+.ti-title{
+   @apply text-base-content text-sm
+}
+
+.ti-price{
+    @apply text-primary  text-sm
+}
+.ti-stock{
+    @apply text-base-content text-sm
+}
+.ti-sale{
+    @apply text-base-content text-sm
+}
+
+
+/* pagination */
+.table-pagination{
+    @apply flex justify-center items-center gap-2
+}
+
+.btn-dashboard-pagi{
+    @apply text-base-content text-lg px-3 py-1 rounded-lg border-transparent hover:border-primary border
+}
+
+.btn-active-pagi{
+    @apply bg-primary text-white
+}

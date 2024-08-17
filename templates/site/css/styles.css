@@ -1,0 +1,136 @@
+body {
+  @apply font-public-sans text-base-content
+}
+.page-title {
+  @apply bg-orange-500 text-3xl font-bold mt-8 rounded-box px-3 py-2;
+}
+.btn{
+  @apply shadow-none hover:shadow-none
+}
+.btn-nm {
+  @apply px-4 py-2 h-8 min-h-[2.5rem] ;
+}
+.btn-primary {
+  @apply text-white dark:text-gray-100
+}
+
+.card {
+  @apply border shadow-md;
+  border-radius: calc(0.5rem);
+}
+
+.input {
+    @apply !outline-1;
+    &:focus,
+    &:focus-within {
+      box-shadow: none;
+      @apply !outline-offset-0 ring-1 ;
+    }
+
+    &-nm {
+        @apply h-10 px-4 text-sm leading-loose  !outline-0 border focus:border-primary focus:ring-primary;
+    }
+
+}
+
+.select {
+  @apply !outline-offset-0 ;
+
+
+  &:focus {
+    @apply outline outline-1
+  }
+  &-nm {
+    @apply !border border-base-content/20 !h-10 min-h-10 px-4;
+    &:focus {
+      @apply outline-primary border-primary;
+    }
+  }
+}
+
+
+.checkbox {
+
+  &-nm {
+    --chkbg: #fff;
+    --chkfg: theme(colors.primary);
+    @apply border-primary [@media(hover:hover)]:hover:border-primary;
+    &:focus-visible {
+      @apply outline-primary;
+    }
+    &:checked,
+    &[checked="true"],
+    &[aria-checked="true"] {
+      @apply border-primary bg-transparent text-primary-content;
+    }
+  }
+}
+
+.textarea {
+  @apply outline-offset-0;
+  &-bordered {
+    @apply border-base-content/20;
+  }
+  &:focus {
+    box-shadow: none;
+    @apply outline outline-1 outline-offset-0;
+  }
+
+
+  &-nm {
+    @apply py-1 border border-base-content/20 min-h-[2.5rem];
+    &:focus {
+      @apply outline-primary border-primary;
+    }
+  }
+
+}
+
+
+.file-input {
+  @apply border-base-content bg-base-100 rounded-btn overflow-hidden border border-opacity-0 text-base;
+  /* &::file-selector-button {
+    border-style: solid;
+    @apply border-neutral bg-neutral text-neutral-content font-semibold uppercase no-underline;
+    border-width: var(--border-btn, 1px);
+    animation: button-pop var(--animation-btn, 0.25s) ease-out;
+  } */
+  &-bordered {
+    @apply border-opacity-20;
+  }
+  &:focus {
+    @apply  outline outline-1 outline-offset-0;
+  }
+  &-nm {
+    @apply border-base-content/20 h-10;
+    &:focus {
+      @apply outline-primary border-primary;
+    }
+    &::file-selector-button {
+      @apply border-base-content/90 bg-base-content/90 text-sm font-medium;
+    }
+  }
+
+}
+
+
+.section-form {
+    @apply w-4/5 lg:w-2/3 pt-20 px-12 md:px-32 mx-auto mb-36 lg:px-28
+
+}
+
+.detail-section {
+  @apply my-3 divide-y divide-gray-200 dark:divide-slate-600
+}
+
+.detail-item {
+  @apply py-3 flex flex-wrap md:flex-nowrap
+}
+
+.detail-item-title {
+  @apply md:w-72 2xl:w-72 md:mb-0 mb-3 flex-shrink-0 flex flex-col font-semibold capitalize 
+}
+
+.detail-item-p {
+  @apply md:flex-grow px-3
+}

@@ -1,0 +1,12 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'styles.css';
+@import 'rn_css.css';
+@import 'header_one.css';
+@import 'header_two.css';
+@import 'dashboard-rn.css';
+@import 'new_site_rn.css';
+@import 'form_css.css';
+

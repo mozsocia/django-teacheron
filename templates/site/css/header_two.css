@@ -1,0 +1,4 @@
+
+.hover-categories-rn{
+    @apply hover:bg-primary/70 hover:text-white
+}
